@@ -2,20 +2,32 @@ import express from "express";
 import BaseController from "../utils/BaseController";
 import { jobsService } from "../services/JobsService";
 import auth0Provider from "@bcwdev/auth0provider";
-import { CommentService } from "../services/CommentsService";
+import { commentsService } from "../services/CommentsService";
+import { queueService } from "../services/QueueService";
 
 export class JobsController extends BaseController {
   constructor() {
-    super("api/Jobs");
+    super("api/jobs");
     this.router
       .get("", this.getAll)
       .get("/:id", this.getJobById)
       // NOTE: Beyond this point all routes require Authorization tokens (the user must be logged in)
+      .get("/:id/queue", this.getQueueByJobId)
       .use(auth0Provider.getAuthorizedUserInfo)
       .put("/:id", this.edit)
       .post("", this.create)
       .delete("/:id", this.delete);
   }
+
+  async getQueueByJobId(req, res, next) {
+    try {
+      let data = await queueService.getQueueById(req.params.id);
+      res.send(data);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   async getAll(req, res, next) {
     try {
       let data = await jobsService.getAll(req.query);
@@ -34,7 +46,7 @@ export class JobsController extends BaseController {
   }
   async getCommentsByJobId(req, res, next) {
     try {
-      let data = await CommentService.getCommentsByJobId(req.params.id);
+      let data = await commentsService.getCommentsByJobId(req.params.id);
       res.send(data);
     } catch (error) {
       next(error);
@@ -52,13 +64,13 @@ export class JobsController extends BaseController {
   }
   async edit(req, res, next) {
     try {
-      req.body.creatorEmail = req.userInfo.email;
+      // req.body.creatorEmail = req.userInfo.email;
       let data = await jobsService.edit(
         req.params.id,
         req.userInfo.email,
         req.body
       );
-      res.send(data);
+      return res.send(data);
     } catch (error) {
       next(error);
     }

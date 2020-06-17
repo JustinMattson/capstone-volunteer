@@ -9,7 +9,7 @@ export class ProfilesController extends BaseController {
     this.router
       .use(auth0Provider.getAuthorizedUserInfo)
       .get("", this.getUserProfile)
-      // .get( possible to get reviews by profile id) stretch
+      .get("/:id", this.getProfileById)
       .put("/:id", this.edit);
   }
   async getUserProfile(req, res, next) {
@@ -22,8 +22,17 @@ export class ProfilesController extends BaseController {
   }
   async edit(req, res, next) {
     try {
-      req.body.creatorId = req.user.sub;
-      res.send(req.body);
+      let edit = await profilesService.updateProfile(req.userInfo, req.body);
+      // req.body.creatorId = req.user.sub;
+      res.send(edit);
+    } catch (error) {
+      next(error);
+    }
+  }
+  async getProfileById(req, res, next) {
+    try {
+      let data = await profilesService.getProfileById(req.params.id);
+      res.send(data);
     } catch (error) {
       next(error);
     }

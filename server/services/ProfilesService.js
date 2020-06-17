@@ -36,7 +36,7 @@ async function mergeSubsIfNeeded(profile, user) {
 function sanitizeBody(body) {
   let writable = {
     name: body.name,
-    picture: body.picture
+    // picture: body.picture
   };
   return writable;
 }
@@ -82,6 +82,16 @@ class ProfileService {
       { runValidators: true, setDefaultsOnInsert: true, new: true }
     );
     return profile;
+  }
+  async getProfileById(id) {
+    let data = await dbContext.Profile.findOne({ _id: id }).populate(
+      "creator",
+      "name picture"
+    );
+    if (!data) {
+      throw new BadRequest("Invalid Id");
+    }
+    return data;
   }
 }
 export const profilesService = new ProfileService();

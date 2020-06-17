@@ -11,7 +11,8 @@ const Job = new Schema(
     endDate: { type: Date, required: true },
     requestorId: { type: String, required: true },
     voluteerId: { type: String },
-    jobStatus: { type: String, enum: ["pending", "completed", "cancelled"] },
+    creatorEmail: { type: String, required: true },
+    jobStatus: { type: String, enum: ["pending", "completed", "cancelled"], required: true, default: "pending" },
   },
   { timestamps: true, toJSON: { virtuals: true } }
 );

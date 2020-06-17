@@ -10,14 +10,14 @@ class JobsService {
     return jobs;
   }
   async getJobById(id) {
-    let job = await dbContext.Jobs.findOne({ _id: id }).populate(
+    let data = await dbContext.Jobs.findOne({ _id: id }).populate(
       "creator",
       "name picture"
     );
-    if (!job) {
+    if (!data) {
       throw new BadRequest("Invalid Id");
     }
-    return job;
+    return data;
   }
   async create(rawData) {
     let data = await dbContext.Jobs.create(rawData);
@@ -28,7 +28,6 @@ class JobsService {
       {
         _id: id,
         creatorEmail: userEmail,
-        jobStatus: "pending",
       },
       update,
       {
