@@ -9,6 +9,7 @@ export class ProfilesController extends BaseController {
     this.router
       .use(auth0Provider.getAuthorizedUserInfo)
       .get("", this.getUserProfile)
+      // .get( possible to get reviews by profile id) stretch
       .put("/:id", this.edit);
   }
   async getUserProfile(req, res, next) {
