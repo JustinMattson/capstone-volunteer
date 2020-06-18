@@ -10,9 +10,14 @@ const Job = new Schema(
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
     requestorId: { type: String, required: true },
-    voluteerId: { type: String },
+    voluteerId: [{ type: Array }],
     creatorEmail: { type: String, required: true },
-    jobStatus: { type: String, enum: ["pending", "completed", "cancelled"], required: true, default: "pending" },
+    jobStatus: {
+      type: String,
+      enum: ["pending", "completed", "cancelled"],
+      required: true,
+      default: "pending",
+    },
   },
   { timestamps: true, toJSON: { virtuals: true } }
 );

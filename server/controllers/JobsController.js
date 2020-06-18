@@ -19,15 +19,6 @@ export class JobsController extends BaseController {
       .delete("/:id", this.delete);
   }
 
-  async getQueueByJobId(req, res, next) {
-    try {
-      let data = await queueService.getQueueById(req.params.id);
-      res.send(data);
-    } catch (error) {
-      next(error);
-    }
-  }
-
   async getAll(req, res, next) {
     try {
       let data = await jobsService.getAll(req.query);
@@ -39,6 +30,14 @@ export class JobsController extends BaseController {
   async getJobById(req, res, next) {
     try {
       let data = await jobsService.getJobById(req.params.id);
+      res.send(data);
+    } catch (error) {
+      next(error);
+    }
+  }
+  async getQueueByJobId(req, res, next) {
+    try {
+      let data = await queueService.getQueueByJobId(req.params.id);
       res.send(data);
     } catch (error) {
       next(error);
