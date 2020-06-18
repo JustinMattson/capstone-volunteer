@@ -6,7 +6,7 @@ let ObjectId = Schema.Types.ObjectId;
 const Queue = new Schema(
   {
     jobId: { type: ObjectId, ref: "Job", required: true },
-    voluteerId: { type: ObjectId, ref: "Profile", required: true },
+    volunteerId: { type: ObjectId, ref: "Profile", required: true },
     // startDate: { type: Date },
     // endDate: { type: Date },
     creatorEmail: { type: String, required: true },
