@@ -22,9 +22,12 @@ export class ProfilesController extends BaseController {
   }
   async edit(req, res, next) {
     try {
-      let edit = await profilesService.updateProfile(req.userInfo, req.body);
+      let data = await profilesService.updateProfile(
+        req.userInfo.email,
+        req.body
+      );
       // req.body.creatorId = req.user.sub;
-      res.send(edit);
+      res.send(data);
     } catch (error) {
       next(error);
     }
