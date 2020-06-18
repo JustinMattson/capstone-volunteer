@@ -26,6 +26,7 @@ export class QueueController extends BaseController {
   async create(req, res, next) {
     try {
       // NOTE NEVER TRUST THE CLIENT TO ADD THE CREATOR ID
+      req.body.creatorEmail = req.userInfo.email;
       req.body.volunteerId = req.userInfo.id;
       let data = await queueService.create(req.body);
       res.status(201).send(data);

@@ -9,8 +9,18 @@ class CommentsService {
     );
     return comments;
   }
+  async getCommentById(id) {
+    let data = await dbContext.Comments.find({ _id: id }).populate(
+      "creator",
+      "name picture"
+    );
+    if (!data) {
+      throw new BadRequest("Invalid Id");
+    }
+    return data;
+  }
   async getCommentsByJobId(id) {
-    let data = await dbContext.Comments.findOne({ _id: id }).populate(
+    let data = await dbContext.Comments.find({ jobId: id }).populate(
       "creator",
       "name picture"
     );

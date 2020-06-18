@@ -14,7 +14,7 @@ class QueueService {
   }
   //need to create a queue to see what the id below is called...
   async getQueuesByVolunteerId(id) {
-    let data = await dbContext.Queues.find({ _id: id }).populate(
+    let data = await dbContext.Queues.find({ volunteerId: id }).populate(
       "creator",
       "name picture"
     );

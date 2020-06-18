@@ -12,6 +12,7 @@ export class JobsController extends BaseController {
       .get("", this.getAll)
       .get("/:id", this.getJobById)
       // NOTE: Beyond this point all routes require Authorization tokens (the user must be logged in)
+      .get("/:id/comments", this.getCommentsByJobId)
       .get("/:id/queue", this.getQueueByJobId)
       .use(auth0Provider.getAuthorizedUserInfo)
       .put("/:id", this.edit)
@@ -55,6 +56,7 @@ export class JobsController extends BaseController {
     try {
       // NOTE NEVER TRUST THE CLIENT TO ADD THE CREATOR ID
       req.body.creatorEmail = req.userInfo.email;
+      req.body.requesterId = req.userInfo.id;
       let data = await jobsService.create(req.body);
       res.status(201).send(data);
     } catch (error) {

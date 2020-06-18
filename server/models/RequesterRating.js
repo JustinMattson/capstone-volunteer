@@ -10,7 +10,7 @@ const RateRequester = new Schema(
     rating: { type: Number },
     comment: { type: String },
     volunteerId: { type: String, required: true },
-    requestorId: { type: String, required: true },
+    requesterId: { type: String, required: true },
   },
   { timestamps: true, toJSON: { virtuals: true } }
 );
