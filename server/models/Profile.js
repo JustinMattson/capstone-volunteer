@@ -8,8 +8,8 @@ const Profile = new Schema(
     email: { type: String, lowercase: true, unique: true },
     name: { type: String, required: true },
     picture: { type: String },
-    volunteerRating: [{ type: ObjectId }],
-    requestorRating: [{ type: ObjectId }],
+    volunteerRating: [{ type: Number }],
+    requestorRating: [{ type: Number }],
     requestsSubmitted: [{ type: ObjectId }],
     jobsAccepted: [{ type: ObjectId }],
     // NOTE If you wish to add additional public properties for profiles do so here

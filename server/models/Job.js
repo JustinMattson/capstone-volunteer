@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
+let ObjectId = Schema.Types.ObjectId
 
 const Job = new Schema(
   {
@@ -10,7 +11,9 @@ const Job = new Schema(
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
     requestorId: { type: String, required: true },
-    voluteerId: [{ type: Array }],
+    volunteerId: [{ type: ObjectId, ref: "Profile" }],
+    requesterRatings: [{ type: Object }],   //job rating {volunteerId, Rating from Volunteer to job poster}
+    volunteerRatings: [{ type: Object }],    //helper's rating {volunteerId, Rating from job poster to Volunteer}
     creatorEmail: { type: String, required: true },
     jobStatus: {
       type: String,
