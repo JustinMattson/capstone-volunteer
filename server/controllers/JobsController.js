@@ -13,7 +13,7 @@ export class JobsController extends BaseController {
       .get("/:id", this.getJobById)
       // NOTE: Beyond this point all routes require Authorization tokens (the user must be logged in)
       .get("/:id/comments", this.getCommentsByJobId)
-      .get("/:id/queue", this.getQueueByJobId)
+      .get("/:id/queue", this.getQueuesByJobId)
       .use(auth0Provider.getAuthorizedUserInfo)
       .put("/:id", this.edit)
       .post("", this.create)
@@ -38,7 +38,7 @@ export class JobsController extends BaseController {
   }
   async getQueuesByJobId(req, res, next) {
     try {
-      let data = await queueService.getQueueByJobId(req.params.id);
+      let data = await queueService.getQueuesByJobId(req.params.id);
       res.send(data);
     } catch (error) {
       next(error);

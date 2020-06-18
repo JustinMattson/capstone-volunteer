@@ -29,17 +29,10 @@ class QueueService {
     let data = await dbContext.Queues.create(rawData);
     return data;
   }
-  async edit(id, userEmail, update) {
-    let data = await dbContext.Queues.findOneAndUpdate(
-      {
-        _id: id,
-        creatorEmail: userEmail,
-      },
-      update,
-      {
-        new: true,
-      }
-    );
+  async edit(id, update) {
+    let data = await dbContext.Queues.findOneAndUpdate({ _id: id }, update, {
+      new: true,
+    });
     if (!data) {
       throw new BadRequest("Invalid ID");
     }
