@@ -6,7 +6,12 @@ let ObjectId = Schema.Types.ObjectId;
 const Queue = new Schema(
   {
     jobId: { type: ObjectId, ref: "Job", required: true },
-    volunteerId: { type: ObjectId, ref: "Profile", required: true },
+    volunteerId: {
+      type: ObjectId,
+      ref: "Profile",
+      required: true,
+      unique: true, // should be able to prevent one person from applying multiple times on the front end. this didn't fully prevent.
+    },
     // startDate: { type: Date },
     // endDate: { type: Date },
     creatorEmail: { type: String, required: true },
