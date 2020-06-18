@@ -36,7 +36,7 @@ export class JobsController extends BaseController {
       next(error);
     }
   }
-  async getQueueByJobId(req, res, next) {
+  async getQueuesByJobId(req, res, next) {
     try {
       let data = await queueService.getQueueByJobId(req.params.id);
       res.send(data);

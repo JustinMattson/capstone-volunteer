@@ -2,8 +2,8 @@ import { dbContext } from "../db/DbContext";
 import { BadRequest } from "../utils/Errors";
 
 class QueueService {
-  async getQueueByJobId(id) {
-    let data = await dbContext.Queues.findOne({ jobId: id }).populate(
+  async getQueuesByJobId(id) {
+    let data = await dbContext.Queues.find({ jobId: id }).populate(
       "creator",
       "name picture"
     );
@@ -12,7 +12,9 @@ class QueueService {
     }
     return data;
   }
+
   //need to create a queue to see what the id below is called...
+  //this is for the profile
   async getQueuesByVolunteerId(id) {
     let data = await dbContext.Queues.find({ volunteerId: id }).populate(
       "creator",
