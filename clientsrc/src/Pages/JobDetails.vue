@@ -28,7 +28,10 @@
         </div>
         <div class="row text-center">
           <div class="col-12 button-bottom">
-            <button class="btn btn-secondary btn-lg text-primary text-shadow">Apply to Help</button>
+            <button
+              @click="addToQueue"
+              class="btn btn-secondary btn-lg text-primary text-shadow"
+            >Apply to Help</button>
           </div>
         </div>
       </div>
@@ -43,7 +46,15 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <!-- <comment v-for="comment in comments" :key="_id" /> -->
+        <!-- <comment v-for="comment in comments" :key="comment._id" /> -->
+      </div>
+    </div>
+    <div class="row text-center border-cstm pb-3">
+      <div class="col-12">Sign Up List</div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <Queue v-for="queue in queues" :key="queue._id" :queue="queue" />
       </div>
     </div>
   </div>
@@ -52,6 +63,7 @@
 <script>
 import moment from "moment";
 // import comment from "@/components/CommentComponent.vue";
+import Queue from "@/components/QueueComponent.vue";
 export default {
   name: "jobDetails",
   data() {
@@ -71,9 +83,6 @@ export default {
     profile() {
       return this.$store.state.profile;
     },
-    profiles() {
-      return this.$store.state.profiles;
-    },
     comments() {
       return this.$store.state.comments;
     },
@@ -89,8 +98,19 @@ export default {
       return moment(String(data)).format("MM/DD/YYYY");
     }
   },
-  methods: {},
+  methods: {
+    addToQueue() {
+      let obj = {
+        volunteerName: this.profile.name,
+        volunteerPic: this.profile.picture,
+        jobId: this.job._id
+      };
+
+      this.$store.dispatch("createQueue", obj);
+    }
+  },
   components: {
+    Queue
     // comment
   }
 };
