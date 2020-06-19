@@ -2,7 +2,7 @@
   <div class="job">
     <!-- CARD TEMPLATE API -->
     <div class="card shadow border-warning">
-      <!-- <img src=url('{{job.imgUrl}}') class="card-img-top p-2" alt="..." /> -->
+      <img :src="job.imgUrl" class="card-img-top p-2" alt="..." />
       <div class="card-body p-2">
         <h5 class="card-title text-left text-primary">{{job.title}}</h5>
         <p class="card-text text-left">{{job.description}}</p>
@@ -59,7 +59,7 @@ export default {
           swal("Close cancelled");
         }
       });
-      this.job.status = "cancelled"; // if it is deleted, this is not necessary
+      // this.job.status = "cancelled"; // if it is deleted, this is not necessary
     }
   },
   components: {}
