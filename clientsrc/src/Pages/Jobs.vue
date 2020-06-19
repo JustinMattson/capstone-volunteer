@@ -21,16 +21,16 @@
             </div>
             <div class="modal-body shadow-sm container text-secondary">
               <!-- add submit method here -->
-              <form @submit.prevent>
+              <form @submit.prevent="addJob">
                 <div class="row justify-content-center">
                   <div class="col text-center">
                     <!-- add v-model -->
                     <h5>Title:</h5>
-                    <input type="text" placeholder="Title" required />
+                    <input type="text" placeholder="Title" required v-model="newJob.title" />
                   </div>
                   <div class="col text-center">
                     <h5>Location:</h5>
-                    <input type="text" placeholder="City" required />
+                    <input type="text" placeholder="City" required v-model="newJob.generalLocation" />
                   </div>
                 </div>
                 <div class="row justify-content-center mt-3">
@@ -44,30 +44,31 @@
                       type="text"
                       placeholder="Describe what you need help with..."
                       required
+                      v-model="newJob.description"
                     />
                   </div>
                 </div>
                 <div class="row justify-content-center">
                   <div class="col text-center">
                     <h5>Image (optional):</h5>
-                    <input type="text" placeholder="Image Link" />
+                    <input type="text" placeholder="Image Link" v-model="newJob.imgUrl" />
                   </div>
                 </div>
 
                 <div class="row justify-content-center mt-3">
                   <div class="col text-center">
                     <h5>Start Date:</h5>
-                    <input type="date" placeholder="start date" required />
+                    <input type="date" placeholder="start date" required v-model="newJob.startDate" />
                   </div>
                   <div class="col text-center">
                     <h5>End Date:</h5>
-                    <input type="date" placeholder="end date" required />
+                    <input type="date" placeholder="end date" required v-model="newJob.endDate" />
                   </div>
                 </div>
                 <div class="row mt-3 align-items-end">
                   <div class="col">
                     <h5>Estimated Hours:</h5>
-                    <input type="number" placeholder="0" required />
+                    <input type="number" placeholder="0" required v-model="newJob.estimatedHours" />
                   </div>
                   <div class="col text-center">
                     <button type="submit" class="btn btn-secondary btn-lg">Add Request</button>
