@@ -1,19 +1,20 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
-let ObjectId = Schema.Types.ObjectId
+let ObjectId = Schema.Types.ObjectId;
 
 const Job = new Schema(
   {
     title: { type: String, required: true },
     description: { type: String, required: true },
+    imgUrl: { type: String },
     generalLocation: { type: String, required: true },
     estimatedHours: { type: Number, required: true },
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
     requestorId: { type: String, required: true },
     volunteerId: [{ type: ObjectId, ref: "Profile" }],
-    requesterRatings: [{ type: Object }],   //job rating {volunteerId, Rating from Volunteer to job poster}
-    volunteerRatings: [{ type: Object }],    //helper's rating {volunteerId, Rating from job poster to Volunteer}
+    requesterRatings: [{ type: Object }], //job rating {volunteerId, Rating from Volunteer to job poster}
+    volunteerRatings: [{ type: Object }], //helper's rating {volunteerId, Rating from job poster to Volunteer}
     creatorEmail: { type: String, required: true },
     jobStatus: {
       type: String,
