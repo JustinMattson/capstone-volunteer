@@ -104,6 +104,11 @@ export default {
       return this.jobs.sort(compare);
     }
   },
+  computed: {
+    jobs() {
+      return this.$store.state.jobs;
+    }
+  },
   components: {
     Job
   }
