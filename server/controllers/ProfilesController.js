@@ -34,6 +34,14 @@ export class ProfilesController extends BaseController {
       next(error);
     }
   }
+  async getAll(req, res, next) {
+    try {
+      let data = await profilesService.getAll(req.query);
+      res.send(data);
+    } catch (error) {
+      next(error);
+    }
+  }
   async getProfileById(req, res, next) {
     try {
       let data = await profilesService.getProfileById(req.params.id);

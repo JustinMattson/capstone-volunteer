@@ -83,6 +83,14 @@ class ProfileService {
     );
     return profile;
   }
+
+  async getAll(query = {}) {
+    let profiles = await dbContext.Profile.find(query).populate(
+      "creator",
+      "name picture"
+    );
+    return profiles;
+  }
   async getProfileById(id) {
     let data = await dbContext.Profile.findOne({ _id: id }).populate(
       "creator",

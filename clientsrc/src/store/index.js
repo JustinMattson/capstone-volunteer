@@ -17,6 +17,7 @@ let api = Axios.create({
 
 export default new Vuex.Store({
   state: {
+    profiles: [],
     profile: {},
     jobs: [],
     activeJob: {},
@@ -26,6 +27,9 @@ export default new Vuex.Store({
   mutations: {
     setProfile(state, profile) {
       state.profile = profile;
+    },
+    setProfiles(state, profiles) {
+      state.profiles = profiles;
     },
     //#region JOBS
     setJobs(state, jobs) {
@@ -126,6 +130,14 @@ export default new Vuex.Store({
       try {
         let res = await api.get("profile");
         commit("setProfile", res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async getAllProfiles({ commit }) {
+      try {
+        let res = await api.get("profiles");
+        commit("setProfiles", res.data);
       } catch (error) {
         console.error(error);
       }
