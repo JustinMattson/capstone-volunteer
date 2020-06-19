@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid">
-    <div class="row">
+    <div class="row text-center">
       <div class="col-12">
         <h1>Request Some Help</h1>
         <!-- MODAL FORM -->
@@ -10,43 +10,78 @@
           data-toggle="modal"
           data-target="#myModal"
         >New Request</button>
-        <div class="modal fade" id="myModal" role="dialog">
-          <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">New Request</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-              </div>
-              <div class="modal-body">
-                <!-- add submit method here -->
-                <form @submit.prevent>
-                  <div>
+      </div>
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header bg-primary shadow-sm">
+              <h4 class="modal-title text-white">New Request</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body shadow-sm container text-secondary">
+              <!-- add submit method here -->
+              <form @submit.prevent>
+                <div class="row justify-content-center">
+                  <div class="col text-center">
                     <!-- add v-model -->
-                    <input type="text" placeholder="title" required />
+                    <h5>Title:</h5>
+                    <input type="text" placeholder="Title" required />
                   </div>
-                  <div>
+                  <div class="col text-center">
+                    <h5>Location:</h5>
+                    <input type="text" placeholder="City" required />
+                  </div>
+                </div>
+                <div class="row justify-content-center mt-3">
+                  <div class="col text-center">
                     <!-- add v-model -->
+                    <h5>Description:</h5>
                     <textarea
                       class="m-3"
                       rows="3"
-                      cols="50"
+                      cols="55"
                       type="text"
-                      placeholder="description"
+                      placeholder="Describe what you need help with..."
                       required
                     />
                   </div>
-                  <button type="submit">Add Request</button>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-              </div>
+                </div>
+                <div class="row justify-content-center">
+                  <div class="col text-center">
+                    <h5>Image (optional):</h5>
+                    <input type="text" placeholder="Image Link" />
+                  </div>
+                </div>
+
+                <div class="row justify-content-center mt-3">
+                  <div class="col text-center">
+                    <h5>Start Date:</h5>
+                    <input type="date" placeholder="start date" required />
+                  </div>
+                  <div class="col text-center">
+                    <h5>End Date:</h5>
+                    <input type="date" placeholder="end date" required />
+                  </div>
+                </div>
+                <div class="row mt-3 align-items-end">
+                  <div class="col">
+                    <h5>Estimated Hours:</h5>
+                    <input type="number" placeholder="0" required />
+                  </div>
+                  <div class="col text-center">
+                    <button type="submit" class="btn btn-secondary btn-lg">Add Request</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer bg-primary shadow-sm">
+              <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
             </div>
           </div>
         </div>
-        <!-- END MODAL FORM -->
       </div>
+      <!-- END MODAL FORM -->
     </div>
     <div class="row">
       <div class="col-12 list-container px-0">
