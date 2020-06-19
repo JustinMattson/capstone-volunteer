@@ -20,11 +20,14 @@ export default new Vuex.Store({
     profile: {},
     jobs: [],
     activeJob: {},
+    comments: [],
+    queue: []
   },
   mutations: {
     setProfile(state, profile) {
       state.profile = profile;
     },
+    //#region JOBS
     setJobs(state, jobs) {
       state.jobs = jobs;
     },
@@ -39,9 +42,33 @@ export default new Vuex.Store({
       let index = state.jobs.findIndex((j) => j.id == id);
       state.jobs.splice(index, 1);
     },
+    //#endregion 
+
+    //#region COMMENTS
+    setAllComments(store, comments) {
+      store.comments = comments
+    },
+    setNewComment(store, comment) {
+      store.comments.push(comment)
+    },
+    changeComment(store, comment) {
+      let index = store.comments.findIndex(c => c.id == comment.id)
+      store.comments[index] = comment
+    },
+    removeComment(store, id) {
+      let index = store.comments.findIndex(c => c.id == id)
+      store.comments.splice(index, 1)
+    },
+    //#endregion
+
+    //#region QUEUEUEUEUEUE 
+    setQueue(state, queues) {
+      state.queue = queues
+    }
+    //#endregion
   },
   actions: {
-    setBearer({}, bearer) {
+    setBearer({ }, bearer) {
       api.defaults.headers.authorization = bearer;
     },
     resetBearer() {
@@ -111,6 +138,77 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
+    //#endregion
+
+    //#region COMMENTS
+    async getComments({ commit }, id) {
+      try {
+        let data = await api.get("jobs/" + id + "/comments", id)
+        commit("setAllComments", data)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+
+    async addComment({ commit }, newComment) {
+      try {
+        let data = await api.post("comments", newComment)
+        commit("setNewComment", data)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async editComment({ commit }, comment) {
+      try {
+        let data = await api.put("comments" + comment.id, comment)
+        commit("changeComment", data)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async deleteComment({ commit }, id) {
+      try {
+        await api.delete("comments" + id, id)
+        commit("removeComment", id)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    //#endregion
+
+    //#region QUEUEUEUEUEUEUE
+    async getQueueByJobId({ commit }, id) {
+      try {
+        let data = await api.get("profile/" + id + "/queue")
+        commit("setQueue", data)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async getQueueByProfileId({ commit }, id) {
+      try {
+        let data = await api.get("jobs/" + id + "/queue")
+        commit("setQueue", data)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async createQueue({ commit }, obj) {
+      try {
+        let data = await api.post("queue", obj)
+        if (data) {
+          return true
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async approveDeny({ commit }, obj) {
+      let data = await api.put("queue/" + obj.id, obj)
+      if (data) {
+        return true
+      }
+    }
     //#endregion
   },
 });
