@@ -31,6 +31,7 @@ export class QueueController extends BaseController {
     try {
       // req.body.creatorEmail = req.userInfo.email;
       // queue only edited by requester front end
+
       let data = await queueService.edit(req.params.id, req.body);
       return res.send(data);
     } catch (error) {

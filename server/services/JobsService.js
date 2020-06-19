@@ -12,11 +12,12 @@ class JobsService {
   async getJobById(id) {
     let data = await dbContext.Jobs.findOne({ _id: id }).populate(
       "creator",
-      "name picture"
+      // "name picture requesterRatings"
     );
     if (!data) {
       throw new BadRequest("Invalid Id");
     }
+
     return data;
   }
   async create(rawData) {

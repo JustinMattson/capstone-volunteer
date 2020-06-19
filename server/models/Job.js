@@ -6,15 +6,15 @@ const Job = new Schema(
   {
     title: { type: String, required: true },
     description: { type: String, required: true },
-    imgUrl: { type: String },
+    imgUrl: { type: String, default: "//placehold.it/200x200" },
     generalLocation: { type: String, required: true },
     estimatedHours: { type: Number, required: true },
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
     requesterId: { type: String, required: true },
     volunteerId: [{ type: ObjectId, ref: "Profile" }],
-    requesterRatings: [{ type: Object }], //job rating {volunteerId, Rating from Volunteer to job poster}
-    volunteerRatings: [{ type: Object }], //helper's rating {volunteerId, Rating from job poster to Volunteer}
+    jobCreatorRatings: [{ type: Object }], //job rating {volunteerId, Rating from Volunteer to job poster}
+    helperRatings: [{ type: Object }], //helper's rating {volunteerId, Rating from job poster to Volunteer}
     creatorEmail: { type: String, required: true },
     jobStatus: {
       type: String,
