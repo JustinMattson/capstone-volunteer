@@ -178,9 +178,10 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
-    async editComment({ commit }, comment) {
+    async editComment({ commit, dispatch }, update) {
+      debugger;
       try {
-        let data = await api.put("comments" + comment.id, comment);
+        let data = await api.put("comments/" + update.id, update);
         commit("changeComment", data);
       } catch (error) {
         console.error(error);

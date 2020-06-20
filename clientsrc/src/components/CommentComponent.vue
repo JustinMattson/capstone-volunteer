@@ -20,30 +20,44 @@
           placeholder="comment.body"
         ></textarea>
       </div>
-      <!-- <form
-        class="form"
-        @submit.prevent="editComment"
-        v-if="$auth.isAuthenticated && comment.creatorEamil == profile.email"
-      >
-        <textarea
-          class="text-left text-primary unbold bg-light border-0 p-2"
-          v-model="comment.body"
-          style="height:100px;width:100%"
-          placeholder="comment.body"
-        ></textarea>
-      </form>-->
+
       <div class="d-flex col-12 m-0 mx-1 px-3 justify-content-between">
         <span>{{comment.creator.name}}</span>
         <span class="text-muted">
-          <i class="far fa-edit text-secondary action" @click="toggleEditForm"></i>
+          <i
+            class="far fa-edit text-secondary action"
+            v-show="comment.creatorEmail == profile.email"
+            @click="toggleEditForm()"
+          ></i>
           &nbsp;
           {{updated}}&nbsp;
-          <i
-            class="far fa-trash-alt text-danger action"
-            @click="deleteComment"
-          ></i>
+          <!-- REVIEW seems to work without parens deleteComment() -->
+          <i class="far fa-trash-alt text-danger action" @click="deleteComment"></i>
         </span>
       </div>
+
+      <!-- EDIT COMMENT FORM -->
+      <form
+        v-show="this.editForm"
+        class="form my-2 border border-top"
+        @submit.prevent="editComment"
+        style="height:100px;width:100%"
+      >
+        <div class="d-flex justify-content-between">
+          <span class="d-flex text-center align-self-center px-3">
+            <button type="submit" class="btn btn-outline-secondary">Update</button>
+          </span>
+          <span class="text-right" style="height:100px;width:100%">
+            <textarea
+              class="text-left text-primary unbold bg-light border-0 p-2"
+              v-model="comment.body"
+              placeholder="comment.body"
+              style="width:100%;height:100px;"
+            ></textarea>
+          </span>
+        </div>
+      </form>
+      <!-- END EDIT COMMENT FORM -->
     </div>
 
     <!-- END COMMENT TEMPLATE -->
@@ -58,23 +72,31 @@ export default {
   props: ["comment"],
   data() {
     return {
+      editForm: false,
       updated: moment(String(this.comment.updatedAt)).format(
         "MM/DD/YYYY h:mm A"
       ),
+
       commentIndex: 0
     };
   },
   mounted() {},
   computed: {
+    profile() {
+      return this.$store.state.profile;
+    }
     // TODO idea below was to alternate the comment row background based on % = 0
     // cIndex() {
     //   this.$store.state.comments.findIndex(c => c.id == this.comment.id);
     // }
   },
   methods: {
+    toggleEditForm() {
+      this.editForm == false ? (this.editForm = true) : (this.editForm = false);
+    },
     addComment() {
       // TODO this method has not bee tested from the app.
-      this.$store.state.dispatch("addComment", this.comment);
+      this.$store.dispatch("addComment", this.comment);
     },
     // REVIEW in the event comments need sorted by date.
     // commentSortAsc() {
@@ -96,7 +118,10 @@ export default {
     toggleEditForm() {
       this.editForm = !this.editForm;
     },
-    editComment() {},
+    editComment() {
+      this.$store.dispatch("editComment", this.comment);
+      this.editForm = false;
+    },
     deleteComment() {
       swal({
         title: "Are you sure?",
