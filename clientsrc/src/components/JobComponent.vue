@@ -2,7 +2,9 @@
   <div class="job">
     <!-- CARD TEMPLATE API -->
     <div class="card shadow border-warning rounded-lg">
-      <img :src="job.imgUrl" class="card-img-top p-2" alt="..." />
+      <router-link :to="{ name: 'job', params: { jobId: job.id } }">
+        <img :src="job.imgUrl" class="card-img-top p-2" alt="..." />
+      </router-link>
       <div class="card-body p-2">
         <div class="d-flex text-left text-primary font-weight-bold font-lg justify-content-between">
           <span>{{job.title}}</span>

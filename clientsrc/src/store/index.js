@@ -72,7 +72,7 @@ export default new Vuex.Store({
     //#endregion
   },
   actions: {
-    setBearer({ }, bearer) {
+    setBearer({}, bearer) {
       api.defaults.headers.authorization = bearer;
     },
     resetBearer() {
@@ -118,7 +118,7 @@ export default new Vuex.Store({
     async deleteJob({ commit, dispatch }, id) {
       try {
         let res = await api.delete("jobs/" + id);
-        debugger
+        debugger;
         commit("removeJob", res.data);
       } catch (error) {
         console.error(error);
