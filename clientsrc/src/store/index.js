@@ -75,6 +75,10 @@ export default new Vuex.Store({
     updateQueueStatus(state, queue) {
       let index = state.queues.findIndex(q => q.id == queue.id)
       state.queues[index] = queue
+    },
+    removeQueue(state, id) {
+      let index = state.queues.findIndex(q => q.id == id)
+      state.queues.splice(index, 1)
     }
     //#endregion
   },
@@ -221,6 +225,10 @@ export default new Vuex.Store({
       } catch (error) {
         console.error(error);
       }
+    },
+    async cancelQueue({ commit }, id) {
+      let res = await api.delete("queue/" + id, id)
+      commit("removeQueue", id)
     },
     async approveDeny({ commit }, obj) {
       let res = await api.put("queue/" + obj.id, obj);

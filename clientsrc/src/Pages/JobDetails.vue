@@ -114,7 +114,9 @@ export default {
         );
       }
     },
-    isJobCreator() {}
+    isJobCreator() {
+      return this.$store.state.profile._id == this.job.creator._id;
+    }
   },
   methods: {
     addToQueue() {
