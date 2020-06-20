@@ -23,7 +23,7 @@
           <div class="col-12">
             <p>General Location: {{job.generalLocation}}</p>
             <p>Estimated Hours: {{job.estimatedHours}}</p>
-            <p>Time Frame: {{jobStart}} - {{jobEnd}}</p>
+            <p>When: {{when}}</p>
           </div>
         </div>
         <div class="row text-center">
@@ -46,7 +46,9 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <comment v-for="comment in comments" :key="comment.id" :comment="comment" />
+        <!-- CARD TEMPLATE COMMENTS -->
+        <comment v-for="comment in comments" :key="comment._id" :comment="comment" />
+        <!-- END CARD TEMPLATE COMMENTS -->
       </div>
     </div>
     <div class="row text-center border-cstm pb-3">
@@ -67,7 +69,10 @@ import Queue from "@/components/QueueComponent.vue";
 export default {
   name: "jobDetails",
   data() {
-    return {};
+    return {
+      start: moment(String(this.job.startDate)).format("MM/DD/YYYY"),
+      end: moment(String(this.job.startDate)).format("MM/DD/YYYY")
+    };
   },
   async mounted() {
     await this.$store.dispatch("getJobById", this.$route.params.jobId);
@@ -89,13 +94,24 @@ export default {
     queues() {
       return this.$store.state.queues;
     },
-    jobStart() {
-      let data = this.$store.state.activeJob.startDate;
-      return moment(String(data)).format("MM/DD/YYYY");
-    },
-    jobEnd() {
-      let data = this.$store.state.activeJob.endDate;
-      return moment(String(data)).format("MM/DD/YYYY");
+    // jobStart() {
+    //   let data = this.$store.state.activeJob.startDate;
+    //   return moment(String(data)).format("MM/DD/YYYY");
+    // },
+    // jobEnd() {
+    //   let data = this.$store.state.activeJob.endDate;
+    //   return moment(String(data)).format("MM/DD/YYYY");
+    // },
+    when() {
+      if (this.job.startDate == this.job.endDate) {
+        return moment(String(this.job.startDate)).format("MM/DD/YYYY");
+      } else {
+        return (
+          moment(String(this.job.startDate)).format("MM/DD/YYYY") +
+          " - " +
+          moment(String(this.job.endDate)).format("MM/DD/YYYY")
+        );
+      }
     }
   },
   methods: {
