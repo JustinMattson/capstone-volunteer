@@ -2,6 +2,8 @@
   <div clas="comment container">
     <!-- COMMENT TEMPLATE API -->
     <div class="row bg-light border border-secondary">
+      <!-- can use a different bg-color if the comment index % = 0? -->
+      <!-- TODO need to add edit/delete functions to owned comments -->
       <div class="col-2 text-left m-0 mt-2 d-flex align-self-center">
         <img
           :src="comment.creator.picture"
@@ -44,7 +46,7 @@ export default {
   },
   mounted() {},
   computed: {
-    // REVIEW idea below was to alternate the comment row background based on % = 0
+    // TODO idea below was to alternate the comment row background based on % = 0
     // cIndex() {
     //   this.$store.state.comments.findIndex(c => c.id == this.comment.id);
     // }
