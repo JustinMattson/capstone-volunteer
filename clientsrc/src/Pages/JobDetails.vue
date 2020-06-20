@@ -69,8 +69,7 @@ import Queue from "@/components/QueueComponent.vue";
 export default {
   name: "jobDetails",
   data() {
-    return {
-    };
+    return {};
   },
   async mounted() {
     await this.$store.dispatch("getJobById", this.$route.params.jobId);
@@ -105,8 +104,7 @@ export default {
           moment(String(this.job.endDate)).format("MM/DD/YYYY")
         );
       }
-    },
-    isJobCreator() {}
+    }
   },
   methods: {
     addToQueue() {
