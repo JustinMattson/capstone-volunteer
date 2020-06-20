@@ -32,7 +32,11 @@
           &nbsp;
           {{updated}}&nbsp;
           <!-- REVIEW seems to work without parens deleteComment() -->
-          <i class="far fa-trash-alt text-danger action" @click="deleteComment"></i>
+          <i
+            class="far fa-trash-alt text-danger action"
+            v-show="comment.creatorEmail == profile.email"
+            @click="deleteComment"
+          ></i>
         </span>
       </div>
 
