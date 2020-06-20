@@ -11,7 +11,7 @@
       </div>
       <div class="col-4 offset-1">
         <div class="row d-flex justify-content-center">
-          <div class="col-6 d-flex justify-content-end">
+          <div class="col-6 d-flex justify-content-end" v-if="job.creator">
             <img :src="job.creator.picture" class="profile-pic border border-secondary" />
           </div>
           <div class="col-6">
@@ -43,7 +43,7 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <!-- <comment v-for="comment in comments" :key="_id" /> -->
+        <comment v-for="comment in comments" :key="comment.id" :comment="comment" />
       </div>
     </div>
   </div>
@@ -51,7 +51,7 @@
 
 <script>
 import moment from "moment";
-// import comment from "@/components/CommentComponent.vue";
+import Comment from "@/components/CommentComponent.vue";
 export default {
   name: "jobDetails",
   data() {
@@ -91,7 +91,7 @@ export default {
   },
   methods: {},
   components: {
-    // comment
+    Comment
   }
 };
 </script>

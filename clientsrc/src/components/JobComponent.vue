@@ -1,26 +1,36 @@
 <template>
   <div class="job">
     <!-- CARD TEMPLATE API -->
-    <div class="card shadow border-warning">
+    <div class="card shadow border-warning rounded-lg">
       <img :src="job.imgUrl" class="card-img-top p-2" alt="..." />
       <div class="card-body p-2">
-        <span class="text-left text-primary font-weight-bold">
-          {{
-          job.title
-          }}
-        </span>
-        <p class="card-text text-left">{{ job.description }}</p>
-        <div>General Location: {{ job.generalLocation }}</div>
-        <div>{{ start }}</div>
-        <div>{{ end }}</div>
+        <div class="d-flex text-left text-primary font-weight-bold font-lg justify-content-between">
+          <span>{{job.title}}</span>
+          <span v-show="job.creatorEmail == profile.email">
+            <!-- <br /> {{job.creatorEmail}} <br /> {{profile.email}} -->
+            <i class="far fa-trash-alt action text-danger" @click="deleteJob"></i>
+          </span>
+        </div>
+        <div class="d-flex text-left text-secondary align-self-center">
+          <span>
+            <img class="rounded-lg" :src="job.creator.picture" style="height:25px;width:25px" />
+          </span>
+          <span class="d-flex align-self-center pl-2 unbold">{{job.creator.name}}</span>
+        </div>
+        <p class="card-text text-left py-2">{{ job.description }}</p>
+        <div class="unbold">General Location: {{ job.generalLocation }}</div>
+        <small class="unbold">
+          When: {{ when }}
+          <!-- <br /> S:{{job.startDate}} <br /> E:{{job.endDate}}-->
+        </small>
         <div>{{ job.status }}</div>
 
         <router-link :to="{ name: 'job', params: { jobId: job.id } }">
-          <span class="d-flex my-2 justify-content-center">
-            <i class="fas fa-hands-helping action text-primary">&nbsp;More Info</i>
+          <span class="d-flex my-3 justify-content-center">
+            <i class="fas fa-hands-helping action text-primary font-lg">&nbsp;More Info</i>
           </span>
         </router-link>
-        <p class="small text-muted mb-0 text-center">#{{ job.id }}</p>
+        <p class="small text-muted mb-0 text-center unbold">#{{ job.id }}</p>
       </div>
     </div>
     <!-- END CARD TEMPLATE -->
@@ -42,6 +52,17 @@ export default {
   computed: {
     profile() {
       return this.$store.state.profile;
+    },
+    when() {
+      if (this.job.startDate == this.job.endDate) {
+        return moment(String(this.job.startDate)).format("MM/DD/YYYY");
+      } else {
+        return (
+          moment(String(this.job.startDate)).format("MM/DD/YYYY") +
+          " - " +
+          moment(String(this.job.endDate)).format("MM/DD/YYYY")
+        );
+      }
     }
   },
   methods: {
@@ -55,9 +76,9 @@ export default {
         dangerMode: true
       }).then(willDelete => {
         if (willDelete) {
-          let data = this.$store.dispatch("deleteJob", this.job);
+          let data = this.$store.dispatch("deleteJob", this.job.id);
 
-          swal("Poof! Your request has been closed!", {
+          swal("Poof! Your help request has been deleted!", {
             icon: "success"
           });
           this.editJob = false;
@@ -65,7 +86,6 @@ export default {
           swal("Close cancelled");
         }
       });
-      // this.job.status = "cancelled"; // if it is deleted, this is not necessary
     }
   },
   components: {}
@@ -73,7 +93,17 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap");
+.unbold {
+  font-family: "Balsamiq Sans", cursive;
+}
 .action {
   cursor: pointer;
+}
+.font-lg {
+  font-size: 20pt;
+}
+img {
+  border-radius: 13px;
 }
 </style>
