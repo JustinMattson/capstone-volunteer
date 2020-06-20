@@ -14,15 +14,35 @@
       </div>
       <div class="col-10 m-0 mt-2 d-flex align-self-center">
         <textarea
-          class="text-left text-primary border border-warning p-2"
+          class="text-left text-primary unbold bg-light border-0 p-2"
           v-model="comment.body"
           style="height:100px;width:100%"
           placeholder="comment.body"
         ></textarea>
       </div>
+      <!-- <form
+        class="form"
+        @submit.prevent="editComment"
+        v-if="$auth.isAuthenticated && comment.creatorEamil == profile.email"
+      >
+        <textarea
+          class="text-left text-primary unbold bg-light border-0 p-2"
+          v-model="comment.body"
+          style="height:100px;width:100%"
+          placeholder="comment.body"
+        ></textarea>
+      </form>-->
       <div class="d-flex col-12 m-0 mx-1 px-3 justify-content-between">
         <span>{{comment.creator.name}}</span>
-        <span class="text-muted">{{updated}}</span>
+        <span class="text-muted">
+          <i class="far fa-edit text-secondary action" @click="toggleEditForm"></i>
+          &nbsp;
+          {{updated}}&nbsp;
+          <i
+            class="far fa-trash-alt text-danger action"
+            @click="deleteComment"
+          ></i>
+        </span>
       </div>
     </div>
 
@@ -73,24 +93,27 @@ export default {
     //   }
     //   return this.comments.sort(compare);
     // },
+    toggleEditForm() {
+      this.editForm = !this.editForm;
+    },
+    editComment() {},
     deleteComment() {
       swal({
         title: "Are you sure?",
         text:
-          "Click 'Ok' to confirm you wish to delete this request.  This action cannot be undone.",
+          "Click 'Ok' to confirm you wish to delete this comment.  This action cannot be undone.",
         icon: "warning",
         buttons: true,
         dangerMode: true
       }).then(willDelete => {
         if (willDelete) {
-          let data = this.$store.dispatch("deleteJob", this.job);
-
-          swal("Poof! Your request has been closed!", {
+          let data = this.$store.dispatch("deleteComment", this.comment.id);
+          swal("Poof! Your comment has been deleted!", {
             icon: "success"
           });
-          this.editJob = false;
+          this.edit = false;
         } else {
-          swal("Close cancelled");
+          swal("Deletion cancelled");
         }
       });
     }
