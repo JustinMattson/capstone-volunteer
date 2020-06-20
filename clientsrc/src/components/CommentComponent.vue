@@ -14,7 +14,7 @@
       </div>
       <div class="col-10 m-0 mt-2 d-flex align-self-center">
         <textarea
-          class="text-left text-primary font-weight-bold border border-warning p-2"
+          class="text-left text-primary border border-warning p-2"
           v-model="comment.body"
           style="height:100px;width:100%"
           placeholder="comment.body"
@@ -53,6 +53,7 @@ export default {
   },
   methods: {
     addComment() {
+      // TODO this method has not bee tested from the app.
       this.$store.state.dispatch("addComment", this.comment);
     },
     // REVIEW in the event comments need sorted by date.

@@ -14,9 +14,9 @@
           <div class="col-6 d-flex justify-content-end" v-if="job.creator">
             <img :src="job.creator.picture" class="profile-pic border border-secondary" />
           </div>
-          <div class="col-6">
+          <div class="col-6" v-if="job.creator">
             <div>{{job.creator.name}}</div>
-            <div>{{profile.requesterRatings}} 5 FIX THIS BEFORE DEPLOY</div>
+            <div>{{profile.requesterRating}} 5 FIX THIS BEFORE DEPLOY</div>
           </div>
         </div>
         <div class="row my-5 text-center">
@@ -70,9 +70,6 @@ export default {
   name: "jobDetails",
   data() {
     return {
-      // Putting info from computed into data throws errors and makes it harder to debug. I'm commenting this out to clear out console errors.
-      // start: moment(String(this.job.startDate)).format("MM/DD/YYYY"),
-      // end: moment(String(this.job.startDate)).format("MM/DD/YYYY")
     };
   },
   async mounted() {
@@ -95,14 +92,9 @@ export default {
     queues() {
       return this.$store.state.queues;
     },
-    // jobStart() {
-    //   let data = this.$store.state.activeJob.startDate;
-    //   return moment(String(data)).format("MM/DD/YYYY");
-    // },
-    // jobEnd() {
-    //   let data = this.$store.state.activeJob.endDate;
-    //   return moment(String(data)).format("MM/DD/YYYY");
-    // },
+    isJobCreator() {
+      return this.$store.state.profile._id == this.job.creator._id;
+    },
     when() {
       if (this.job.startDate == this.job.endDate) {
         return moment(String(this.job.startDate)).format("MM/DD/YYYY");
