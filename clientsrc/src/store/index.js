@@ -70,7 +70,7 @@ export default new Vuex.Store({
       state.queues = queues;
     },
     addToQueue(state, queue) {
-      state.queues.push(queue)
+      state.queues.push(queue);
     },
     updateQueueStatus(state, queue) {
       let index = state.queues.findIndex(q => q.id == queue.id)
@@ -83,7 +83,7 @@ export default new Vuex.Store({
     //#endregion
   },
   actions: {
-    setBearer({ }, bearer) {
+    setBearer({}, bearer) {
       api.defaults.headers.authorization = bearer;
     },
     resetBearer() {
@@ -182,9 +182,10 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
-    async editComment({ commit }, comment) {
+    async editComment({ commit, dispatch }, update) {
+      debugger;
       try {
-        let data = await api.put("comments" + comment.id, comment);
+        let data = await api.put("comments/" + update.id, update);
         commit("changeComment", data);
       } catch (error) {
         console.error(error);
@@ -192,8 +193,8 @@ export default new Vuex.Store({
     },
     async deleteComment({ commit }, id) {
       try {
-        await api.delete("comments" + id, id);
-        commit("removeComment", id);
+        let res = await api.delete("comments/" + id);
+        commit("removeComment", res.data);
       } catch (error) {
         console.error(error);
       }
@@ -220,8 +221,8 @@ export default new Vuex.Store({
     async createQueue({ commit }, obj) {
       try {
         let res = await api.post("queue", obj);
-        debugger
-        commit("addToQueue", res.data)
+        debugger;
+        commit("addToQueue", res.data);
       } catch (error) {
         console.error(error);
       }
@@ -232,7 +233,7 @@ export default new Vuex.Store({
     },
     async approveDeny({ commit }, obj) {
       let res = await api.put("queue/" + obj.id, obj);
-      commit("updateQueueStatus", res.data)
+      commit("updateQueueStatus", res.data);
     },
     //#endregion
   },

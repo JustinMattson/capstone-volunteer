@@ -14,16 +14,54 @@
       </div>
       <div class="col-10 m-0 mt-2 d-flex align-self-center">
         <textarea
-          class="text-left text-primary font-weight-bold border border-warning p-2"
+          class="text-left text-primary unbold bg-light border-0 p-2"
           v-model="comment.body"
           style="height:100px;width:100%"
           placeholder="comment.body"
         ></textarea>
       </div>
+
       <div class="d-flex col-12 m-0 mx-1 px-3 justify-content-between">
         <span>{{comment.creator.name}}</span>
-        <span class="text-muted">{{updated}}</span>
+        <span class="text-muted">
+          <i
+            class="far fa-edit text-secondary action"
+            v-show="comment.creatorEmail == profile.email"
+            @click="toggleEditForm()"
+          ></i>
+          &nbsp;
+          {{updated}}&nbsp;
+          <!-- REVIEW seems to work without parens deleteComment() -->
+          <i
+            class="far fa-trash-alt text-danger action"
+            v-show="comment.creatorEmail == profile.email"
+            @click="deleteComment"
+          ></i>
+        </span>
       </div>
+
+      <!-- EDIT COMMENT FORM -->
+      <form
+        v-show="this.editForm"
+        class="form my-2 border border-top"
+        @submit.prevent="editComment"
+        style="height:100px;width:100%"
+      >
+        <div class="d-flex justify-content-between">
+          <span class="d-flex text-center align-self-center px-3">
+            <button type="submit" class="btn btn-outline-secondary">Update</button>
+          </span>
+          <span class="text-right" style="height:100px;width:100%">
+            <textarea
+              class="text-left text-primary unbold bg-light border-0 p-2"
+              v-model="comment.body"
+              placeholder="comment.body"
+              style="width:100%;height:100px;"
+            ></textarea>
+          </span>
+        </div>
+      </form>
+      <!-- END EDIT COMMENT FORM -->
     </div>
 
     <!-- END COMMENT TEMPLATE -->
@@ -38,22 +76,31 @@ export default {
   props: ["comment"],
   data() {
     return {
+      editForm: false,
       updated: moment(String(this.comment.updatedAt)).format(
         "MM/DD/YYYY h:mm A"
       ),
+
       commentIndex: 0
     };
   },
   mounted() {},
   computed: {
+    profile() {
+      return this.$store.state.profile;
+    }
     // TODO idea below was to alternate the comment row background based on % = 0
     // cIndex() {
     //   this.$store.state.comments.findIndex(c => c.id == this.comment.id);
     // }
   },
   methods: {
+    toggleEditForm() {
+      this.editForm == false ? (this.editForm = true) : (this.editForm = false);
+    },
     addComment() {
-      this.$store.state.dispatch("addComment", this.comment);
+      // TODO this method has not bee tested from the app.
+      this.$store.dispatch("addComment", this.comment);
     },
     // REVIEW in the event comments need sorted by date.
     // commentSortAsc() {
@@ -72,24 +119,30 @@ export default {
     //   }
     //   return this.comments.sort(compare);
     // },
+    toggleEditForm() {
+      this.editForm = !this.editForm;
+    },
+    editComment() {
+      this.$store.dispatch("editComment", this.comment);
+      this.editForm = false;
+    },
     deleteComment() {
       swal({
         title: "Are you sure?",
         text:
-          "Click 'Ok' to confirm you wish to delete this request.  This action cannot be undone.",
+          "Click 'Ok' to confirm you wish to delete this comment.  This action cannot be undone.",
         icon: "warning",
         buttons: true,
         dangerMode: true
       }).then(willDelete => {
         if (willDelete) {
-          let data = this.$store.dispatch("deleteJob", this.job);
-
-          swal("Poof! Your request has been closed!", {
+          let data = this.$store.dispatch("deleteComment", this.comment.id);
+          swal("Poof! Your comment has been deleted!", {
             icon: "success"
           });
-          this.editJob = false;
+          this.edit = false;
         } else {
-          swal("Close cancelled");
+          swal("Deletion cancelled");
         }
       });
     }
