@@ -70,8 +70,9 @@ export default {
   name: "jobDetails",
   data() {
     return {
-      start: moment(String(this.job.startDate)).format("MM/DD/YYYY"),
-      end: moment(String(this.job.startDate)).format("MM/DD/YYYY")
+      // Putting info from computed into data throws errors and makes it harder to debug. I'm commenting this out to clear out console errors.
+      // start: moment(String(this.job.startDate)).format("MM/DD/YYYY"),
+      // end: moment(String(this.job.startDate)).format("MM/DD/YYYY")
     };
   },
   async mounted() {
@@ -112,7 +113,8 @@ export default {
           moment(String(this.job.endDate)).format("MM/DD/YYYY")
         );
       }
-    }
+    },
+    isJobCreator() {}
   },
   methods: {
     addToQueue() {

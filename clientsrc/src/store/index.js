@@ -69,10 +69,17 @@ export default new Vuex.Store({
     setQueue(state, queues) {
       state.queues = queues;
     },
+    addToQueue(state, queue) {
+      state.queues.push(queue)
+    },
+    updateQueueStatus(state, queue) {
+      let index = state.queues.findIndex(q => q.id == queue.id)
+      state.queues[index] = queue
+    }
     //#endregion
   },
   actions: {
-    setBearer({}, bearer) {
+    setBearer({ }, bearer) {
       api.defaults.headers.authorization = bearer;
     },
     resetBearer() {
@@ -208,19 +215,16 @@ export default new Vuex.Store({
     },
     async createQueue({ commit }, obj) {
       try {
-        let data = await api.post("queue", obj);
-        if (data) {
-          return true;
-        }
+        let res = await api.post("queue", obj);
+        debugger
+        commit("addToQueue", res.data)
       } catch (error) {
         console.error(error);
       }
     },
     async approveDeny({ commit }, obj) {
-      let data = await api.put("queue/" + obj.id, obj);
-      if (data) {
-        return true;
-      }
+      let res = await api.put("queue/" + obj.id, obj);
+      commit("updateQueueStatus", res.data)
     },
     //#endregion
   },
