@@ -18,6 +18,7 @@ const Queue = new Schema(
     volunteerPic: { type: String, required: true },
     volunteerName: { type: String, required: true },
     volunteerRating: { type: Number },
+    volunteerEmail: { type: String, required: true },
     jobApproval: {
       type: String,
       required: true,

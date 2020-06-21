@@ -26,9 +26,16 @@
             <p>When: {{when}}</p>
           </div>
         </div>
-        <div class="row text-center">
+
+        <div v-if="!isJobCreator" class="row text-center">
           <div class="col-12 button-bottom">
             <button
+              v-if="isSignedUp"
+              @click="addToQueue"
+              class="btn btn-secondary btn-lg text-primary text-shadow"
+            >Apply to Help</button>
+            <button
+              v-else
               @click="addToQueue"
               class="btn btn-secondary btn-lg text-primary text-shadow"
             >Apply to Help</button>
@@ -93,6 +100,16 @@ export default {
     },
     isJobCreator() {
       return this.$store.state.profile._id == this.job.creator._id;
+    },
+    isSignedUp() {
+      let data = this.$store.state.queues.find(
+        q => q.volunteerEmail == this.$store.state.profile.email
+      );
+      if (data) {
+        return true;
+      } else {
+        return false;
+      }
     },
     when() {
       if (this.job.startDate == this.job.endDate) {
