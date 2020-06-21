@@ -79,7 +79,7 @@ export default new Vuex.Store({
     //#endregion
   },
   actions: {
-    setBearer({ }, bearer) {
+    setBearer({}, bearer) {
       api.defaults.headers.authorization = bearer;
     },
     resetBearer() {
@@ -178,7 +178,6 @@ export default new Vuex.Store({
       }
     },
     async editComment({ commit, dispatch }, update) {
-      debugger;
       try {
         let data = await api.put("comments/" + update.id, update);
         commit("changeComment", data);

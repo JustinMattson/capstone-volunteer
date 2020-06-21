@@ -1,10 +1,15 @@
 <template>
   <div clas="comment container">
     <!-- COMMENT TEMPLATE API -->
+
     <div class="row bg-light border border-secondary">
+      <div class="d-flex col-12 m-0 px-3 justify-content-between">
+        <span>{{comment.creator.name}}</span>
+        <small class="text-muted align-self-center">{{updated}}&nbsp;</small>
+      </div>
       <!-- can use a different bg-color if the comment index % = 0? -->
       <!-- TODO need to add edit/delete functions to owned comments -->
-      <div class="col-2 text-left m-0 mt-2 d-flex align-self-center">
+      <div class="col-2 text-left m-0 d-flex align-self-center">
         <img
           :src="comment.creator.picture"
           class="card-img-top p-2"
@@ -12,25 +17,24 @@
           style="width:75px;height:75px;"
         />
       </div>
-      <div class="col-10 m-0 mt-2 d-flex align-self-center">
+      <div class="col-10 m-0 d-flex align-self-center">
         <textarea
-          class="text-left text-primary unbold bg-light border-0 p-2"
+          class="text-left text-primary unbold bg-light border-0 py-0 pl-2"
           v-model="comment.body"
           style="height:100px;width:100%"
           placeholder="comment.body"
         ></textarea>
       </div>
 
-      <div class="d-flex col-12 m-0 mx-1 px-3 justify-content-between">
-        <span>{{comment.creator.name}}</span>
-        <span class="text-muted">
+      <div class="d-flex col-12 m-0 justify-content-between">
+        <span class="pb-2">
           <i
             class="far fa-edit text-secondary action"
             v-show="comment.creatorEmail == profile.email"
             @click="toggleEditForm()"
           ></i>
-          &nbsp;
-          {{updated}}&nbsp;
+        </span>
+        <span>
           <!-- REVIEW seems to work without parens deleteComment() -->
           <i
             class="far fa-trash-alt text-danger action"
@@ -43,7 +47,7 @@
       <!-- EDIT COMMENT FORM -->
       <form
         v-show="this.editForm"
-        class="form my-2 border border-top"
+        class="form border border-top"
         @submit.prevent="editComment"
         style="height:100px;width:100%"
       >
@@ -56,7 +60,7 @@
               class="text-left text-primary unbold bg-light border-0 p-2"
               v-model="comment.body"
               placeholder="comment.body"
-              style="width:100%;height:100px;"
+              style="width:100%;height:98px;"
             ></textarea>
           </span>
         </div>
