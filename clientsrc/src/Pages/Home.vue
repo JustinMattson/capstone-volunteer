@@ -6,19 +6,19 @@
     <div class="row d-flex justify-content-around my-5">
       <router-link
         :to="{name: 'Jobs'}"
-        class="col-12 col-md-5 bg-primary box-height no-line d-flex align-items-center justify-content-center rounded"
+        class="col-12 col-md-5 bg-primary box-height no-line d-flex align-items-center justify-content-center rounded my-1"
       >
         <h1 class="text-secondary">Get help with something</h1>
       </router-link>
       <router-link
         :to="{name: 'Jobs'}"
-        class="col-12 col-md-5 bg-secondary box-height no-line d-flex align-items-center justify-content-center rounded"
+        class="col-12 col-md-5 bg-secondary box-height no-line d-flex align-items-center justify-content-center rounded my-1"
       >
         <h1 class="text-primary">Find something to help with</h1>
       </router-link>
     </div>
     <div class="row my-5 d-flex justify-content-around">
-      <div class="card col-3 height-fix">
+      <div class="card col-12 col-md-3 height-fix my-1 shadow">
         <img
           src="https://qph.fs.quoracdn.net/main-qimg-134e3bf89fff27bf56bdbd04e7dbaedf.webp"
           class="card-img-top mt-3"
@@ -38,7 +38,7 @@
           >Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         </div>
       </div>
-      <div class="card col-3 height-fix">
+      <div class="card col-12 col-md-3 height-fix my-1 shadow">
         <img
           src="https://vignette.wikia.nocookie.net/wackishlyawesomerandomness/images/0/08/Imagemkksje.jpg/revision/latest?cb=20140414235032"
           class="card-img-top mt-3"
@@ -58,7 +58,7 @@
           >Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         </div>
       </div>
-      <div class="card col-3 height-fix">
+      <div class="card col-12 col-md-3 height-fix my-1 shadow">
         <img
           src="https://media.tumblr.com/53c511cd960aa91831bb98c4a7804871/tumblr_inline_mhxsraQw7F1qz4rgp.gif"
           class="card-img-top mt-3"

@@ -56,7 +56,8 @@ export class JobsController extends BaseController {
     try {
       // NOTE NEVER TRUST THE CLIENT TO ADD THE CREATOR ID
       req.body.creatorEmail = req.userInfo.email;
-      req.body.requesterId = req.userInfo.id;
+      // req.body.requesterId = req.userInfo.id;
+      // REVIEW the line above was assigning some different auth0 id making it not possible to link the requesterId to the creator.id.
       let data = await jobsService.create(req.body);
       res.status(201).send(data);
     } catch (error) {

@@ -3,13 +3,13 @@
     <!-- COMMENT TEMPLATE API -->
 
     <div class="row bg-light border border-secondary">
-      <div class="d-flex col-12 m-0 px-3 justify-content-between">
+      <div class="d-flex col-12 m-0 px-3 justify-content-between" v-if="comment.creator">
         <span>{{comment.creator.name}}</span>
         <small class="text-muted align-self-center">{{updated}}&nbsp;</small>
       </div>
       <!-- can use a different bg-color if the comment index % = 0? -->
       <!-- TODO need to add edit/delete functions to owned comments -->
-      <div class="col-2 text-left m-0 d-flex align-self-center">
+      <div class="col-2 text-left m-0 d-flex align-self-center" v-if="comment.creator">
         <img
           :src="comment.creator.picture"
           class="card-img-top p-2"
@@ -92,11 +92,11 @@ export default {
   computed: {
     profile() {
       return this.$store.state.profile;
-    }
+    },
     // TODO idea below was to alternate the comment row background based on % = 0
-    // cIndex() {
-    //   this.$store.state.comments.findIndex(c => c.id == this.comment.id);
-    // }
+    cIndex() {
+      return this.$store.state.comments.findIndex(c => c.id == this.comment.id);
+    }
   },
   methods: {
     toggleEditForm() {

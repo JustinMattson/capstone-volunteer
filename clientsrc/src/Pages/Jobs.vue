@@ -9,9 +9,7 @@
           class="btn btn-info btn-lg"
           data-toggle="modal"
           data-target="#myModal"
-        >
-          New Request
-        </button>
+        >New Request</button>
       </div>
       <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
@@ -19,9 +17,7 @@
           <div class="modal-content">
             <div class="modal-header bg-primary shadow-sm">
               <h4 class="modal-title text-white">New Request</h4>
-              <button type="button" class="close" data-dismiss="modal">
-                &times;
-              </button>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body shadow-sm container text-secondary">
               <!-- add submit method here -->
@@ -30,21 +26,11 @@
                   <div class="col text-center">
                     <!-- add v-model -->
                     <h5>Title:</h5>
-                    <input
-                      type="text"
-                      placeholder="Title"
-                      required
-                      v-model="newJob.title"
-                    />
+                    <input type="text" placeholder="Title" required v-model="newJob.title" />
                   </div>
                   <div class="col text-center">
                     <h5>Location:</h5>
-                    <input
-                      type="text"
-                      placeholder="City"
-                      required
-                      v-model="newJob.generalLocation"
-                    />
+                    <input type="text" placeholder="City" required v-model="newJob.generalLocation" />
                   </div>
                 </div>
                 <div class="row justify-content-center mt-3">
@@ -65,56 +51,33 @@
                 <div class="row justify-content-center">
                   <div class="col text-center">
                     <h5>Image (optional):</h5>
-                    <input
-                      type="text"
-                      placeholder="Image Link"
-                      v-model="newJob.imgUrl"
-                    />
+                    <input type="text" placeholder="Image Link" v-model="newJob.imgUrl" />
                   </div>
                 </div>
 
                 <div class="row justify-content-center mt-3">
                   <div class="col text-center">
                     <h5>Start Date:</h5>
-                    <input
-                      type="date"
-                      placeholder="start date"
-                      required
-                      v-model="newJob.startDate"
-                    />
+                    <input type="date" placeholder="start date" required v-model="newJob.startDate" />
                   </div>
                   <div class="col text-center">
                     <h5>End Date:</h5>
-                    <input
-                      type="date"
-                      placeholder="end date"
-                      required
-                      v-model="newJob.endDate"
-                    />
+                    <input type="date" placeholder="end date" required v-model="newJob.endDate" />
                   </div>
                 </div>
                 <div class="row mt-3 align-items-end">
                   <div class="col">
                     <h5>Estimated Hours:</h5>
-                    <input
-                      type="number"
-                      placeholder="0"
-                      required
-                      v-model="newJob.estimatedHours"
-                    />
+                    <input type="number" placeholder="0" required v-model="newJob.estimatedHours" />
                   </div>
                   <div class="col text-center">
-                    <button type="submit" class="btn btn-secondary btn-lg">
-                      Add Request
-                    </button>
+                    <button type="submit" class="btn btn-secondary btn-lg">Add Request</button>
                   </div>
                 </div>
               </form>
             </div>
             <div class="modal-footer bg-primary shadow-sm">
-              <button type="button" class="btn btn-light" data-dismiss="modal">
-                Cancel
-              </button>
+              <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
             </div>
           </div>
         </div>
@@ -140,7 +103,7 @@ export default {
   name: "jobs",
   data() {
     return {
-      newJob: {},
+      newJob: {}
     };
   },
   async mounted() {
@@ -158,7 +121,7 @@ export default {
       this.newJob.requesterId = this.profile.id;
       this.$store.dispatch("addJob", { ...this.newJob });
       this.newJob = {};
-      this.jobForm = false;
+      this.jobForm = false; // REVIEW what is this line doing?
     },
     editJob() {},
     deleteJob() {},
@@ -177,7 +140,7 @@ export default {
         return 0;
       }
       return this.jobs.sort(compare);
-    },
+    }
   },
   computed: {
     jobs() {
@@ -185,10 +148,10 @@ export default {
     },
     profile() {
       return this.$store.state.profile;
-    },
+    }
   },
   components: {
-    Job,
-  },
+    Job
+  }
 };
 </script>

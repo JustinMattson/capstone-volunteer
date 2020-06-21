@@ -50,11 +50,67 @@
       class="row mb-3 d-flex justify-content-center bg-secondary text-primary text-shadow border-cstm p-3"
     >
       <div class="col-10 text-center">Comments</div>
+
+      <!-- ADD COMMENT MODAL FORM -->
+      <div class="col-12">
+        <!-- MODAL FORM -->
+        <button
+          type="button"
+          class="btn btn-info btn-lg"
+          data-toggle="modal"
+          data-target="#myModal"
+        >Add Comment</button>
+      </div>
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header bg-primary shadow-sm">
+              <h4 class="modal-title text-white">New Comment</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body shadow-sm container text-secondary">
+              <!-- add submit method here -->
+              <form @submit.prevent="addComment">
+                <div class="row justify-content-center">
+                  <div class="col text-center">
+                    <!-- add v-model -->
+                    <h5>Comment:</h5>
+                    <textarea
+                      class="unbold"
+                      placeholder="Comment..."
+                      required
+                      v-model="newComment.body"
+                      style="height:100px;width:100%;"
+                    />
+                  </div>
+                </div>
+                <div class="row justify-content-center mt-3">
+                  <div class="col text-center">
+                    <!-- add v-model -->
+                  </div>
+                </div>
+
+                <div class="row mt-3 align-items-end">
+                  <div class="col text-center">
+                    <button type="submit" class="btn btn-secondary btn-lg">Add Comment</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer bg-primary shadow-sm">
+              <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END MODAL FORM -->
+      <!-- END ADD COMMENT MODAL -->
     </div>
     <div class="row">
       <div class="col-12">
         <!-- CARD TEMPLATE COMMENTS -->
-        <comment v-for="comment in comments" :key="comment._id" :comment="comment" />
+        <comment v-for="comment in comments" :key="comment.id" :comment="comment" />
         <!-- END CARD TEMPLATE COMMENTS -->
       </div>
     </div>
@@ -63,7 +119,7 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <Queue v-for="queue in queues" :key="queue._id" :queue="queue" />
+        <Queue v-for="queue in queues" :key="queue.id" :queue="queue" />
       </div>
     </div>
   </div>
@@ -76,7 +132,9 @@ import Queue from "@/components/QueueComponent.vue";
 export default {
   name: "jobDetails",
   data() {
-    return {};
+    return {
+      newComment: {}
+    };
   },
   async mounted() {
     await this.$store.dispatch("getJobById", this.$route.params.jobId);
@@ -99,7 +157,7 @@ export default {
       return this.$store.state.queues;
     },
     isJobCreator() {
-      return this.$store.state.profile._id == this.job.creator._id;
+      return this.$store.state.profile.id == this.job.creator.id;
     },
     isSignedUp() {
       let data = this.$store.state.queues.find(
@@ -128,10 +186,15 @@ export default {
       let obj = {
         volunteerName: this.profile.name,
         volunteerPic: this.profile.picture,
-        jobId: this.job._id
+        jobId: this.$route.params.jobId
       };
 
       this.$store.dispatch("createQueue", obj);
+    },
+    addComment() {
+      this.newComment.jobId = this.$route.params.jobId;
+      this.$store.dispatch("addComment", { ...this.newComment });
+      this.newComment = {};
     }
   },
   components: {
@@ -142,6 +205,10 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap");
+.unbold {
+  font-family: "Balsamiq Sans", cursive;
+}
 .mx-img {
   max-width: 40vw;
   border-radius: 10px;
