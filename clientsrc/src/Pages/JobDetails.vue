@@ -136,6 +136,10 @@ export default {
       newComment: {}
     };
   },
+  onRouterLeave(to, from, next) {
+    commit("setActiveJob", {});
+    next();
+  },
   async mounted() {
     await this.$store.dispatch("getJobById", this.$route.params.jobId);
     this.$store.dispatch("getComments", this.$route.params.jobId);
