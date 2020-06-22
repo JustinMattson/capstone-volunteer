@@ -49,10 +49,9 @@ class CommentsService {
     }
     return data;
   }
-  async delete(id, userEmail) {
+  async delete(id) {
     let data = await dbContext.Comments.findOneAndDelete({
       _id: id,
-      creatorEmail: userEmail,
     });
     if (!data) {
       throw new BadRequest("Invalid ID");
