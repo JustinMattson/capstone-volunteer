@@ -276,7 +276,7 @@ img {
   border-radius: 13px;
 }
 .mx-img {
-  max-width: 85vw;
+  max-width: 45vw;
   border-radius: 10px;
   box-shadow: 4px 4px 5px black;
 }
