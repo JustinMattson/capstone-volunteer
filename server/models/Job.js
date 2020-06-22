@@ -12,7 +12,7 @@ const Job = new Schema(
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
     requesterId: { type: String, required: true },
-    volunteerId: [{ type: ObjectId, ref: "Profile" }],
+    volunteerIds: [{ type: ObjectId, ref: "Profile" }],
     jobCreatorRatings: [{ type: Object }], //job rating {volunteerId, Rating from Volunteer to job poster}
     helperRatings: [{ type: Object }], //helper's rating {volunteerId, Rating from job poster to Volunteer}
     creatorEmail: { type: String, required: true },

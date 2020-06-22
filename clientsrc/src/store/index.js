@@ -227,6 +227,9 @@ export default new Vuex.Store({
     async approveDeny({ commit }, obj) {
       let res = await api.put("queue/" + obj.id, obj);
       commit("updateQueueStatus", res.data);
+      if (obj.jobApproval == "accepted") {
+        await api.put("queue/" + obj.id + "/jobs", obj)
+      }
     },
     async cancelQueue({ commit }, id) {
       let res = await api.delete("queue/" + id, id)

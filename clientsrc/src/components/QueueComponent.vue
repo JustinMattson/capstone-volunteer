@@ -10,8 +10,16 @@
       <button @click="cancelQueue" class="btn btn-danger smol-button">Cancel</button>
     </div>
     <div v-else class="col-3 d-flex justify-content-end">
-      <button v-if="isJobCreator" class="btn btn-success smol-button">Approve</button>
-      <button v-if="isJobCreator" class="btn btn-danger smol-button">Deny</button>
+      <button
+        v-if="isJobCreator && !acceptanceToggle"
+        @click="approve"
+        class="btn btn-success smol-button mx-1"
+      >Approve</button>
+      <button
+        v-if="isJobCreator && !acceptanceToggle"
+        @click="deny"
+        class="btn btn-danger smol-button mx-1"
+      >Deny</button>
     </div>
   </div>
 </template>
@@ -30,11 +38,25 @@ export default {
     },
     isJobCreator() {
       return this.$store.state.profile.email == this.queue.jobCreatorEmail;
+    },
+    acceptanceToggle() {
+      return (
+        this.queue.jobApproval == "accepted" ||
+        this.queue.jobApproval == "rejected"
+      );
     }
   },
   methods: {
     cancelQueue() {
       this.$store.dispatch("cancelQueue", this.queue.id);
+    },
+    approve() {
+      this.queue.jobApproval = "accepted";
+      this.$store.dispatch("approveDeny", this.queue);
+    },
+    deny() {
+      this.queue.jobApproval = "rejected";
+      this.$store.dispatch("approveDeny", this.queue);
     }
   }
 };
