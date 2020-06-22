@@ -9,7 +9,7 @@
           class="btn btn-info btn-lg"
           data-toggle="modal"
           data-target="#myModal"
-          v-show="!$auth.isAuthorized"
+          v-if="$auth.isAuthenticated"
         >New Request</button>
       </div>
       <div class="modal fade" id="myModal" role="dialog">
