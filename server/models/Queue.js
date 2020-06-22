@@ -15,7 +15,7 @@ const Queue = new Schema(
     },
     // startDate: { type: Date },
     // endDate: { type: Date },
-    creatorEmail: { type: String, required: true },
+    creatorEmail: { type: String, required: true }, //
     volunteerPic: { type: String, required: true },
     volunteerName: { type: String, required: true },
     volunteerRating: { type: Number },

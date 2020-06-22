@@ -75,12 +75,7 @@
         <div v-if="!isJobCreator" class="row text-center">
           <div class>
             <button
-              v-if="isSignedUp"
-              @click="addToQueue"
-              class="btn btn-secondary btn-lg text-primary text-shadow"
-            >Cancel</button>
-            <button
-              v-else
+              v-if="!isSignedUp"
               @click="addToQueue"
               class="btn btn-secondary btn-lg text-primary text-shadow"
             >Apply to Help</button>
