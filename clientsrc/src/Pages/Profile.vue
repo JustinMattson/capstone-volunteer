@@ -7,14 +7,14 @@
       Welcome
       <span :style="{color:color}">{{ profile.name }}</span>
     </h1>
-    <img class="rounded-circle shadow" :src="profile.picture" @click="toggleEdit" />
-    <p>
+    <img class="rounded-circle shadow-lg" :src="profile.picture" @click="toggleEdit" />
+    <h5>
       {{ profile.email }}
       <br />
       <!-- Last Updated: {{prettyDate}}
       <br />-->
       <!-- <span class="text-danger" :style="{fontSize:fontSize}">{{profile.id}}</span> -->
-    </p>
+    </h5>
     <p class="text-muted">Click on profile image to edit user profile.</p>
 
     <form class="form text-left" v-if="edit" style="width:100%;" @submit.prevent="updateProfile">
@@ -44,7 +44,22 @@
       </div>
     </form>
 
-    <div id="profile-object" class="text-left text-muted" :style="{fontSize:fontSize}">
+<div class="container-fluid shadow-lg">
+  <div class="row justify-content-center">
+    <div class="col-6 py-5 bg-primary text-secondary">
+      <h3>Volunteer Rating:</h3>
+      <h1> {{profile.volunteerRating}}</h1>
+      </div>
+    <div class="col-6 py-5 bg-secondary text-primary">
+      <h3>Job Poster Rating:</h3>
+      <h1> {{profile.requesterRating}}</h1></div>
+  </div>
+  <div class="row py-5 bg-white"><div class="col">
+   <h3> Jobs Accepted:</h3>
+   <h1> {{profile.jobsAccepted}}</h1></div></div>
+</div>
+
+    <!-- <div id="profile-object" class="text-left text-muted" :style="{fontSize:fontSize}">
       <div>
         __v: {{profile.__v}}
         <br />
@@ -65,7 +80,7 @@
         updatedAt: {{profile.updatedAt}}"
         <br />
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
