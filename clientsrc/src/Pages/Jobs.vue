@@ -123,8 +123,6 @@ export default {
       this.newJob = {};
       this.jobForm = false; // REVIEW what is this line doing?
     },
-    editJob() {},
-    deleteJob() {},
     jobSortAsc() {
       function compare(a, b) {
         if (a.updatedAt < b.updatedAt) return -1;
