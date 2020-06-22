@@ -48,11 +48,11 @@
   <div class="row justify-content-center">
     <div class="col-6 py-5 bg-primary text-secondary">
       <h3>Volunteer Rating:</h3>
-      <h1> {{profile.volunteerRating}}</h1>
+      <h1>{{volunteerAverage}}</h1>
       </div>
     <div class="col-6 py-5 bg-secondary text-primary">
       <h3>Job Poster Rating:</h3>
-      <h1> {{profile.requesterRating}}</h1></div>
+      <h1> {{requesterAverage}}</h1></div>
   </div>
   <div class="row py-5 bg-white"><div class="col">
    <h3> Jobs Accepted:</h3>
@@ -91,7 +91,8 @@ export default {
     return {
       edit: false,
       fontSize: "10px",
-      color: "#808"
+      color: "#808",
+      
       // prettyDate: new Date(this.profile.createdAt).toLocaleDateString("eu-US", {
       //   year: "numeric",
       //   month: "short",
@@ -104,6 +105,24 @@ export default {
   computed: {
     profile() {
       return this.$store.state.profile;
+    },
+    volunteerAverage(){
+      let total=0
+      let vr = this.$store.state.profile.volunteerRating
+      for (let index = 0; index < vr.length; index++) {
+        total += vr[index]
+      } 
+      let avg= total/vr.length
+      return avg
+    },
+      requesterAverage(){
+      let total=0
+      let vr = this.$store.state.profile.requesterRating
+      for (let index = 0; index < vr.length; index++) {
+        total += vr[index]
+      } 
+      let avg= total/vr.length
+      return avg
     }
   },
   methods: {
@@ -121,7 +140,8 @@ export default {
       // NOTE may need to enable debugger here to get the button to function again.
       // debugger
       this.myComments = !this.myComments;
-    }
+    },
+
   }
 };
 </script>
