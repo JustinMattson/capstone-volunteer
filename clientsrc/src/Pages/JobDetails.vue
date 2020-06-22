@@ -73,7 +73,7 @@
 
       <div class="col-12 d-flex justify-content-center m-3">
         <div v-if="!isJobCreator" class="row text-center">
-          <div class>
+          <div>
             <button
               v-if="!isSignedUp"
               @click="addToQueue"
@@ -204,7 +204,7 @@ export default {
     },
     isSignedUp() {
       let data = this.$store.state.queues.find(
-        q => q.volunteerEmail == this.$store.state.profile.email
+        q => q.creatorEmail == this.$store.state.profile.email
       );
       if (data) {
         return true;
