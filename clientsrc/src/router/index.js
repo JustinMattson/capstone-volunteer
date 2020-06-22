@@ -33,7 +33,6 @@ const routes = [
     path: "/jobs/:jobId",
     name: "job",
     component: JobDetails,
-    beforeEnter: authGuard,
   },
 ];
 

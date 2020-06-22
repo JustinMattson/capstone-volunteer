@@ -1,7 +1,9 @@
 import express from "express";
 import BaseController from "../utils/BaseController";
 import { queueService } from "../services/QueueService";
+import { jobsService } from "../services/JobsService";
 import auth0Provider from "@bcwdev/auth0provider";
+
 
 export class QueueController extends BaseController {
   constructor() {
@@ -9,7 +11,7 @@ export class QueueController extends BaseController {
     this.router
       // NOTE: Beyond this point all routes require Authorization tokens (the user must be logged in)
       .use(auth0Provider.getAuthorizedUserInfo)
-
+      .put("/:id/jobs", this.addVolunteerIdToJobQueue)
       .put("/:id", this.edit)
       .post("", this.create)
       .delete("/:id", this.delete);
@@ -21,7 +23,8 @@ export class QueueController extends BaseController {
       // NOTE NEVER TRUST THE CLIENT TO ADD THE CREATOR ID
       req.body.creatorEmail = req.userInfo.email;
       req.body.volunteerId = req.userInfo.id;
-      req.body.volunteerEmail = req.userInfo.email
+      req.body.volunteerEmail = req.userInfo.email;
+
       let data = await queueService.create(req.body);
       res.status(201).send(data);
     } catch (error) {
@@ -47,6 +50,14 @@ export class QueueController extends BaseController {
       }
     } catch (error) {
       next(error);
+    }
+  }
+  async addVolunteerIdToJobQueue(req, res, next) {
+    try {
+      let data = await jobsService.updateJobVolunteers(req.body)
+      res.send(data)
+    } catch (error) {
+      next(error)
     }
   }
 }

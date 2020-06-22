@@ -2,6 +2,7 @@ import { dbContext } from "../db/DbContext";
 import { BadRequest } from "../utils/Errors";
 
 class JobsService {
+
   async getAll(query = {}) {
     let jobs = await dbContext.Jobs.find(query).populate(
       "creator",
@@ -49,6 +50,9 @@ class JobsService {
       throw new BadRequest("Invalid ID");
     }
     return data;
+  }
+  async updateJobVolunteers(obj) {
+    await dbContext.Jobs.findOneAndUpdate({ _id: obj.jobId }, { $addToSet: { volunteerIds: obj.volunteerId } })
   }
 }
 
