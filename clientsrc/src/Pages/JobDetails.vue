@@ -199,6 +199,7 @@ export default {
       this.newComment.jobId = this.$route.params.jobId;
       this.$store.dispatch("addComment", { ...this.newComment });
       this.newComment = {};
+      $('#myModal').modal('hide')
     }
   },
   components: {
