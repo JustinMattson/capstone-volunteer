@@ -13,8 +13,6 @@ const Queue = new Schema(
       required: true,
       unique: true, // should be able to prevent one person from applying multiple times on the front end. this didn't fully prevent.
     },
-    // startDate: { type: Date },
-    // endDate: { type: Date },
     creatorEmail: { type: String, required: true }, //
     volunteerPic: { type: String, required: true },
     volunteerName: { type: String, required: true },
