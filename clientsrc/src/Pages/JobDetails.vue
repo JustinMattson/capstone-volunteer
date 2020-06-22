@@ -1,35 +1,79 @@
 <template>
   <div class="jobDetails container-fluid">
-    <div class="row mt-3 border-cstm">
-      <div class="col-12 text-center">
-        <h1>{{job.title}}</h1>
-      </div>
-    </div>
     <!-- TOP ROW -->
-    <div class="row mb-3 d-flex justify-content-center bg-primary p-3 border-cstm">
+    <div class="row mb-3 d-flex justify-content-center bg-primary border-cstm">
       <div class="col-12 col-md-6 d-flex justify-content-center align-self-center">
-        <img :src="job.imgUrl" class="mx-img border border-secondary" />
+        <img :src="job.imgUrl" class="mx-img border border-secondary m-3" />
       </div>
-      <div class="col-12 col-md-6 justify-content-center align-self-center">
-        <h1>{{job.title}}</h1>
+      <div class="col-12 col-md-6 justify-content-center align-self-center mt-3" v-if="!editForm">
+        <div class="d-flex justify-content-between">
+          <span class="font-lg">{{job.title}}</span>
+          <span>
+            <i
+              class="far fa-edit text-secondary action"
+              v-show="job.creatorEmail == profile.email"
+              @click="toggleEditForm"
+            ></i>
+          </span>
+        </div>
         <div class="text-secondary d-flex justify-content-between" v-if="job.creator">
           <span class="unbold">
             <img class="rounded-lg" :src="job.creator.picture" style="height:25px;width:25px" />
-            {{job.creator.name}}
+            {{job.creator.name}} {{profile.requesterRating}} 5 FIX THIS BEFORE DEPLOY
           </span>
-          <span class="unbold">{{profile.requesterRating}} 5 FIX THIS BEFORE DEPLOY</span>
         </div>
-        <h5>{{job.description}}</h5>
-        <div class="unbold">
-          <p>General Location: {{job.generalLocation}}</p>
-          <p>Estimated Hours: {{job.estimatedHours}}</p>
+        <h5 class="mt-3">{{job.description}}</h5>
+        <div>
+          <div class="unbold">General Location: {{job.generalLocation}}</div>
+          <div class="unbold">Estimated Hours: {{job.estimatedHours}}</div>
           <p>When: {{when}}</p>
         </div>
       </div>
 
-      <div class="col-12">
+      <!-- Edit Job -->
+      <div class="col-12 col-md-6 justify-content-center align-self-center mt-3" v-else>
+        <form class="form" @submit.prevent="editJob">
+          <div class="d-flex justify-content-between">
+            <span class="font-lg">
+              <input type="text" v-model="job.title" style="width:100%;" />
+            </span>
+            <span class="d-flex align-self-center">
+              <button type="submit" class="btn btn-outline-secondary ml-3">
+                <i
+                  type="submit"
+                  class="far fa-save text-warning action shadow fa-2x text-shadow"
+                  v-show="job.creatorEmail == profile.email"
+                ></i>
+              </button>
+            </span>
+          </div>
+          <div class="text-secondary d-flex justify-content-between mt-2" v-if="job.creator">
+            <span class="unbold">
+              <img class="rounded-lg" :src="job.creator.picture" style="height:25px;width:25px" />
+              {{job.creator.name}} {{profile.requesterRating}} 5 FIX THIS BEFORE DEPLOY
+            </span>
+          </div>
+          <h5 class="mt-3">
+            <textarea v-model="job.description" style="width:100%;height:100px;" />
+          </h5>
+          <div class="unbold">
+            <input type="text" v-model="job.generalLocation" style="width:100%;" />
+            <input class="unbold" v-model="job.estimatedHours" style="width:100%;" />
+            <div class="unbold">
+              <input type="date" v-model="job.startDate" /> Start Date
+            </div>
+            <div class="unbold">
+              <input type="date" v-model="job.endDate" />
+              End Date
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- END Edit Job -->
+
+      <div class="col-12 d-flex justify-content-center m-3">
         <div v-if="!isJobCreator" class="row text-center">
-          <div class="col-12 button-bottom">
+          <div class>
             <button
               v-if="isSignedUp"
               @click="addToQueue"
@@ -44,14 +88,11 @@
         </div>
       </div>
     </div>
-    <div class="row d-flex justify-content-center border-cstm py-5">
-      <div class="col-8">{{job.description}}</div>
-    </div>
+
     <div
       class="row mb-3 d-flex justify-content-center bg-secondary text-primary text-shadow border-cstm p-3"
     >
       <div class="col-10 text-center">Comments</div>
-
       <!-- ADD COMMENT MODAL FORM -->
       <div class="col-12">
         <!-- MODAL FORM -->
@@ -108,6 +149,7 @@
       <!-- END MODAL FORM -->
       <!-- END ADD COMMENT MODAL -->
     </div>
+
     <div class="row">
       <div class="col-12">
         <!-- CARD TEMPLATE COMMENTS -->
@@ -134,7 +176,8 @@ export default {
   name: "jobDetails",
   data() {
     return {
-      newComment: {}
+      newComment: {},
+      editForm: false
     };
   },
   onRouterLeave(to, from, next) {
@@ -197,11 +240,18 @@ export default {
 
       this.$store.dispatch("createQueue", obj);
     },
+    toggleEditForm() {
+      this.editForm = !this.editForm;
+    },
+    editJob() {
+      this.$store.dispatch("editJob", this.job);
+      this.editForm = false;
+    },
     addComment() {
       this.newComment.jobId = this.$route.params.jobId;
       this.$store.dispatch("addComment", { ...this.newComment });
       this.newComment = {};
-      $('#myModal').modal('hide')
+      $("#myModal").modal("hide");
     }
   },
   components: {
@@ -216,8 +266,17 @@ export default {
 .unbold {
   font-family: "Balsamiq Sans", cursive;
 }
+.action {
+  cursor: pointer;
+}
+.font-lg {
+  font-size: 20pt;
+}
+img {
+  border-radius: 13px;
+}
 .mx-img {
-  max-width: 40vw;
+  max-width: 85vw;
   border-radius: 10px;
   box-shadow: 4px 4px 5px black;
 }
