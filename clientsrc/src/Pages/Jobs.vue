@@ -119,9 +119,14 @@ export default {
     },
     addJob() {
       this.newJob.requesterId = this.profile.id;
+      this.newJob.startDate = moment(this.newJob.startDate).format(
+        "MM-DD-YYYY"
+      );
+      this.newJob.endDate = moment(this.newJob.endDate).format("MM-DD-YYYY");
       this.$store.dispatch("addJob", { ...this.newJob });
       this.newJob = {};
-      this.jobForm = false; // REVIEW what is this line doing?
+      $("#myModal").modal("hide");
+      // this.jobForm = false; // REVIEW what is this line doing?
     },
     jobSortAsc() {
       function compare(a, b) {
