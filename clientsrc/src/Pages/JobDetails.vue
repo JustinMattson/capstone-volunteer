@@ -72,7 +72,7 @@
       <!-- END Edit Job -->
 
       <div class="col-12 d-flex justify-content-center m-3">
-        <div v-if="!isJobCreator" class="row text-center">
+        <div v-if="!isJobCreator && $auth.isAuthenticated" class="row text-center">
           <div>
             <button
               v-if="!isSignedUp"
@@ -92,6 +92,7 @@
       <div class="col-12">
         <!-- MODAL FORM -->
         <button
+          v-if="$auth.isAuthenticated"
           type="button"
           class="btn btn-info btn-lg"
           data-toggle="modal"
