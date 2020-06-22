@@ -239,6 +239,8 @@ export default {
       this.editForm = !this.editForm;
     },
     editJob() {
+      this.job.startDate = moment(this.job.startDate).format("MM-DD-YYYY");
+      this.job.endDate = moment(this.job.endDate).format("MM-DD-YYYY");
       this.$store.dispatch("editJob", this.job);
       this.editForm = false;
     },
