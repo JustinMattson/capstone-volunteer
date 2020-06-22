@@ -78,12 +78,12 @@ export default new Vuex.Store({
     },
     deleteQueue(state, id) {
       let index = state.queues.findIndex((q) => q.id == id);
-      state.queues.splice(index, 1)
-    }
+      state.queues.splice(index, 1);
+    },
     //#endregion
   },
   actions: {
-    setBearer({ }, bearer) {
+    setBearer({}, bearer) {
       api.defaults.headers.authorization = bearer;
     },
     resetBearer() {
@@ -177,6 +177,7 @@ export default new Vuex.Store({
       try {
         let res = await api.post("comments", newComment);
         commit("setNewComment", res.data);
+        this.dispatch("getComments", newComment.jobId);
       } catch (error) {
         console.error(error);
       }
@@ -228,15 +229,15 @@ export default new Vuex.Store({
       let res = await api.put("queue/" + obj.id, obj);
       commit("updateQueueStatus", res.data);
       if (obj.jobApproval == "accepted") {
-        await api.put("queue/" + obj.id + "/jobs", obj)
+        await api.put("queue/" + obj.id + "/jobs", obj);
       }
     },
     async cancelQueue({ commit }, id) {
-      let res = await api.delete("queue/" + id, id)
+      let res = await api.delete("queue/" + id, id);
       if (res) {
-        commit("deleteQueue", id)
+        commit("deleteQueue", id);
       }
-    }
+    },
     //#endregion
   },
 });
