@@ -5,35 +5,36 @@
         <h1>{{job.title}}</h1>
       </div>
     </div>
+    <!-- TOP ROW -->
     <div class="row mb-3 d-flex justify-content-center bg-primary p-3 border-cstm">
-      <div class="col-6 d-flex justify-content-center align-self-center">
+      <div class="col-12 col-md-6 d-flex justify-content-center align-self-center">
         <img :src="job.imgUrl" class="mx-img border border-secondary" />
       </div>
-      <div class="col-4 offset-1">
-        <div class="row d-flex justify-content-center">
-          <div class="col-6 d-flex justify-content-end" v-if="job.creator">
-            <img :src="job.creator.picture" class="profile-pic border border-secondary" />
-          </div>
-          <div class="col-6" v-if="job.creator">
-            <div>{{job.creator.name}}</div>
-            <div>{{profile.requesterRating}} 5 FIX THIS BEFORE DEPLOY</div>
-          </div>
+      <div class="col-12 col-md-6 justify-content-center align-self-center">
+        <h1>{{job.title}}</h1>
+        <div class="text-secondary d-flex justify-content-between" v-if="job.creator">
+          <span class="unbold">
+            <img class="rounded-lg" :src="job.creator.picture" style="height:25px;width:25px" />
+            {{job.creator.name}}
+          </span>
+          <span class="unbold">{{profile.requesterRating}} 5 FIX THIS BEFORE DEPLOY</span>
         </div>
-        <div class="row my-5 text-center">
-          <div class="col-12">
-            <p>General Location: {{job.generalLocation}}</p>
-            <p>Estimated Hours: {{job.estimatedHours}}</p>
-            <p>When: {{when}}</p>
-          </div>
+        <h5>{{job.description}}</h5>
+        <div class="unbold">
+          <p>General Location: {{job.generalLocation}}</p>
+          <p>Estimated Hours: {{job.estimatedHours}}</p>
+          <p>When: {{when}}</p>
         </div>
+      </div>
 
+      <div class="col-12">
         <div v-if="!isJobCreator" class="row text-center">
           <div class="col-12 button-bottom">
             <button
               v-if="isSignedUp"
               @click="addToQueue"
               class="btn btn-secondary btn-lg text-primary text-shadow"
-            >Apply to Help</button>
+            >Cancel</button>
             <button
               v-else
               @click="addToQueue"
@@ -190,7 +191,8 @@ export default {
       let obj = {
         volunteerName: this.profile.name,
         volunteerPic: this.profile.picture,
-        jobId: this.$route.params.jobId
+        jobId: this.$route.params.jobId,
+        jobCreatorEmail: this.job.creatorEmail
       };
 
       this.$store.dispatch("createQueue", obj);
