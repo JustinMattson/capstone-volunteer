@@ -6,6 +6,7 @@ let ObjectId = Schema.Types.ObjectId;
 const Queue = new Schema(
   {
     jobId: { type: ObjectId, ref: "Job", required: true },
+    jobCreatorEmail: { type: String, required: true },
     volunteerId: {
       type: ObjectId,
       ref: "Profile",
@@ -18,14 +19,12 @@ const Queue = new Schema(
     volunteerPic: { type: String, required: true },
     volunteerName: { type: String, required: true },
     volunteerRating: { type: Number },
-    volunteerEmail: { type: String, required: true },
     jobApproval: {
       type: String,
       required: true,
       default: "pending",
       enum: ["accepted", "rejected", "pending"],
     },
-
   },
   { timestamps: true, toJSON: { virtuals: true } }
 );
