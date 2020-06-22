@@ -6,9 +6,12 @@
     <div class="col-2">{{queue.volunteerName}}</div>
     <div class="col-1">{{queue.volunteerRating}}</div>
     <div class="col-2 offset-3 d-flex justify-content-end">{{queue.jobApproval}}</div>
-    <div class="col-3 d-flex justify-content-end">
-      <button class="btn btn-success smol-button">Approve</button>
-      <button class="btn btn-danger smol-button">Deny</button>
+    <div v-if="isCreator" class="col-3 d-flex justify-content-end">
+      <button @click="cancelQueue" class="btn btn-danger smol-button">Cancel</button>
+    </div>
+    <div v-else class="col-3 d-flex justify-content-end">
+      <button v-if="isJobCreator" class="btn btn-success smol-button">Approve</button>
+      <button v-if="isJobCreator" class="btn btn-danger smol-button">Deny</button>
     </div>
   </div>
 </template>
@@ -21,8 +24,19 @@ export default {
     return {};
   },
   mounted() {},
-  computed: {},
-  methods: {}
+  computed: {
+    isCreator() {
+      return this.$store.state.profile.email == this.queue.creatorEmail;
+    },
+    isJobCreator() {
+      return this.$store.state.profile.email == this.queue.jobCreatorEmail;
+    }
+  },
+  methods: {
+    cancelQueue() {
+      this.$store.dispatch("cancelQueue", this.queue.id);
+    }
+  }
 };
 </script>
 

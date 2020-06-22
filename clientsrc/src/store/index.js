@@ -76,10 +76,14 @@ export default new Vuex.Store({
       let index = state.queues.findIndex((q) => q.id == queue.id);
       state.queues[index] = queue;
     },
+    deleteQueue(state, id) {
+      let index = state.queues.findIndex((q) => q.id == id);
+      state.queues.splice(index, 1)
+    }
     //#endregion
   },
   actions: {
-    setBearer({}, bearer) {
+    setBearer({ }, bearer) {
       api.defaults.headers.authorization = bearer;
     },
     resetBearer() {
@@ -224,6 +228,12 @@ export default new Vuex.Store({
       let res = await api.put("queue/" + obj.id, obj);
       commit("updateQueueStatus", res.data);
     },
+    async cancelQueue({ commit }, id) {
+      let res = await api.delete("queue/" + id, id)
+      if (res) {
+        commit("deleteQueue", id)
+      }
+    }
     //#endregion
   },
 });
