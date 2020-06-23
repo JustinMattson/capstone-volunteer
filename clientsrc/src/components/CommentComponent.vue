@@ -1,8 +1,8 @@
 <template>
-  <div clas="comment container">
+  <div class="comment container">
     <!-- COMMENT TEMPLATE API -->
 
-    <div class="row bg-light border border-secondary" v-if="cIndex == 0">
+    <div class="row bg-light border border-secondary rounded-lg mb-1 shadow" v-if="cIndex == 0">
       <div class="d-flex col-12 m-0 px-3 justify-content-between" v-if="comment.creator">
         <span>{{comment.creator.name}}</span>
         <small class="text-muted align-self-center">{{updated}}&nbsp;</small>
@@ -19,9 +19,9 @@
       </div>
       <div class="col-10 m-0 d-flex align-self-center">
         <textarea
-          class="text-left text-primary unbold bg-light border-0 py-0 pl-2"
+          class="text-left text-primary unbold bg-light border-0 py-0 pl-2 ml-2"
           v-model="comment.body"
-          style="height:100px;width:100%"
+          style="height:88px;width:99%"
           placeholder="comment.body"
         ></textarea>
       </div>
@@ -49,18 +49,18 @@
         v-show="this.editForm"
         class="form border border-top"
         @submit.prevent="editComment"
-        style="height:100px;width:100%"
+        style="height:88px;width:99%"
       >
         <div class="d-flex justify-content-between">
           <span class="d-flex text-center align-self-center px-3">
             <button type="submit" class="btn btn-outline-secondary">Update</button>
           </span>
-          <span class="text-right" style="height:100px;width:100%">
+          <span class="text-right" style="height:88px;width:99%">
             <textarea
               class="text-left text-primary unbold bg-light border-0 p-2"
               v-model="comment.body"
               placeholder="comment.body"
-              style="width:100%;height:98px;"
+              style="width:99%;height:88px;"
             ></textarea>
           </span>
         </div>
@@ -69,7 +69,7 @@
     </div>
 
     <!-- Alternate BG color -->
-    <div class="row body-bg border border-secondary" v-if="cIndex == 1">
+    <div class="row border border-secondary rounded-lg mb-1 shadow" v-if="cIndex == 1">
       <div class="d-flex col-12 m-0 px-3 justify-content-between" v-if="comment.creator">
         <span>{{comment.creator.name}}</span>
         <small class="text-muted align-self-center">{{updated}}&nbsp;</small>
@@ -86,9 +86,9 @@
       </div>
       <div class="col-10 m-0 d-flex align-self-center">
         <textarea
-          class="text-left text-primary unbold bg-light border-0 py-0 pl-2"
+          class="text-left text-secondary unbold border-0 py-0 pl-2 ml-2"
           v-model="comment.body"
-          style="height:100px;width:100%"
+          style="height:88px;width:99%;background-color:var(--elephant);"
           placeholder="comment.body"
         ></textarea>
       </div>
@@ -111,23 +111,23 @@
         </span>
       </div>
 
-      <!-- EDIT COMMENT FORM -->
+      <!-- Alt EDIT COMMENT FORM -->
       <form
         v-show="this.editForm"
         class="form border border-top"
         @submit.prevent="editComment"
-        style="height:100px;width:100%"
+        style="height:88px;width:99%"
       >
         <div class="d-flex justify-content-between">
           <span class="d-flex text-center align-self-center px-3">
             <button type="submit" class="btn btn-outline-secondary">Update</button>
           </span>
-          <span class="text-right" style="height:100px;width:100%">
+          <span class="text-right" style="height:88px;width:99%">
             <textarea
-              class="text-left text-primary unbold bg-light border-0 p-2"
+              class="text-left text-secondary unbold border-0 p-2"
               v-model="comment.body"
               placeholder="comment.body"
-              style="width:100%;height:98px;"
+              style="width:99%;height:88px;background-color:var(--elephant);"
             ></textarea>
           </span>
         </div>

@@ -87,14 +87,16 @@
     <div
       class="row mb-3 d-flex justify-content-center bg-secondary text-primary text-shadow border-cstm p-3"
     >
-      <div class="col-10 text-center">Comments</div>
+      <div class="col-10 text-center">
+        <h3>Ask a Question or Leave a Comment:</h3>
+      </div>
       <!-- ADD COMMENT MODAL FORM -->
-      <div class="col-12">
+      <div class="col-12 d-flex justify-content-center">
         <!-- MODAL FORM -->
         <button
           v-if="$auth.isAuthenticated"
           type="button"
-          class="btn btn-info btn-lg"
+          class="btn btn-info btn-sm"
           data-toggle="modal"
           data-target="#myModal"
         >Add Comment</button>
@@ -107,13 +109,13 @@
               <h4 class="modal-title text-white">New Comment</h4>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-            <div class="modal-body shadow-sm container text-secondary">
+            <div class="modal-body shadow-sm container text-primary">
               <!-- add submit method here -->
               <form @submit.prevent="addComment">
                 <div class="row justify-content-center">
                   <div class="col text-center">
                     <!-- add v-model -->
-                    <h5>Comment:</h5>
+                    <h5>Ask a Question or Leave a Comment:</h5>
                     <textarea
                       class="unbold"
                       placeholder="Comment..."
@@ -153,6 +155,64 @@
         <!-- END CARD TEMPLATE COMMENTS -->
       </div>
     </div>
+
+    <!-- ADD COMMENT MODAL FORM -->
+    <div class="col-12 d-flex justify-content-center">
+      <!-- MODAL FORM -->
+      <button
+        v-if="$auth.isAuthenticated && comments.length >= 5"
+        type="button"
+        class="btn btn-info btn-sm mb-3"
+        data-toggle="modal"
+        data-target="#myModal"
+      >Add Comment</button>
+    </div>
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header bg-primary shadow-sm">
+            <h4 class="modal-title text-white">New Comment</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body shadow-sm container text-primary">
+            <!-- add submit method here -->
+            <form @submit.prevent="addComment">
+              <div class="row justify-content-center">
+                <div class="col text-center">
+                  <!-- add v-model -->
+                  <h5>Ask a Question or Leave a Comment:</h5>
+                  <textarea
+                    class="unbold"
+                    placeholder="Comment..."
+                    required
+                    v-model="newComment.body"
+                    style="height:100px;width:100%;"
+                  />
+                </div>
+              </div>
+              <div class="row justify-content-center mt-3">
+                <div class="col text-center">
+                  <!-- add v-model -->
+                </div>
+              </div>
+
+              <div class="row mt-3 align-items-end">
+                <div class="col text-center">
+                  <button type="submit" class="btn btn-secondary btn-lg">Add Comment</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer bg-primary shadow-sm">
+            <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END MODAL FORM -->
+    <!-- END ADD COMMENT MODAL -->
+
     <div class="row text-center border-cstm pb-3">
       <div class="col-12">Sign Up List</div>
     </div>
@@ -292,6 +352,7 @@ img {
   text-shadow: 2px 2px black;
 }
 .border-cstm {
-  border-bottom: 3px solid black;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
 }
 </style>

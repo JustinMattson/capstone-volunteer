@@ -104,8 +104,8 @@ export default {
 }
 .bg-img {
   background-image: url("https://www.ci.medford.or.us/SIB/images/Many-Hands-Holding-the-red-Letters-Volunteer-Isolated-1024x300.jpg");
+  background-size: 100% auto;
   background-repeat: no-repeat;
-  background-size: cover;
   background-position: center;
 }
 .cstm-size {
