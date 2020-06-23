@@ -56,9 +56,17 @@
   </div>
    <div class="row">
      <div class="col">
-       <h3>Upcoming Jobs:</h3>
-            <jobsQueue v-for="jobQueue in jobsQueue" :key="jobQueue.id" :jobQueue="jobQueue" />
-
+       <h2>Upcoming Jobs:</h2>
+            <div v-for="jobQueue in jobsQueue" :key="jobQueue.id" :jobQueue="jobQueue">
+              <div class="row text-center">
+               <div class="col-6">
+                 <h3>{{jobQueue.jobId.title}}</h3>
+                 </div> 
+                 <div class="col-6">
+                  <h3> {{jobQueue.jobApproval}}</h3>
+                   </div>
+            </div>
+            </div>
      </div>
    </div>
   <div class="row py-5 bg-white"><div class="col">
@@ -69,7 +77,6 @@
 </template>
 
 <script>
-import jobsQueue from "@/components/jobsQueue.vue";
 
 export default {
   name: "Profile",
@@ -88,9 +95,15 @@ export default {
       // })
     };
   },
+    async mounted() {
+    await this.$store.dispatch("getQueuesByProfileId", this.$store.state.profile.id);
+  },
   computed: {
     profile() {
       return this.$store.state.profile;
+    },
+    jobsQueue(){
+return this.$store.state.queues
     },
     volunteerAverage(){
       let total=0
@@ -127,9 +140,7 @@ export default {
       // debugger
       this.myComments = !this.myComments;
     },
-  components: {
-    jobsQueue
-  }
+
   }
 };
 </script>
