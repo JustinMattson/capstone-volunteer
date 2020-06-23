@@ -10,11 +10,11 @@ export class CommentsController extends BaseController {
     this.router
       .get("", this.getAll)
       .get("/:id", this.getCommentById)
+      .delete("/:id", this.delete)
       // NOTE: Beyond this point all routes require Authorization tokens (the user must be logged in)
       .use(auth0Provider.getAuthorizedUserInfo)
       .put("/:id", this.edit)
-      .post("", this.create)
-      .delete("/:id", this.delete);
+      .post("", this.create);
   }
   async getAll(req, res, next) {
     try {
@@ -59,10 +59,7 @@ export class CommentsController extends BaseController {
   }
   async delete(req, res, next) {
     try {
-      let data = await commentsService.delete(
-        req.params.id,
-        req.userInfo.email
-      );
+      let data = await commentsService.delete(req.params.id);
       if (data) {
         res.send("Successfully deleted");
       }
