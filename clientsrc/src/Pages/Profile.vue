@@ -56,7 +56,7 @@
   </div>
    <div class="row">
      <div class="col">
-       <h2>Upcoming Jobs:</h2>
+       <h2>Opportunites Enrolled In:</h2>
             <div v-for="jobQueue in jobsQueue" :key="jobQueue.id" :jobQueue="jobQueue">
               <div v-if="jobQueue.jobId.jobStatus == 'pending'" class="row text-center">
                <div class="col-6">
@@ -70,13 +70,18 @@
      </div>
    </div>
   <div class="row py-5 bg-white"><div class="col">
-   <h3> Jobs completed:</h3>
+   <h3> Opportunities Completed:</h3>
    <div v-for= "volunteerJob in volunteerJobs" :key="volunteerJob.id" :volunteerJob="volunteerJob">
      <div v-if="volunteerJob.jobStatus == 'completed'">
      <h1>{{volunteerJob.title}} {{volunteerJob.jobStatus}}</h1>
      </div>
    </div>
    </div>
+   </div>
+   <div class="row">
+     <div class="col">
+       <h3>Opportunities You've Posted:</h3>
+     </div>
    </div>
 </div>
   </div>
@@ -104,6 +109,8 @@ export default {
     async mounted() {
     await this.$store.dispatch("getQueuesByProfileId", this.$store.state.profile.id);
     await this.$store.dispatch("getJobsByVolunteerId", this.$store.state.profile.id);
+    await this.$store.dispatch("getJobsByRequesterId", this.$store.state.profile.id);
+
   },
   computed: {
     profile() {
