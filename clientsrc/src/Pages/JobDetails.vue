@@ -261,7 +261,10 @@ export default {
       return this.$store.state.queues;
     },
     isJobCreator() {
-      return this.$store.state.profile.id == this.job.creator.id;
+      if (this.job.creator) {
+        return this.$store.state.profile.id == this.job.creator.id;
+      }
+      return false;
     },
     isSignedUp() {
       let data = this.$store.state.queues.find(
