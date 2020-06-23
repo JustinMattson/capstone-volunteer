@@ -25,7 +25,7 @@
           When: {{ when }}
           <!-- <br /> S:{{job.startDate}} <br /> E:{{job.endDate}}-->
         </small>
-        <div>{{ job.status }}</div>
+        <!-- <div>{{ job.jobStatus }}</div> -->
 
         <router-link :to="{ name: 'job', params: { jobId: job.id } }">
           <span class="d-flex my-3 justify-content-center">
