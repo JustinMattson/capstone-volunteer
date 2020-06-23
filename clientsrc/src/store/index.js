@@ -20,8 +20,8 @@ export default new Vuex.Store({
     profiles: [],
     profile: {},
     jobs: [],
-    volunteerJobs:[],
-    postedJobs:[],
+    volunteerJobs: [],
+    postedJobs: [],
     activeJob: {},
     comments: [],
     queues: [],
@@ -33,11 +33,11 @@ export default new Vuex.Store({
     setProfiles(state, profiles) {
       state.profiles = profiles;
     },
-    setVolunteerJobs(state,volunteerJobs){
-      state.volunteerJobs = volunteerJobs
+    setVolunteerJobs(state, volunteerJobs) {
+      state.volunteerJobs = volunteerJobs;
     },
-    setVolunteerPostedJobs(state,postedJobs){
-      state.postedJobs = postedJobs
+    setVolunteerPostedJobs(state, postedJobs) {
+      state.postedJobs = postedJobs;
     },
     //#region JOBS
     setJobs(state, jobs) {
@@ -155,7 +155,8 @@ export default new Vuex.Store({
     },
     async getJobsByRequesterId({ commit }, id) {
       try {
-        let res = await api.get("profile/" + id + "/jobs");
+        debugger;
+        let res = await api.get("profile/" + id + "/myJobs");
         commit("setPostedJobs", res.data);
       } catch (error) {
         console.error(error);

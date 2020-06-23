@@ -10,7 +10,7 @@ export class ProfilesController extends BaseController {
     super("api/profile");
     this.router
       .get("/:id/jobs", this.getJobsByVolunteerId)
-      .get("/:id/jobs", this.getJobsByRequesterId)
+      .get("/:id/myJobs", this.getJobsByRequesterId)
       .get("/:id/queue", this.getQueuesByVolunteerId)
       .get("/:id", this.getProfileById)
       .use(auth0Provider.getAuthorizedUserInfo)
