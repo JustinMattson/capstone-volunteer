@@ -1,7 +1,23 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-    <router-link class="navbar-brand" :to="{ name: 'Home' }">
+    <!-- <router-link class="navbar-brand" :to="{ name: 'Home' }">
       <img alt="Vue logo" src="../assets/logo.png" class="sml-img" />olen-Told
+    </router-link>-->
+    <router-link class="navbar-brand" :to="{ name: 'Home' }">
+      Please Help
+      <img
+        class="rotateImg180"
+        alt="Vue logo"
+        src="../assets/logo.png"
+        style="height:30px;object-position: -11px; margin-left:-15px"
+      />
+      <img
+        class="rotateImg180"
+        alt="Vue logo"
+        src="../assets/logo.png"
+        style="height:30px;object-position: 11px;"
+      />
+      <span style="margin-left:-15px;">e!</span>
     </router-link>
     <button
       class="navbar-toggler"
@@ -62,5 +78,8 @@ export default {
 <style scoped>
 .sml-img {
   height: 3rem;
+}
+.rotateImg180 {
+  transform: rotate(180deg);
 }
 </style>

@@ -30,6 +30,7 @@
         <router-link :to="{ name: 'job', params: { jobId: job.id } }">
           <span class="d-flex my-3 justify-content-center">
             <i class="fas fa-hands-helping action text-primary font-lg">&nbsp;More Info</i>
+            <!-- <i class="far fa-handshake action text-primary font-lg">&nbsp;More Info</i> -->
           </span>
         </router-link>
         <p class="small text-muted mb-0 text-center unbold">#{{ job.id }}</p>
