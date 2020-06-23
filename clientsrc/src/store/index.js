@@ -155,7 +155,6 @@ export default new Vuex.Store({
     },
     async getJobsByRequesterId({ commit }, id) {
       try {
-        debugger;
         let res = await api.get("profile/" + id + "/myJobs");
         commit("setPostedJobs", res.data);
       } catch (error) {
