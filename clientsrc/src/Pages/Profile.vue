@@ -44,59 +44,64 @@
       </div>
     </form>
 
-<div class="container-fluid shadow-lg">
-  <div class="row justify-content-center">
-    <div class="col-6 py-5 bg-primary text-secondary">
-      <h3>Volunteer Rating:</h3>
-      <h1>{{volunteerAverage}}</h1>
+    <div class="container-fluid shadow-lg">
+      <div class="row justify-content-center">
+        <div class="col-6 py-5 bg-primary text-secondary">
+          <h3>Volunteer Rating:</h3>
+          <h1>{{volunteerAverage}}</h1>
+        </div>
+        <div class="col-6 py-5 bg-secondary text-primary">
+          <h3>Job Poster Rating:</h3>
+          <h1>{{requesterAverage}}</h1>
+        </div>
       </div>
-    <div class="col-6 py-5 bg-secondary text-primary">
-      <h3>Job Poster Rating:</h3>
-      <h1> {{requesterAverage}}</h1></div>
-  </div>
-   <div class="row">
-     <div class="col">
-       <h2>Opportunites Enrolled In:</h2>
-            <div v-for="jobQueue in jobsQueue" :key="jobQueue.id" :jobQueue="jobQueue">
-              <div v-if="jobQueue.jobId.jobStatus == 'pending'" class="row text-center">
-               <div class="col-6">
-                 <h3>{{jobQueue.jobId.title}}</h3>
-                 </div> 
-                 <div class="col-6">
-                  <h3> {{jobQueue.jobApproval}}</h3>
-                   </div>
+      <div class="row">
+        <div class="col">
+          <h2>Opportunites Enrolled In:</h2>
+          <div v-for="jobQueue in jobsQueue" :key="jobQueue.id" :jobQueue="jobQueue">
+            <div v-if="jobQueue.jobId.jobStatus == 'pending'" class="row text-center">
+              <div class="col-6">
+                <h3>{{jobQueue.jobId.title}}</h3>
+              </div>
+              <div class="col-6">
+                <h3>{{jobQueue.jobApproval}}</h3>
+              </div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="row py-5 bg-white">
+        <div class="col">
+          <h3>Opportunities Completed:</h3>
+          <div
+            v-for="volunteerJob in volunteerJobs"
+            :key="volunteerJob.id"
+            :volunteerJob="volunteerJob"
+          >
+            <div v-if="volunteerJob.jobStatus == 'completed'">
+              <h1>{{volunteerJob.title}} {{volunteerJob.jobStatus}}</h1>
             </div>
-     </div>
-   </div>
-  <div class="row py-5 bg-white"><div class="col">
-   <h3> Opportunities Completed:</h3>
-   <div v-for= "volunteerJob in volunteerJobs" :key="volunteerJob.id" :volunteerJob="volunteerJob">
-     <div v-if="volunteerJob.jobStatus == 'completed'">
-     <h1>{{volunteerJob.title}} {{volunteerJob.jobStatus}}</h1>
-     </div>
-   </div>
-   </div>
-   </div>
-   <div class="row">
-     <div class="col">
-       <h3>Opportunities You've Posted:</h3>
-     </div>
-   </div>
-</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <h3>Opportunities You've Posted:</h3>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-
 export default {
   name: "Profile",
   data() {
     return {
       edit: false,
       fontSize: "10px",
-      color: "#808",
-      
+      color: "#808"
+
       // prettyDate: new Date(this.profile.createdAt).toLocaleDateString("eu-US", {
       //   year: "numeric",
       //   month: "short",
@@ -106,39 +111,51 @@ export default {
       // })
     };
   },
-    async mounted() {
-    await this.$store.dispatch("getQueuesByProfileId", this.$store.state.profile.id);
-    await this.$store.dispatch("getJobsByVolunteerId", this.$store.state.profile.id);
-    await this.$store.dispatch("getJobsByRequesterId", this.$store.state.profile.id);
-
+  async mounted() {
+    await this.$store.dispatch(
+      "getQueuesByProfileId",
+      this.$store.state.profile.id
+    );
+    await this.$store.dispatch(
+      "getJobsByVolunteerId",
+      this.$store.state.profile.id
+    );
+    await this.$store.dispatch(
+      "getJobsByRequesterId",
+      this.$store.state.profile.id
+    );
   },
   computed: {
     profile() {
       return this.$store.state.profile;
     },
-    jobsQueue(){
-    return this.$store.state.queues
+    jobsQueue() {
+      return this.$store.state.queues;
     },
-    volunteerJobs(){
-      return this.$store.state.volunteerJobs
+    volunteerJobs() {
+      return this.$store.state.volunteerJobs;
     },
-    volunteerAverage(){
-      let total=0
-      let vr = this.$store.state.profile.volunteerRating
+    volunteerAverage() {
+      let total = 0;
+      let vr = this.$store.state.profile.volunteerRating;
       for (let index = 0; index < vr.length; index++) {
-        total += vr[index]
-      } 
-      let avg= total/vr.length
-      return avg
+        total += vr[index];
+      }
+      let avg = total / vr.length;
+      if (vr.length == 0) {
+        return "No Rating";
+      } else return avg;
     },
-      requesterAverage(){
-      let total=0
-      let vr = this.$store.state.profile.requesterRating
+    requesterAverage() {
+      let total = 0;
+      let vr = this.$store.state.profile.requesterRating;
       for (let index = 0; index < vr.length; index++) {
-        total += vr[index]
-      } 
-      let avg= total/vr.length
-      return avg
+        total += vr[index];
+      }
+      let avg = total / vr.length;
+      if (vr.length == 0) {
+        return "No Rating";
+      } else return avg;
     }
   },
   methods: {
@@ -156,8 +173,7 @@ export default {
       // NOTE may need to enable debugger here to get the button to function again.
       // debugger
       this.myComments = !this.myComments;
-    },
-
+    }
   }
 };
 </script>

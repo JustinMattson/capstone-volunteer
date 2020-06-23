@@ -36,7 +36,7 @@
           <router-link :to="{ name: 'Home' }" class="nav-link">Home</router-link>
         </li>
         <li class="nav-item" :class="{ active: $route.name == 'Jobs' }">
-          <router-link :to="{ name: 'Jobs' }" class="nav-link">Jobs</router-link>
+          <router-link :to="{ name: 'Jobs' }" class="nav-link">Volunteer Oportunities</router-link>
         </li>
         <li
           class="nav-item"

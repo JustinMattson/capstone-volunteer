@@ -25,12 +25,12 @@
     <div class="row my-5 d-flex justify-content-around">
       <div class="card col-12 col-md-3 height-fix my-1 shadow">
         <img
-          src="https://qph.fs.quoracdn.net/main-qimg-134e3bf89fff27bf56bdbd04e7dbaedf.webp"
+          src="https://i.pinimg.com/originals/0d/c5/7b/0dc57b8d66c12736c666f157a3afa3ff.jpg"
           class="card-img-top mt-3"
-          alt="..."
+          alt="error loading image"
         />
         <div class="card-body">
-          <h5 class="card-title">Morgan Freeman</h5>
+          <h5 class="card-title">Sydney</h5>
           <p class="card-text">
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
@@ -40,17 +40,17 @@
           </p>
           <p
             class="card-text"
-          >Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          >I love this website! I run an after-school program to help keep kids busy and off the streets. We use this site almost exclusively to find projects to help out with. I reccomend this to everyone I know!</p>
         </div>
       </div>
       <div class="card col-12 col-md-3 height-fix my-1 shadow">
         <img
-          src="https://vignette.wikia.nocookie.net/wackishlyawesomerandomness/images/0/08/Imagemkksje.jpg/revision/latest?cb=20140414235032"
+          src="https://headshotphotographerasheville.com/wp-content/uploads/headshots-in-asheville-3.jpg"
           class="card-img-top mt-3"
-          alt="..."
+          alt="error loading image"
         />
         <div class="card-body">
-          <h5 class="card-title">Dr. Phil</h5>
+          <h5 class="card-title">Albert</h5>
           <p class="card-text">
             <i class="fas fa-star"></i>
             <i class="fas fa-star"></i>
@@ -60,28 +60,43 @@
           </p>
           <p
             class="card-text"
-          >Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          >I really enjoy this site! I've had tons of projects I've needed help with and have found plenty of people to help me out. I've also been able to return the favor by helping others with their projects as well. This has been very useful!</p>
         </div>
       </div>
       <div class="card col-12 col-md-3 height-fix my-1 shadow">
         <img
-          src="https://media.tumblr.com/53c511cd960aa91831bb98c4a7804871/tumblr_inline_mhxsraQw7F1qz4rgp.gif"
+          src="https://i1.wp.com/kinserstudios.com/wp-content/uploads/2019/06/man.png?fit=384%2C295&ssl=1"
           class="card-img-top mt-3"
-          alt="..."
+          alt="error loading image"
         />
         <div class="card-body">
-          <h5 class="card-title">Captain Jack Sparrow</h5>
+          <h5 class="card-title">Scott</h5>
           <p class="card-text">
             <i class="fas fa-star"></i>
-            <i class="far fa-star"></i>
-            <i class="far fa-star"></i>
-            <i class="far fa-star"></i>
-            <i class="far fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
           </p>
-          <p class="card-text">I'm not about helping others, mate.</p>
+          <p
+            class="card-text"
+          >I've been using this site for months now and found it very helpful! I use it to help others in my community with various jobs they have going on. It gives me opportunities to learn new skills and connect with those around me.</p>
         </div>
       </div>
     </div>
+    <footer class="row sticky-bottom bg-primary d-flex justify-content-between">
+      <div class="col-3">Xander</div>
+      <div class="col-3">
+        Kevin Lane
+        <a href="https://www.linkedin.com/in/kevin-lane-2422b51b0/" target="_blank">
+          <i class="fa fa-linkedin-square text-black p-1"></i>
+        </a>
+        <a href="https://github.com/Kevinclane" target="_blank">
+          <i class="fa fa-github text-black p-1"></i>
+        </a>
+      </div>
+      <div class="col-3">Justin</div>
+    </footer>
   </div>
 </template>
 
@@ -114,5 +129,8 @@ export default {
 }
 .height-fix {
   height: fit-content !important;
+}
+.text-black {
+  color: black;
 }
 </style>
