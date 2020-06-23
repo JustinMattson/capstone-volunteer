@@ -2,7 +2,6 @@ import { dbContext } from "../db/DbContext";
 import { BadRequest } from "../utils/Errors";
 
 class JobsService {
-
   async getAll(query = {}) {
     let jobs = await dbContext.Jobs.find(query).populate(
       "creator",
@@ -12,13 +11,32 @@ class JobsService {
   }
   async getJobById(id) {
     let data = await dbContext.Jobs.findOne({ _id: id }).populate(
-      "creator",
+      "creator"
       // "name picture requesterRatings"
     );
     if (!data) {
       throw new BadRequest("Invalid Id");
     }
-
+    return data;
+  }
+  async getJobsByRequesterId(id) {
+    let data = await dbContext.Queues.find({ requesterId: id }).populate(
+      "creator",
+      "name picture"
+    );
+    if (!data) {
+      throw new BadRequest("Invalid Id");
+    }
+    return data;
+  }
+  async getJobsByVolunteerId(id) {
+    let data = await dbContext.Queues.find({ volunteerId: id }).populate(
+      "creator",
+      "name picture"
+    );
+    if (!data) {
+      throw new BadRequest("Invalid Id");
+    }
     return data;
   }
   async create(rawData) {
@@ -52,7 +70,10 @@ class JobsService {
     return data;
   }
   async updateJobVolunteers(obj) {
-    await dbContext.Jobs.findOneAndUpdate({ _id: obj.jobId }, { $addToSet: { volunteerIds: obj.volunteerId } })
+    await dbContext.Jobs.findOneAndUpdate(
+      { _id: obj.jobId },
+      { $addToSet: { volunteerIds: obj.volunteerId } }
+    );
   }
 }
 

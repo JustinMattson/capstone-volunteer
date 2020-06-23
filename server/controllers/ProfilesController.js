@@ -3,15 +3,18 @@ import BaseController from "../utils/BaseController";
 import auth0Provider from "@bcwdev/auth0provider";
 import { queueService } from "../services/QueueService";
 import { profilesService } from "../services/ProfilesService";
+import { jobsService } from "../services/JobsService";
 
 export class ProfilesController extends BaseController {
   constructor() {
     super("api/profile");
     this.router
-      .use(auth0Provider.getAuthorizedUserInfo)
-      .get("", this.getUserProfile)
-      .get("/:id", this.getProfileById)
+      .get("/:id/jobs", this.getJobsByVolunteerId)
+      .get("/:id/jobs", this.getJobsByRequesterId)
       .get("/:id/queue", this.getQueuesByVolunteerId)
+      .get("/:id", this.getProfileById)
+      .get("", this.getUserProfile)
+      .use(auth0Provider.getAuthorizedUserInfo)
       .put("/:id", this.edit);
   }
   async getUserProfile(req, res, next) {
@@ -53,6 +56,22 @@ export class ProfilesController extends BaseController {
   async getQueuesByVolunteerId(req, res, next) {
     try {
       let data = await queueService.getQueuesByVolunteerId(req.params.id);
+      res.send(data);
+    } catch (error) {
+      next(error);
+    }
+  }
+  async getJobsByVolunteerId(req, res, next) {
+    try {
+      let data = await jobsService.getJobsByVolunteerId(req.params.id);
+      res.send(data);
+    } catch (error) {
+      next(error);
+    }
+  }
+  async getJobsByRequesterId(req, res, next) {
+    try {
+      let data = await jobsService.getJobsByRequesterId(req.params.id);
       res.send(data);
     } catch (error) {
       next(error);
