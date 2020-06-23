@@ -294,7 +294,8 @@ export default {
         volunteerName: this.profile.name,
         volunteerPic: this.profile.picture,
         jobId: this.$route.params.jobId,
-        jobCreatorEmail: this.job.creatorEmail
+        jobCreatorEmail: this.job.creatorEmail,
+        volunteerId: this.profile.id
       };
 
       this.$store.dispatch("createQueue", obj);

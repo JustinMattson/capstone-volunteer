@@ -8,10 +8,10 @@ const Queue = new Schema(
     jobId: { type: ObjectId, ref: "Job", required: true },
     jobCreatorEmail: { type: String, required: true },
     volunteerId: {
-      type: ObjectId,
-      ref: "Profile",
+      type: String,
+      // ref: "Profile",
       required: true,
-      unique: true, // should be able to prevent one person from applying multiple times on the front end. this didn't fully prevent.
+      // unique: true, // should be able to prevent one person from applying multiple times on the front end. this didn't fully prevent.
     },
     creatorEmail: { type: String, required: true }, //
     volunteerPic: { type: String, required: true },

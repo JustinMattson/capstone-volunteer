@@ -54,37 +54,23 @@
       <h3>Job Poster Rating:</h3>
       <h1> {{requesterAverage}}</h1></div>
   </div>
+   <div class="row">
+     <div class="col">
+       <h3>Upcoming Jobs:</h3>
+            <jobsQueue v-for="jobQueue in jobsQueue" :key="jobQueue.id" :jobQueue="jobQueue" />
+
+     </div>
+   </div>
   <div class="row py-5 bg-white"><div class="col">
-   <h3> Jobs Accepted:</h3>
+   <h3> Jobs completed:</h3>
    <h1> {{profile.jobsAccepted}}</h1></div></div>
 </div>
-
-    <!-- <div id="profile-object" class="text-left text-muted" :style="{fontSize:fontSize}">
-      <div>
-        __v: {{profile.__v}}
-        <br />
-        _id: "{{profile.id}}"
-        <br />
-        createdAt: "{{profile.createdAt}}"
-        <br />
-        email: "{{profile.email}}"
-        <br />
-        id: "{{profile.id}}"
-        <br />
-        name: "{{profile.name}}"
-        <br />
-        picture: "{{profile.picture}}"
-        <br />
-        subs: {{profile.subs}}
-        <br />
-        updatedAt: {{profile.updatedAt}}"
-        <br />
-      </div>
-    </div> -->
   </div>
 </template>
 
 <script>
+import jobsQueue from "@/components/jobsQueue.vue";
+
 export default {
   name: "Profile",
   data() {
@@ -141,7 +127,9 @@ export default {
       // debugger
       this.myComments = !this.myComments;
     },
-
+  components: {
+    jobsQueue
+  }
   }
 };
 </script>
