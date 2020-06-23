@@ -1,7 +1,12 @@
 <template>
   <div class="home container-fluid text-center">
-    <div class="row bg-img">
-      <div class="col-12 text-center cstm-size"></div>
+    <div class="row">
+      <div class="col-12 p-0">
+        <img
+          src="https://www.ci.medford.or.us/SIB/images/Many-Hands-Holding-the-red-Letters-Volunteer-Isolated-1024x300.jpg"
+          class="cstm-size"
+        />
+      </div>
     </div>
     <div class="row d-flex justify-content-around my-5">
       <router-link
@@ -102,15 +107,10 @@ export default {
 .rounded {
   border-radius: 120px !important;
 }
-.bg-img {
-  background-image: url("https://www.ci.medford.or.us/SIB/images/Many-Hands-Holding-the-red-Letters-Volunteer-Isolated-1024x300.jpg");
-  background-size: 100% auto;
-  background-repeat: no-repeat;
-  background-position: center;
-}
+
 .cstm-size {
-  height: 35vh;
-  width: 100vw;
+  height: 20vh;
+  width: 100%;
 }
 .height-fix {
   height: fit-content !important;
