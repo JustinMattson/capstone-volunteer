@@ -20,7 +20,7 @@ class JobsService {
     return data;
   }
   async getJobsByRequesterId(id) {
-    let data = await dbContext.Queues.find({ requesterId: id }).populate(
+    let data = await dbContext.Jobs.find({ requesterId: id }).populate(
       "creator",
       "name picture"
     );
@@ -30,7 +30,7 @@ class JobsService {
     return data;
   }
   async getJobsByVolunteerId(id) {
-    let data = await dbContext.Queues.find({ volunteerId: id }).populate(
+    let data = await dbContext.Jobs.find({ volunteerIds: id }).populate(
       "creator",
       "name picture"
     );

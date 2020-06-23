@@ -71,7 +71,11 @@
    </div>
   <div class="row py-5 bg-white"><div class="col">
    <h3> Jobs completed:</h3>
-   <h1> {{profile.jobsAccepted}}</h1></div></div>
+   <div v-for= "volunteerJob in volunteerJobs" :key="volunteerJob.id" :volunteerJob="volunteerJob">
+     <h1>{{volunteerJob.title}} {{volunteerJob.jobStatus}}</h1>
+   </div>
+   </div>
+   </div>
 </div>
   </div>
 </template>
@@ -97,13 +101,17 @@ export default {
   },
     async mounted() {
     await this.$store.dispatch("getQueuesByProfileId", this.$store.state.profile.id);
+    await this.$store.dispatch("getJobsByVolunteerId", this.$store.state.profile.id);
   },
   computed: {
     profile() {
       return this.$store.state.profile;
     },
     jobsQueue(){
-return this.$store.state.queues
+    return this.$store.state.queues
+    },
+    volunteerJobs(){
+      return this.$store.state.volunteerJobs
     },
     volunteerAverage(){
       let total=0
