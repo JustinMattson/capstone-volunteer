@@ -18,8 +18,9 @@ class QueueService {
   async getQueuesByVolunteerId(id) {
     let data = await dbContext.Queues.find({ volunteerId: id }).populate(
       "creator",
-      "name picture"
-    );
+      "name picture").populate(
+        "jobId"
+      )
     if (!data) {
       throw new BadRequest("Invalid Id");
     }
