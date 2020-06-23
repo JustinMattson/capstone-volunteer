@@ -16,10 +16,13 @@
             ></i>
           </span>
         </div>
-        <div class="text-secondary d-flex justify-content-between" v-if="job.creator">
+        <div class="text-secondary d-flex justify-content-start" v-if="job.creator">
           <span class="unbold">
-            <img class="rounded-lg" :src="job.creator.picture" style="height:25px;width:25px" />
-            {{requestorRating}}
+            <img class="rounded-lg" :src="job.creator.picture" style="height:75px;width:75px" />
+          </span>
+          <span class="ml-2 d-flex flex-column justify-content-between">
+            <div>&nbsp;{{job.creator.name}}</div>
+            <div>&nbsp;{{requestorRating}}</div>
           </span>
         </div>
         <h5 class="mt-3">{{job.description}}</h5>
