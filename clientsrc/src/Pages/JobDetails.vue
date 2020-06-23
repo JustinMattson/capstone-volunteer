@@ -19,7 +19,7 @@
         <div class="text-secondary d-flex justify-content-between" v-if="job.creator">
           <span class="unbold">
             <img class="rounded-lg" :src="job.creator.picture" style="height:25px;width:25px" />
-            {{job.creator.name}} {{profile.requesterRating}} 5 FIX THIS BEFORE DEPLOY
+            {{requestorRating}}
           </span>
         </div>
         <h5 class="mt-3">{{job.description}}</h5>
@@ -297,6 +297,21 @@ export default {
           " - " +
           moment(String(this.job.endDate)).format("MM/DD/YYYY")
         );
+      }
+    },
+    requestorRating() {
+      if (this.job) {
+        let rateArr = this.job.jobCreatorRatings;
+        let length = rateArr.length;
+        let x = 0;
+        let i = 0;
+        while (i < length) {
+          x += rateArr[i];
+          i++;
+        }
+        if (length == 0) {
+          return "No Ratings";
+        } else return x;
       }
     }
   },

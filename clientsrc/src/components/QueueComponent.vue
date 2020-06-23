@@ -1,24 +1,26 @@
 <template>
   <div class="row my-2">
-    <div class="col-1">
+    <div class="col-3">
       <img :src="queue.volunteerPic" class="profile-pic" />
     </div>
-    <div class="col-2">{{queue.volunteerName}}</div>
-    <div class="col-1">{{queue.volunteerRating}}</div>
-    <div class="col-2 offset-3 d-flex justify-content-end">{{queue.jobApproval}}</div>
-    <div v-if="isCreator" class="col-3 d-flex justify-content-end">
-      <button @click="cancelQueue" class="btn btn-danger smol-button">Cancel</button>
+    <div class="col-md-2 col-6">
+      {{queue.volunteerName}}
+      {{queue.volunteerRating}}
     </div>
-    <div v-else class="col-3 d-flex justify-content-end">
+    <div class="col-3 d-flex justify-content-end">{{queue.jobApproval}}</div>
+    <div v-if="isCreator" class="col-12 col-md-3 d-flex justify-content-end">
+      <button @click="cancelQueue" class="btn btn-danger">Cancel</button>
+    </div>
+    <div v-else class="col-md-3 col-12 d-flex justify-content-end">
       <button
         v-if="isJobCreator && !acceptanceToggle"
         @click="approve"
-        class="btn btn-success smol-button mx-1"
+        class="btn btn-success mx-1"
       >Approve</button>
       <button
         v-if="isJobCreator && !acceptanceToggle"
         @click="deny"
-        class="btn btn-danger smol-button mx-1"
+        class="btn btn-danger mx-1"
       >Deny</button>
     </div>
   </div>
