@@ -27,6 +27,7 @@
           <div class="unbold">General Location: {{job.generalLocation}}</div>
           <div class="unbold">Estimated Hours: {{job.estimatedHours}}</div>
           <p>When: {{when}}</p>
+          <span class="unbold">Status: {{job.jobStatus}}</span>
         </div>
       </div>
 
@@ -63,9 +64,19 @@
               <input type="date" v-model="job.startDate" /> Start Date
             </div>
             <div class="unbold">
-              <input type="date" v-model="job.endDate" />
-              End Date
+              <input type="date" v-model="job.endDate" />End Date
             </div>
+            <br />
+            <!-- dropdown -->
+            <span class="unbold">Job Status:</span>
+            <select v-model="job.jobStatus">
+              <!-- <option disabled value="Job Status">Job Status:</option> -->
+              <option value="pending">Pending</option>
+              <option value="completed">Completed</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+
+            <!-- End Dropdown -->
           </div>
         </form>
       </div>
@@ -233,7 +244,8 @@ export default {
   data() {
     return {
       newComment: {},
-      editForm: false
+      editForm: false,
+      jobStatuses: ["pending", "completed", "cancelled"]
     };
   },
   onRouterLeave(to, from, next) {
