@@ -277,7 +277,7 @@ export default new Vuex.Store({
     //#region 
     async jobPosterRating({ commit }, obj) {
       try {
-        let res1 = await api.put("profiles/" + obj.creatorId + "/jr", obj)
+        let res1 = await api.put("profile/" + obj.creatorId + "/jr", obj)
       } catch (error) {
         console.error(error)
       }

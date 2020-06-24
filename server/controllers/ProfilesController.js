@@ -12,11 +12,11 @@ export class ProfilesController extends BaseController {
       .get("/:id/jobs", this.getJobsByVolunteerId)
       .get("/:id/myJobs", this.getJobsByRequesterId)
       .get("/:id/queue", this.getQueuesByVolunteerId)
+      .put("/:id/jr", this.updateUserJR)
       .use(auth0Provider.getAuthorizedUserInfo)
       .get("/:id", this.getProfileById)
       .get("", this.getUserProfile)
       .put("/:id", this.edit)
-      .put("/:id/jr", this.updateUserJR)
   }
   async getUserProfile(req, res, next) {
     try {
