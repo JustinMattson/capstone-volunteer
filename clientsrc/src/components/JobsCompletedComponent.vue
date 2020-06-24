@@ -1,28 +1,29 @@
 <template>
-  <div class="volunteerJob container">
-    <div class="row">
-        <div class="col-4">
+  <div class="volunteerJob row text-center justify-content-center border-top border-secondary py-3">
+        <div class="col-md-4">
            <router-link :to="{ name: 'job', params: { jobId: volunteerJob.id } }">
-            {{volunteerJob.title}}
+            <h3>{{volunteerJob.title}}</h3>
             </router-link>
             </div>
-        <div class="col-4">
-            Rate Opportunity Poster:
-        </div>
-<div class="col-4">
-    <form @submit.prevent="submitRating">
-      <select v-model="jobCreatorRating">
+       
+<div class="col-md-4 d-flex justify-content-center align-items-center">
+   <h5>Rate Opportunity Poster:</h5>
+</div>
+<div class="col-md-2 d-flex justify-content-center align-items-center">
+    <form @submit.prevent="submitRating" id="form1">
+      <select v-model="obj.rating">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
               <option value="4">4</option>
               <option value="5">5</option>
             </select>
-     <button type="submit" class="btn btn-primary text-secondary btn-lg">Submit</button>
     </form>
-</div>
     </div>
+    <div class="col-md-2 mt-md-0 mt-3">
+     <button type="submit" form="form1" class="btn btn-secondary text-primary btn-lg">Submit</button>
 
+    </div>
     </div>
 </template>
 <script>
@@ -33,11 +34,14 @@ export default {
    props: ["volunteerJob"],
    data(){
     return {
-        jobCreatorRating: {}
+        obj:{} 
    }
    },
-   methods(){
-
+   methods:{
+submitRating(){
+this.obj.creatorId = this.volunteerJob.creator.id,
+this.$store.dispatch("jobPosterRating", this.obj )
+},
    }
 }
 </script>
