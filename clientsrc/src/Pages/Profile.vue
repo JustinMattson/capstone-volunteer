@@ -57,7 +57,7 @@
       </div>
       <div class="row">
         <div class="col">
-          <h2>Opportunites Enrolled In:</h2>
+          <h2>Future Opportunites:</h2>
           <jobQueue
             v-for="jobQueue in jobQueues"
             :key="jobQueue.id"

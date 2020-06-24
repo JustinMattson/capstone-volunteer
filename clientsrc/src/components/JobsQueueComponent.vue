@@ -3,7 +3,9 @@
     <!-- Color 1 -->
     <div class="row bg-light border border-secondary rounded-lg mb-1 shadow" v-if="qIndex == 0">
       <div class="col-12 col-md-6 d-flex justify-content-between">
-        <router-link :to="{ name: 'job', params: { jobId: jobQueue.id } }">{{jobQueue.jobId.title}}</router-link>
+        <router-link
+          :to="{ name: 'job', params: { jobId: jobQueue.jobId.id } }"
+        >{{jobQueue.jobId.title}}</router-link>
         <span class="unbold">{{when}}</span>
       </div>
       <div class="col-12 col-md-6 d-flex justify-content-between">
@@ -54,9 +56,10 @@ export default {
     profile() {
       return this.$store.state.profile;
     },
+    // FIXME once completed, the index is not sequential, colors can be all white or gray.
     qIndex() {
       let num = this.$store.state.queues.findIndex(
-        q => q.id == this.jobQueue.id
+        q => q.id == this.jobQueue.id && q.jobId.jobStatus == "pending"
       );
       return num % 2;
     },
