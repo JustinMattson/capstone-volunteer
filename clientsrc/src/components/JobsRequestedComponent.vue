@@ -12,12 +12,18 @@
       <div class="col-12 col-md-6 d-flex justify-content-between">
         <span class="unbold">Status: {{requesterJob.jobStatus}}</span>
         <span title="Rate Volunteer(s)">
+          <!-- TODO this star should only show once completed -->
           <i class="fas fa-star-half-alt text-warning action" alt="Ratings" @click="toggleRatings"></i>
         </span>
       </div>
       <!-- Ratings -->
-      <div v-show="volunteerRatings" class="border border-top">
-        <!-- FIXME Ratings Component goes here -->
+      <div v-show="volunteerRatings" class="border border-top col-12">
+        <VolunteerId
+          v-for="volunteerId in requesterJob.volunteerIds"
+          :key="volunteerId.id"
+          :volunteerId="volunteerId"
+          :requesterJob="requesterJob"
+        />
       </div>
     </div>
     <!-- Alt Color -->
@@ -27,6 +33,7 @@
 
 <script>
 import moment from "moment";
+import VolunteerId from "@/components/RatingsComponent";
 export default {
   name: "requesterJob",
   props: ["requesterJob"],
@@ -57,9 +64,16 @@ export default {
   methods: {
     toggleRatings() {
       this.volunteerRatings = !this.volunteerRatings;
+    },
+    volunteers() {
+      let arr = this.$state.store.profile.find(
+        p => p.id == this.requestorJob.volunteerIds
+      );
     }
   },
-  components: {}
+  components: {
+    VolunteerId
+  }
 };
 </script>
 
