@@ -143,7 +143,7 @@ export default {
 }
 
 .cstm-size {
-  height: 20vh;
+  height: auto;
   width: 100%;
 }
 .height-fix {
