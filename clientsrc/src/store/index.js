@@ -161,10 +161,13 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
-    async getProfile({ commit }) {
+    async getProfile({ commit, dispatch }) {
       try {
         let res = await api.get("profile");
         commit("setProfile", res.data);
+        dispatch("getQueuesByProfileId",res.data.id)
+        dispatch("getJobsByVolunteerId",res.data.id)
+        dispatch("getJobsByRequesterId",res.data.id)
       } catch (error) {
         console.error(error);
       }
