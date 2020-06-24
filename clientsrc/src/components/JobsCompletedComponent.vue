@@ -10,7 +10,11 @@
       <h5>Rate Opportunity Poster:</h5>
     </div>
     <div class="col-md-2 d-flex justify-content-center align-items-center">
-      <form @submit.prevent="submitRating" :id="volunteerJob.id">
+      <form
+        v-if="this.reviewCompleted == false"
+        @submit.prevent="submitRating"
+        :id="volunteerJob.id"
+      >
         <select v-model="obj.rating">
           <option value="1">1</option>
           <option value="2">2</option>
@@ -22,11 +26,12 @@
     </div>
     <div class="col-md-2 mt-md-0 mt-3">
       <button
+        v-if="this.reviewCompleted == false"
         type="submit"
         :form="volunteerJob.id"
         class="btn btn-secondary text-primary btn-lg"
       >Submit</button>
-      <!-- <div v-if="reviewCompleted">Thanks for the feedback!</div> -->
+      <div v-if="this.reviewCompleted == true">Thanks for the feedback!</div>
     </div>
   </div>
 </template>
