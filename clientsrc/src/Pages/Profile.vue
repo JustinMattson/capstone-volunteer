@@ -64,14 +64,6 @@
             :jobQueue="jobQueue"
             v-show="jobQueue.jobId.jobStatus == 'pending'"
           />
-          <!-- <div class="row text-center">
-            <div class="col-6">
-              <h3>{{jobQueue.jobId.title}}</h3>
-            </div>
-            <div class="col-6">
-              <h3>{{jobQueue.jobApproval}}</h3>
-            </div>
-          </div>-->
         </div>
       </div>
       <div class="row py-5 bg-white">
@@ -82,9 +74,7 @@
             :key="volunteerJob.id"
             :volunteerJob="volunteerJob"
             v-show="volunteerJob.jobStatus == 'completed'"
-          >
-            <h1>{{volunteerJob.title}}</h1>
-          </volunteerJob>
+          />
         </div>
       </div>
       <div class="row">
@@ -95,9 +85,7 @@
             :key="requesterJob.id"
             :requesterJob="requesterJob"
             v-show="requesterJobs"
-          >
-            <h1>{{requesterJob.title}}</h1>
-          </requesterJob>
+          />
         </div>
       </div>
     </div>

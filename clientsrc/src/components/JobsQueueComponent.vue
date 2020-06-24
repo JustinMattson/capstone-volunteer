@@ -1,7 +1,11 @@
 <template>
-  <div class="jobsInQueue container">
+  <div class="jobQueue container">
     <div class="row">
-      <div class="col-12">{{jobQueue.title}}</div>
+      <div class="col-12">
+        <!-- <router-link :to="{ name: 'job', params: { jobId: job.id } }"></router-link> -->
+        {{jobQueue.jobId.title}}
+        {{jobQueue.jobApproval}}
+      </div>
     </div>
   </div>
 </template>
@@ -9,7 +13,7 @@
 
 <script>
 export default {
-  name: "jobsInQueue",
+  name: "jobQueue",
   props: ["jobQueue"],
   data() {
     return {};
