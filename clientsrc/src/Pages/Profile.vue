@@ -152,7 +152,7 @@ export default {
     },
     volunteerAverage() {
       let total = 0;
-      let vr = this.$store.state.profile.volunteerRating;
+      let vr = this.$store.state.profile.volunteerRating || [];
       for (let index = 0; index < vr.length; index++) {
         total += vr[index];
       }
@@ -163,7 +163,7 @@ export default {
     },
     requesterAverage() {
       let total = 0;
-      let vr = this.$store.state.profile.requesterRating;
+      let vr = this.$store.state.profile.requesterRating || [];
       for (let index = 0; index < vr.length; index++) {
         total += vr[index];
       }
