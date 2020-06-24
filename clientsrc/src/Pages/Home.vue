@@ -172,6 +172,6 @@ export default {
   border: 12px solid #41b883 !important;
 }
 .text-shadow {
-text-shadow: 1px 1px black;
+text-shadow: 1px 1px black !important;
 }
 </style>
