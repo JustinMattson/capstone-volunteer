@@ -111,7 +111,6 @@ export default {
         this.job.jobStatus = "completed";
         this.$store.dispatch("editJob", this.job);
         this.$store.dispatch("removeOldJob", this.job.id);
-        return "Passed Date";
       } else return "upcoming";
     }
   },
