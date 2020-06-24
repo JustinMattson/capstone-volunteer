@@ -12,8 +12,8 @@ export class ProfilesController extends BaseController {
       .get("/:id/jobs", this.getJobsByVolunteerId)
       .get("/:id/myJobs", this.getJobsByRequesterId)
       .get("/:id/queue", this.getQueuesByVolunteerId)
-      .get("/:id", this.getProfileById)
       .use(auth0Provider.getAuthorizedUserInfo)
+      .get("/:id", this.getProfileById)
       .get("", this.getUserProfile)
       .put("/:id", this.edit);
   }

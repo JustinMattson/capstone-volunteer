@@ -327,7 +327,6 @@ export default {
         jobCreatorEmail: this.job.creatorEmail,
         volunteerId: this.profile.id
       };
-
       this.$store.dispatch("createQueue", obj);
     },
     toggleEditForm() {

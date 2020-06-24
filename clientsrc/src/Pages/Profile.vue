@@ -8,14 +8,14 @@
       <span :style="{color:color}">{{ profile.name }}</span>
     </h1>
     <img class="rounded-circle shadow-lg" :src="profile.picture" @click="toggleEdit" />
-    <h5>
+    <div class="font-lg unbold">
       {{ profile.email }}
-      <br />
+      <div class="text-muted unbold" style="font-size:12px">{{profile.id}}</div>
       <!-- Last Updated: {{prettyDate}}
       <br />-->
       <!-- <span class="text-danger" :style="{fontSize:fontSize}">{{profile.id}}</span> -->
-    </h5>
-    <p class="text-muted">Click on profile image to edit user profile.</p>
+    </div>
+    <p class="text-muted unbold">Click on profile image to edit user profile.</p>
 
     <form class="form text-left" v-if="edit" style="width:100%;" @submit.prevent="updateProfile">
       <div class="form-group">
@@ -58,8 +58,13 @@
       <div class="row">
         <div class="col">
           <h2>Opportunites Enrolled In:</h2>
-          <div v-for="jobQueue in jobsQueue" :key="jobQueue.id" :jobQueue="jobQueue">
-            <div v-if="jobQueue.jobId.jobStatus == 'pending'" class="row text-center">
+          <div
+            v-for="jobQueue in jobsQueue"
+            :key="jobQueue.id"
+            :jobQueue="jobQueue"
+            v-show="jobQueue.jobId.jobStatus == 'pending'"
+          >
+            <div class="row text-center">
               <div class="col-6">
                 <h3>{{jobQueue.jobId.title}}</h3>
               </div>
@@ -77,16 +82,23 @@
             v-for="volunteerJob in volunteerJobs"
             :key="volunteerJob.id"
             :volunteerJob="volunteerJob"
+            v-show="volunteerJob.jobStatus == 'completed'"
           >
-            <div v-if="volunteerJob.jobStatus == 'completed'">
-              <h1>{{volunteerJob.title}} {{volunteerJob.jobStatus}}</h1>
-            </div>
+            <h1>{{volunteerJob.title}}</h1>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <h3>Opportunities You've Posted:</h3>
+          <h3>Requests You've Posted:</h3>
+          <div
+            v-for="requesterJob in requesterJobs"
+            :key="requesterJob.id"
+            :requesterJob="requesterJob"
+            v-show="requesterJobs"
+          >
+            <h1>{{requesterJob.title}}</h1>
+          </div>
         </div>
       </div>
     </div>
@@ -182,6 +194,16 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap");
+.unbold {
+  font-family: "Balsamiq Sans", cursive;
+}
+.action {
+  cursor: pointer;
+}
+.font-lg {
+  font-size: 20pt;
+}
 img {
   max-width: 150px;
   max-height: 150px;
