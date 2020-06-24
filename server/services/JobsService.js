@@ -27,10 +27,9 @@ class JobsService {
     return data;
   }
   async getJobsByRequesterId(id) {
-    let data = await dbContext.Jobs.find({ requesterId: id }).populate(
-      "creator",
-      "name picture"
-    );
+    let data = await dbContext.Jobs.find({ requesterId: id })
+      .populate("creator", "name picture")
+      .populate("volunteerIds");
     if (!data) {
       throw new BadRequest("Invalid Id");
     }
