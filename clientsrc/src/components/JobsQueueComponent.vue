@@ -4,7 +4,7 @@
     <div class="row bg-light border border-secondary rounded-lg mb-1 shadow" v-if="qIndex == 0">
       <div class="col-12 col-md-6 d-flex justify-content-between">
         <router-link :to="{ name: 'job', params: { jobId: jobQueue.id } }">{{jobQueue.jobId.title}}</router-link>
-        <span>{{when}}</span>
+        <span class="unbold">{{when}}</span>
       </div>
       <div class="col-12 col-md-6 d-flex justify-content-between">
         <span class="unbold">Status: {{jobQueue.jobApproval}}</span>
@@ -23,7 +23,7 @@
     <div class="row border border-secondary rounded-lg mb-1 shadow" v-if="qIndex == 1">
       <div class="col-12 col-md-6 d-flex justify-content-between">
         <router-link :to="{ name: 'job', params: { jobId: jobQueue.id } }">{{jobQueue.jobId.title}}</router-link>
-        <span>{{when}}</span>
+        <span class="unbold">{{when}}</span>
       </div>
       <div class="col-12 col-md-6 d-flex justify-content-between">
         <span class="unbold">Status: {{jobQueue.jobApproval}}</span>
