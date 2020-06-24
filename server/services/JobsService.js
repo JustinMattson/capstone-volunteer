@@ -84,8 +84,12 @@ class JobsService {
   }
   async updateJobRating(obj) {
     await dbContext.Jobs.findByIdAndUpdate(
-      { _id: obj.creatorId },
+      { _id: obj.jobId },
       { $addToSet: { jobCreatorRatings: obj.rating } }
+    )
+    await dbContext.Jobs.findByIdAndUpdate(
+      { _id: obj.jobId },
+      { $addToSet: { completedReview: obj.userId } }
     )
   }
 }
