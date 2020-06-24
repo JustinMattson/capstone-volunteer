@@ -124,18 +124,8 @@ export default {
     };
   },
   async mounted() {
-    // await this.$store.dispatch(
-    //   "getQueuesByProfileId",
-    //   this.$store.state.profile.id
-    // );
-    // await this.$store.dispatch(
-    //   "getJobsByVolunteerId",
-    //   this.$store.state.profile.id
-    // );
-    // await this.$store.dispatch(
-    //   "getJobsByRequesterId",
-    //   this.$store.state.profile.id
-    // );
+    await this.$store.dispatch(
+      "getProfile")
   },
   computed: {
     profile() {
