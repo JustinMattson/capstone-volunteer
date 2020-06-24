@@ -10,7 +10,7 @@
       <h5>Rate Opportunity Poster:</h5>
     </div>
     <div class="col-md-2 d-flex justify-content-center align-items-center">
-      <form @submit.prevent="submitRating" id="form1">
+      <form @submit.prevent="submitRating" :id="volunteerJob.id">
         <select v-model="obj.rating">
           <option value="1">1</option>
           <option value="2">2</option>
@@ -21,7 +21,11 @@
       </form>
     </div>
     <div class="col-md-2 mt-md-0 mt-3">
-      <button type="submit" form="form1" class="btn btn-secondary text-primary btn-lg">Submit</button>
+      <button
+        type="submit"
+        :form="volunteerJob.id"
+        class="btn btn-secondary text-primary btn-lg"
+      >Submit</button>
       <!-- <div v-if="reviewCompleted">Thanks for the feedback!</div> -->
     </div>
   </div>
@@ -35,9 +39,20 @@ export default {
       obj: {
         recipientId: this.volunteerJob.creator.id,
         userId: this.$store.state.profile.id,
-        jobId: this.volunteerJob.id
+        jobId: this.volunteerJob.id,
+        rating: 0
       }
     };
+  },
+  computed: {
+    reviewSubmitted() {
+      let id = this.$store.state.profile.id;
+      let data = this.volunteerJob.completedReviews.find(v => v == id);
+      debugger;
+      if (data) {
+        return true;
+      } else return false;
+    }
   },
   methods: {
     submitRating() {

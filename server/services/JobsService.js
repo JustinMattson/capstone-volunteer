@@ -89,7 +89,7 @@ class JobsService {
     )
     await dbContext.Jobs.findByIdAndUpdate(
       { _id: obj.jobId },
-      { $addToSet: { completedReview: obj.userId } }
+      { $addToSet: { completedReviews: obj.userId } }
     )
   }
 }
