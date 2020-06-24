@@ -36,7 +36,7 @@ export default new Vuex.Store({
     setVolunteerJobs(state, volunteerJobs) {
       state.volunteerJobs = volunteerJobs;
     },
-    setVolunteerPostedJobs(state, postedJobs) {
+    setPostedJobs(state, postedJobs) {
       state.postedJobs = postedJobs;
     },
     //#region JOBS

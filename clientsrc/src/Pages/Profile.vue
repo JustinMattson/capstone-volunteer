@@ -135,6 +135,9 @@ export default {
     volunteerJobs() {
       return this.$store.state.volunteerJobs;
     },
+    requesterJobs() {
+      return this.$store.state.postedJobs;
+    },
     volunteerAverage() {
       let total = 0;
       let vr = this.$store.state.profile.volunteerRating;
