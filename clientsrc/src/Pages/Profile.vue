@@ -58,47 +58,46 @@
       <div class="row">
         <div class="col">
           <h2>Opportunites Enrolled In:</h2>
-          <div
+          <jobQueue
             v-for="jobQueue in jobsQueue"
             :key="jobQueue.id"
             :jobQueue="jobQueue"
             v-show="jobQueue.jobId.jobStatus == 'pending'"
-          >
-            <div class="row text-center">
-              <div class="col-6">
-                <h3>{{jobQueue.jobId.title}}</h3>
-              </div>
-              <div class="col-6">
-                <h3>{{jobQueue.jobApproval}}</h3>
-              </div>
+          />
+          <!-- <div class="row text-center">
+            <div class="col-6">
+              <h3>{{jobQueue.jobId.title}}</h3>
             </div>
-          </div>
+            <div class="col-6">
+              <h3>{{jobQueue.jobApproval}}</h3>
+            </div>
+          </div>-->
         </div>
       </div>
       <div class="row py-5 bg-white">
         <div class="col">
           <h3>Opportunities Completed:</h3>
-          <div
+          <volunteerJob
             v-for="volunteerJob in volunteerJobs"
             :key="volunteerJob.id"
             :volunteerJob="volunteerJob"
             v-show="volunteerJob.jobStatus == 'completed'"
           >
             <h1>{{volunteerJob.title}}</h1>
-          </div>
+          </volunteerJob>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <h3>Requests You've Posted:</h3>
-          <div
+          <requesterJob
             v-for="requesterJob in requesterJobs"
             :key="requesterJob.id"
             :requesterJob="requesterJob"
             v-show="requesterJobs"
           >
             <h1>{{requesterJob.title}}</h1>
-          </div>
+          </requesterJob>
         </div>
       </div>
     </div>
@@ -106,6 +105,9 @@
 </template>
 
 <script>
+import JobQueue from "@/components/JobsQueueComponent.vue";
+import VolunteerJob from "@/components/JobsCompletedComponent.vue";
+import RequesterJob from "@/components/JobsRequestedComponent.vue";
 export default {
   name: "Profile",
   data() {
@@ -124,8 +126,7 @@ export default {
     };
   },
   async mounted() {
-    await this.$store.dispatch(
-      "getProfile")
+    await this.$store.dispatch("getProfile");
   },
   computed: {
     profile() {
@@ -179,6 +180,11 @@ export default {
       // debugger
       this.myComments = !this.myComments;
     }
+  },
+  components: {
+    JobQueue,
+    VolunteerJob,
+    RequesterJob
   }
 };
 </script>
