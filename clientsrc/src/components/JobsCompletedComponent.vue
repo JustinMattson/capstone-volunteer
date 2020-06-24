@@ -1,5 +1,5 @@
 <template>
-  <div class="completedJobsComponent container">
+  <div class="volunteerJob container">
     <div class="row">
         <div class="col-4">
            <router-link :to="{ name: 'job', params: { jobId: volunteerJob.id } }">
@@ -29,8 +29,8 @@
 
 
 export default {
-   name: "completedJobsComponent",
-   props: [VolunteerJob],
+   name: "volunteerJob",
+   props: ["volunteerJob"],
    data(){
     return {
         jobCreatorRating: {}
