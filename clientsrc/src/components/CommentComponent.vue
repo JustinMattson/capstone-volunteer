@@ -5,7 +5,7 @@
     <div class="row bg-light border border-secondary rounded-lg mb-1 shadow" v-if="cIndex == 0">
       <div class="d-flex col-12 m-0 px-3 justify-content-between" v-if="comment.creator">
         <span>{{comment.creator.name}}</span>
-        <small class="text-muted align-self-center">{{updated}}&nbsp;</small>
+        <small class="text-muted align-self-center">{{updated}}</small>
       </div>
       <!-- can use a different bg-color if the comment index % = 0? -->
       <!-- TODO need to add edit/delete functions to owned comments -->

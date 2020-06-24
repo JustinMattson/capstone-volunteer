@@ -59,7 +59,7 @@
         <div class="col">
           <h2>Opportunites Enrolled In:</h2>
           <jobQueue
-            v-for="jobQueue in jobsQueue"
+            v-for="jobQueue in jobQueues"
             :key="jobQueue.id"
             :jobQueue="jobQueue"
             v-show="jobQueue.jobId.jobStatus == 'pending'"
@@ -120,7 +120,7 @@ export default {
     profile() {
       return this.$store.state.profile;
     },
-    jobsQueue() {
+    jobQueues() {
       return this.$store.state.queues;
     },
     volunteerJobs() {
