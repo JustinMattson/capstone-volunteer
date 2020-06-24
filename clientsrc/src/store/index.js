@@ -91,7 +91,7 @@ export default new Vuex.Store({
     //#endregion
   },
   actions: {
-    setBearer({}, bearer) {
+    setBearer({ }, bearer) {
       api.defaults.headers.authorization = bearer;
     },
     resetBearer() {
@@ -137,9 +137,16 @@ export default new Vuex.Store({
     async deleteJob({ commit, dispatch }, id) {
       try {
         let res = await api.delete("jobs/" + id);
-        commit("removeJob", res.data);
+        commit("removeJob", id);
       } catch (error) {
         console.error(error);
+      }
+    },
+    async removeOldJob({ commit }, id) {
+      try {
+        commit("removeJob", id)
+      } catch (error) {
+        console.error(error)
       }
     },
     //#endregion
@@ -165,9 +172,9 @@ export default new Vuex.Store({
       try {
         let res = await api.get("profile");
         commit("setProfile", res.data);
-        dispatch("getQueuesByProfileId",res.data.id)
-        dispatch("getJobsByVolunteerId",res.data.id)
-        dispatch("getJobsByRequesterId",res.data.id)
+        dispatch("getQueuesByProfileId", res.data.id)
+        dispatch("getJobsByVolunteerId", res.data.id)
+        dispatch("getJobsByRequesterId", res.data.id)
       } catch (error) {
         console.error(error);
       }
@@ -265,6 +272,16 @@ export default new Vuex.Store({
         commit("deleteQueue", id);
       }
     },
+    //#endregion
+
+    //#region 
+    async jobPosterRating({ commit }, obj) {
+      try {
+        let res1 = await api.put("profiles/" + obj.creatorId + "/jr", obj)
+      } catch (error) {
+        console.error(error)
+      }
+    }
     //#endregion
   },
 });

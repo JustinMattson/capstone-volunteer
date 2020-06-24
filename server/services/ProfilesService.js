@@ -101,5 +101,11 @@ class ProfileService {
     }
     return data;
   }
+  async updateUserJR(obj) {
+    return await dbContext.Profile.findOneAndUpdate(
+      { _id: obj.creatorId },
+      { $addToSet: { requestorRating: obj.rating } }
+    );
+  }
 }
 export const profilesService = new ProfileService();

@@ -47,6 +47,9 @@ export default {
       end: moment(String(this.job.startDate)).format("MM/DD/YYYY")
     };
   },
+  mounted() {
+    this.expireCheck;
+  },
   computed: {
     profile() {
       return this.$store.state.profile;
@@ -99,6 +102,17 @@ export default {
           swal("Close cancelled");
         }
       });
+    },
+    expireCheck() {
+      debugger;
+      let jobDate = moment(String(this.job.endDate)).format("MM/DD/YYYY");
+      let currentDate = moment(String(new Date())).format("MM/DD/YYYY");
+      if (jobDate < currentDate) {
+        this.job.jobStatus = "completed";
+        this.$store.dispatch("editJob", this.job);
+        this.$store.dispatch("removeOldJob", this.job.id);
+        return "Passed Date";
+      } else return "upcoming";
     }
   },
   components: {}

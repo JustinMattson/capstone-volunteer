@@ -82,6 +82,12 @@ class JobsService {
       { $addToSet: { volunteerIds: obj.volunteerId } }
     );
   }
+  async updateJobRating(obj) {
+    await dbContext.Jobs.findByIdAndUpdate(
+      { _id: obj.creatorId },
+      { $addToSet: { jobCreatorRatings: obj.rating } }
+    )
+  }
 }
 
 export const jobsService = new JobsService();

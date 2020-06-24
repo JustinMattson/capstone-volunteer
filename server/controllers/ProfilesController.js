@@ -15,7 +15,8 @@ export class ProfilesController extends BaseController {
       .use(auth0Provider.getAuthorizedUserInfo)
       .get("/:id", this.getProfileById)
       .get("", this.getUserProfile)
-      .put("/:id", this.edit);
+      .put("/:id", this.edit)
+      .put("/:id/jr", this.updateUserJR)
   }
   async getUserProfile(req, res, next) {
     try {
@@ -75,6 +76,15 @@ export class ProfilesController extends BaseController {
       res.send(data);
     } catch (error) {
       next(error);
+    }
+  }
+  async updateUserJR(req, res, next) {
+    try {
+      await profilesService.updateUserJR(req.body)
+      await jobsService.updateJobRating(req.body)
+      res.send("Successfully updated")
+    } catch (error) {
+      next(error)
     }
   }
 }

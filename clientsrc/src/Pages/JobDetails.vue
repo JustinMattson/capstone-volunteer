@@ -86,7 +86,10 @@
       <!-- END Edit Job -->
 
       <div class="col-12 d-flex justify-content-center m-3">
-        <div v-if="!isJobCreator && $auth.isAuthenticated" class="row text-center">
+        <div
+          v-if="!isJobCreator && $auth.isAuthenticated && job.jobStatus == 'pending'"
+          class="row text-center"
+        >
           <div>
             <button
               v-if="!isSignedUp"
