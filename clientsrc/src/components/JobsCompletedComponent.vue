@@ -22,6 +22,9 @@
     </div>
     <div class="col-md-2 mt-md-0 mt-3">
       <button type="submit" form="form1" class="btn btn-secondary text-primary btn-lg">Submit</button>
+
+      <!-- <div v-if="reviewCompleted">Thanks for the feedback!</div> -->
+
     </div>
   </div>
 </template>
@@ -31,13 +34,20 @@ export default {
   props: ["volunteerJob"],
   data() {
     return {
-      obj: {}
+
+      obj: {
+        recipientId: this.volunteerJob.creator.id,
+        userId: this.$store.state.profile.id,
+        jobId: this.volunteerJob.id
+      }
+
     };
   },
   methods: {
     submitRating() {
-      (this.obj.creatorId = this.volunteerJob.creator.id),
-        this.$store.dispatch("jobPosterRating", this.obj);
+
+      this.$store.dispatch("jobPosterRating", this.obj);
+
     }
   }
 };

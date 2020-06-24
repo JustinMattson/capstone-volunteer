@@ -22,6 +22,7 @@ const Job = new Schema(
       required: true,
       default: "pending",
     },
+    completedReviews: [{ type: String }]
   },
   { timestamps: true, toJSON: { virtuals: true } }
 );
