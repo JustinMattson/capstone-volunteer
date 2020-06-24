@@ -259,8 +259,6 @@ export default {
     await this.$store.dispatch("getJobById", this.$route.params.jobId);
     this.$store.dispatch("getComments", this.$route.params.jobId);
     this.$store.dispatch("getQueuesByJobId", this.$route.params.jobId);
-    // I was thinking that this would give us access to all of user profiles for our app, but I am not sure we are storing user profiles...
-    // this.$store.dispatch("getAllProfiles");
   },
   computed: {
     job() {
@@ -314,7 +312,7 @@ export default {
         }
         if (length == 0) {
           return "No Ratings";
-        } else return x;
+        } else return x.toFixed(1);
       }
     }
   },

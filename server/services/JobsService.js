@@ -2,6 +2,13 @@ import { dbContext } from "../db/DbContext";
 import { BadRequest } from "../utils/Errors";
 
 class JobsService {
+  async getActive(query = { jobStatus: "pending" }) {
+    let jobs = await dbContext.Jobs.find({ jobStatus: "pending" }).populate(
+      "creator",
+      "name picture"
+    );
+    return jobs;
+  }
   async getAll(query = {}) {
     let jobs = await dbContext.Jobs.find(query).populate(
       "creator",

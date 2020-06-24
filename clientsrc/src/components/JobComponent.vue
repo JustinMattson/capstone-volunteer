@@ -9,7 +9,6 @@
         <div class="d-flex text-left text-primary font-weight-bold font-lg justify-content-between">
           <span>{{job.title}}</span>
           <span v-show="job.creatorEmail == profile.email">
-            <!-- <br /> {{job.creatorEmail}} <br /> {{profile.email}} -->
             <i class="far fa-trash-alt action text-danger" @click="deleteJob"></i>
           </span>
         </div>
@@ -18,19 +17,15 @@
             <img class="rounded-lg" :src="job.creator.picture" style="height:25px;width:25px" />
           </span>
           <span class="d-flex align-self-center pl-2 unbold">{{job.creator.name}}</span>
+          <span class="ml-1">{{requestorRating}}</span>
         </div>
         <p class="card-text text-left py-2">{{ job.description }}</p>
         <div class="unbold">General Location: {{ job.generalLocation }}</div>
-        <small class="unbold">
-          When: {{ when }}
-          <!-- <br /> S:{{job.startDate}} <br /> E:{{job.endDate}}-->
-        </small>
-        <!-- <div>{{ job.jobStatus }}</div> -->
+        <small class="unbold">When: {{ when }}</small>
 
         <router-link :to="{ name: 'job', params: { jobId: job.id } }">
           <span class="d-flex my-3 justify-content-center">
             <i class="fas fa-hands-helping action text-primary font-lg">&nbsp;More Info</i>
-            <!-- <i class="far fa-handshake action text-primary font-lg">&nbsp;More Info</i> -->
           </span>
         </router-link>
         <p class="small text-muted mb-0 text-center unbold">#{{ job.id }}</p>
@@ -65,6 +60,21 @@ export default {
           " - " +
           moment(String(this.job.endDate)).format("MM/DD/YYYY")
         );
+      }
+    },
+    requestorRating() {
+      if (this.job) {
+        let rateArr = this.job.jobCreatorRatings;
+        let length = rateArr.length;
+        let x = 0;
+        let i = 0;
+        while (i < length) {
+          x += rateArr[i];
+          i++;
+        }
+        if (length == 0) {
+          return "No Ratings";
+        } else return x.toFixed(1);
       }
     }
   },

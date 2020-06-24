@@ -9,7 +9,8 @@ export class JobsController extends BaseController {
   constructor() {
     super("api/jobs");
     this.router
-      .get("", this.getAll)
+      .get("", this.getActive)
+      .get("/all", this.getAll)
       .get("/:id", this.getJobById)
       // NOTE: Beyond this point all routes require Authorization tokens (the user must be logged in)
       .get("/:id/comments", this.getCommentsByJobId)
@@ -20,6 +21,14 @@ export class JobsController extends BaseController {
       .delete("/:id", this.delete);
   }
 
+  async getActive(req, res, next) {
+    try {
+      let data = await jobsService.getActive(req.query);
+      res.send(data)
+    } catch (error) {
+      next(error)
+    }
+  }
   async getAll(req, res, next) {
     try {
       let data = await jobsService.getAll(req.query);
