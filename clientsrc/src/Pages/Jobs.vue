@@ -1,16 +1,16 @@
 <template>
   <div class="container-fluid">
-    <div class="row text-center">
+    <div class="row bg-secondary text-center py-5">
       <div class="col-12">
-        <h1>Request Some Help</h1>
+        <h1 class="text-white darkness">Request Some Help</h1>
         <!-- MODAL FORM -->
         <button
           type="button"
-          class="btn btn-info btn-lg"
+          class="btn btn-primary btn-lg shadow my-1"
           data-toggle="modal"
           data-target="#myModal"
           v-if="$auth.isAuthenticated"
-        >New Request</button>
+        ><h2 class="little-darkness">New Request</h2></button>
       </div>
       <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
@@ -85,15 +85,54 @@
       </div>
       <!-- END MODAL FORM -->
     </div>
-    <div class="row">
+    <div class="row bg-white p-3">
       <div class="col-12 list-container px-0">
-        <div id="jobs" class="card-columns p-2" style="column-gap: 0.7rem;">
+        <div id="jobs" class="card-columns p-2" style="column-gap: 1rem;">
           <!-- CARD TEMPLATE API -->
           <job v-for="job in jobs" :key="job.id" :job="job" />
           <!-- END CARD TEMPLATE -->
         </div>
       </div>
     </div>
+    <footer class="row sticky-bottom bg-primary d-flex justify-content-between">
+      <div class="col-4">Xander Rutledge<br/>
+           <a href="https://www.linkedin.com/in/alexander-rutledge/" target="_blank">
+          <i class="fa fa-linkedin-square text-black p-1"></i>
+           <a href="https://github.com/XanderRutledge" target="_blank">
+          <i class="fa fa-github text-black p-1"></i>
+        </a>
+        </a>
+      </div>
+      <div class="col-4">
+        Kevin Lane<br/>
+        <a href="https://www.linkedin.com/in/kevin-lane-2422b51b0/" target="_blank">
+          <i class="fa fa-linkedin-square text-black p-1"></i>
+        </a>
+        <a href="https://github.com/Kevinclane" target="_blank">
+          <i class="fa fa-github text-black p-1"></i>
+        </a>
+      </div>
+      <!-- Justin -->
+      <div class="col-4 text-center">
+        <div>
+          Justin Mattson
+          <br />
+          <a href="https://www.facebook.com/justin.mattson.9" target="_blank">
+            <i class="fa fa-facebook-official text-dark" aria-hidden="true"></i>
+          </a>&nbsp;
+          <a href="https://www.linkedin.com/in/justin-mattson" target="_blank">
+            <i class="fa fa-linkedin-square text-dark" aria-hidden="true"></i>
+          </a>&nbsp;
+          <a href="https://justinmattson.github.io/" target="_blank">
+            <i class="fa fa-github text-dark p-1" aria-hidden="true"></i>
+          </a>&nbsp;
+          <a href="mailto:justin.mattson@outlook.com" class="text-dark">
+            <i class="fa fa-envelope-o text-dark" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+      <!-- Justin -->
+    </footer>
   </div>
 </template>
 
@@ -159,3 +198,11 @@ export default {
   }
 };
 </script>
+<style scoped>
+.darkness {
+text-shadow: 5px 5px black !important;
+}
+.little-darkness {
+text-shadow: 2px 2px black !important;
+}
+</style>
