@@ -205,4 +205,7 @@ text-shadow: 5px 5px black !important;
 .little-darkness {
 text-shadow: 2px 2px black !important;
 }
+.text-black {
+  color: black;
+}
 </style>

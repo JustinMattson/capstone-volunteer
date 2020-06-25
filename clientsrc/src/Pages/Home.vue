@@ -93,19 +93,19 @@
     <footer class="row sticky-bottom bg-primary d-flex justify-content-between">
       <div class="col-4">Xander Rutledge<br/>
            <a href="https://www.linkedin.com/in/alexander-rutledge/" target="_blank">
-          <i class="fa fa-linkedin-square text-black p-1"></i>
+          <i class="fa fa-linkedin-square text-dark p-1"></i>
            <a href="https://github.com/XanderRutledge" target="_blank">
-          <i class="fa fa-github text-black p-1"></i>
+          <i class="fa fa-github text-dark p-1"></i>
         </a>
         </a>
       </div>
       <div class="col-4">
         Kevin Lane<br/>
         <a href="https://www.linkedin.com/in/kevin-lane-2422b51b0/" target="_blank">
-          <i class="fa fa-linkedin-square text-black p-1"></i>
+          <i class="fa fa-linkedin-square text-dark p-1"></i>
         </a>
         <a href="https://github.com/Kevinclane" target="_blank">
-          <i class="fa fa-github text-black p-1"></i>
+          <i class="fa fa-github text-dark p-1"></i>
         </a>
       </div>
       <!-- Justin -->
