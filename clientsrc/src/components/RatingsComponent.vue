@@ -1,7 +1,7 @@
 <template>
   <div class="volunteerId">
-    <div class="col-12 d-flex my-2 justify-content-between border-bottom">
-      <span class="mb-2">
+    <div class="col-12 d-flex my-2 justify-content-between border-bottom px-0">
+      <span class="mb-2 text-left" style="max-width:40%;">
         <img :src="volunteerId.picture" style="height:25px;width:25px;" />
         {{volunteerId.name}}
       </span>
@@ -21,7 +21,7 @@
         </form>
         <button
           type="submit"
-          class="btn btn-secondary text-primary btn-sm ml-2"
+          class="btn btn-secondary text-primary btn-sm ml-1"
           form="vRatingForm"
         >Submit</button>
       </span>

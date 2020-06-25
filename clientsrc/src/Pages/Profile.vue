@@ -55,9 +55,9 @@
           <h1>{{requesterAverage}}</h1>
         </div>
       </div>
-      <div class="row">
+      <div class="row py-3 rounded-lg">
         <div class="col">
-          <h2>Future Opportunites:</h2>
+          <h3>Future Opportunites:</h3>
           <jobQueue
             v-for="jobQueue in jobQueues"
             :key="jobQueue.id"
@@ -66,7 +66,7 @@
           />
         </div>
       </div>
-      <div class="row py-5 bg-white">
+      <div class="row py-3 bg-white rounded-lg">
         <div class="col">
           <h3>Opportunities Completed:</h3>
           <volunteerJob
@@ -77,14 +77,13 @@
           />
         </div>
       </div>
-      <div class="row">
+      <div class="row py-3 rounded-lg">
         <div class="col">
           <h3>Requests You've Posted:</h3>
           <requesterJob
             v-for="requesterJob in requesterJobs"
             :key="requesterJob.id"
             :requesterJob="requesterJob"
-            v-show="requesterJobs"
           />
         </div>
       </div>

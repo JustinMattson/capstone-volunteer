@@ -1,41 +1,87 @@
 <template>
-  <div class="volunteerJob row text-center justify-content-center border-top border-secondary py-3">
-    <div class="col-md-4">
-      <router-link :to="{ name: 'job', params: { jobId: volunteerJob.id } }">
-        <h3>{{volunteerJob.title}}</h3>
-      </router-link>
+  <div class="volunteerJob container">
+    <!-- Color 1 -->
+    <div
+      class="row border border-secondary rounded-lg mb-1 shadow"
+      v-if="vIndex == 0"
+      style="background-color:#dadada;"
+    >
+      <div class="col-12 col-md-6 d-flex justify-content-between">
+        <router-link
+          :to="{ name: 'job', params: { jobId: volunteerJob.id } }"
+        >{{volunteerJob.title}}</router-link>
+        <span class="unbold">{{when}}</span>
+      </div>
+      <div class="col-12 col-md-6 d-flex justify-content-between align-items-center">
+        <span
+          class="unbold text-left"
+          style="max-width:65%;"
+        >Rate {{volunteerJob.creator.name}}'s Help Request</span>
+        <span class="form-inline d-flex align-self-center">
+          <form
+            v-if="this.reviewSubmitted == false"
+            @submit.prevent="submitRating"
+            :id="volunteerJob.id"
+          >
+            <select v-model="obj.rating">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </form>
+          <button
+            v-if="this.reviewSubmitted == false"
+            type="submit"
+            :form="volunteerJob.id"
+            class="btn btn-secondary text-primary btn-sm mb-2 ml-1"
+          >Submit</button>
+          <div class="text-right" v-if="this.reviewSubmitted == true">Thanks for the feedback!</div>
+        </span>
+      </div>
     </div>
-
-    <div class="col-md-4 d-flex justify-content-center align-items-center">
-      <h5>Rate Opportunity Poster:</h5>
-    </div>
-    <div class="col-md-2 d-flex justify-content-center align-items-center">
-      <form
-        v-if="this.reviewSubmitted == false"
-        @submit.prevent="submitRating"
-        :id="volunteerJob.id"
-      >
-        <select v-model="obj.rating">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-      </form>
-    </div>
-    <div class="col-md-2 mt-md-0 mt-3">
-      <button
-        v-if="this.reviewSubmitted == false"
-        type="submit"
-        :form="volunteerJob.id"
-        class="btn btn-secondary text-primary btn-lg"
-      >Submit</button>
-      <div v-if="this.reviewSubmitted == true">Thanks for the feedback!</div>
+    <!-- Alt Color -->
+    <div class="row border border-secondary rounded-lg mb-1 shadow" v-if="vIndex == 1">
+      <div class="col-12 col-md-6 d-flex justify-content-between">
+        <router-link
+          :to="{ name: 'job', params: { jobId: volunteerJob.id } }"
+        >{{volunteerJob.title}}</router-link>
+        <span class="unbold">{{when}}</span>
+      </div>
+      <div class="col-12 col-md-6 d-flex justify-content-between align-items-center">
+        <span
+          class="unbold text-left"
+          style="max-width:65%;"
+        >Rate {{volunteerJob.creator.name}}'s Help Request</span>
+        <span class="form-inline d-flex align-self-center">
+          <form
+            v-if="this.reviewSubmitted == false"
+            @submit.prevent="submitRating"
+            :id="volunteerJob.id"
+          >
+            <select v-model="obj.rating">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </form>
+          <button
+            v-if="this.reviewSubmitted == false"
+            type="submit"
+            :form="volunteerJob.id"
+            class="btn btn-secondary text-primary btn-sm mb-2 ml-1"
+          >Submit</button>
+          <div class="text-right" v-if="this.reviewSubmitted == true">Thanks for the feedback!</div>
+        </span>
+      </div>
     </div>
   </div>
 </template>
 <script>
+import moment from "moment";
 export default {
   name: "volunteerJob",
   props: ["volunteerJob"],
@@ -50,6 +96,23 @@ export default {
     };
   },
   computed: {
+    vIndex() {
+      let num = this.$store.state.volunteerJobs.findIndex(
+        v => v.id == this.volunteerJob.id
+      );
+      return num % 2;
+    },
+    when() {
+      if (this.volunteerJob.startDate == this.volunteerJob.endDate) {
+        return moment(String(this.volunteerJob.startDate)).format("MM/DD/YYYY");
+      } else {
+        return (
+          moment(String(this.volunteerJob.startDate)).format("MM/DD/YYYY") +
+          " - " +
+          moment(String(this.volunteerJob.endDate)).format("MM/DD/YYYY")
+        );
+      }
+    },
     reviewSubmitted() {
       let id = this.$store.state.profile.id;
       let data = this.volunteerJob.completedReviews.find(v => v == id);
@@ -67,4 +130,14 @@ export default {
 };
 </script>
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap");
+.unbold {
+  font-family: "Balsamiq Sans", cursive;
+}
+.action {
+  cursor: pointer;
+}
+.font-lg {
+  font-size: 20pt;
+}
 </style>
