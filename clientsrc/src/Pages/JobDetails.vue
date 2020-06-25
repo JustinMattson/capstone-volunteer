@@ -250,7 +250,7 @@
       </div>
     </div>
 
-    <footer class="row sticky-bottom bg-primary d-flex justify-content-between">
+    <footer class="row sticky-bottom bg-primary d-flex justify-content-between mt-5">
       <div class="col-4 text-center">Xander Rutledge<br/>
            <a href="https://www.linkedin.com/in/alexander-rutledge/" target="_blank">
           <i class="fa fa-linkedin-square text-dark p-1"></i>
