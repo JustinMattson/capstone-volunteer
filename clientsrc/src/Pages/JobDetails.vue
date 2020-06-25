@@ -1,39 +1,50 @@
 <template>
   <div class="jobDetails container-fluid">
     <!-- TOP ROW -->
-    <div class="row mb-3 d-flex justify-content-center bg-primary border-cstm">
+    <div class="row py-2 bg-secondary text-white text-center darkness shadow-lg">
+      <div class="col"><h1>{{job.title}}</h1></div>
+    </div>
+    <div class="row d-flex justify-content-center bg-light border-cstm">
       <div class="col-12 col-md-6 d-flex justify-content-center align-self-center">
         <img :src="job.imgUrl" class="mx-img border border-secondary m-3" />
       </div>
       <div class="col-12 col-md-6 justify-content-center align-self-center mt-3" v-if="!editForm">
-        <div class="d-flex justify-content-between">
-          <span class="font-lg">{{job.title}}</span>
-          <span>
+        <div class="text-center">
+          <h1>
             <i
               class="far fa-edit text-secondary action"
               v-show="job.creatorEmail == profile.email"
               @click="toggleEditForm"
             ></i>
-          </span>
+          </h1>
         </div>
-        <div class="text-secondary d-flex justify-content-start" v-if="job.creator">
-          <span class="unbold">
-            <img class="rounded-lg" :src="job.creator.picture" style="height:75px;width:75px" />
-          </span>
-          <span class="ml-2 d-flex flex-column justify-content-between">
-            <div>&nbsp;{{job.creator.name}}</div>
-            <div>&nbsp;{{requestorRating}}</div>
-          </span>
+        <div class="row text-center pb-3">
+          <div class="col">
+            <h1> Posted By:</h1>
+          </div>
         </div>
-        <h5 class="mt-3">{{job.description}}</h5>
-        <div>
-          <div class="unbold">General Location: {{job.generalLocation}}</div>
-          <div class="unbold">Estimated Hours: {{job.estimatedHours}}</div>
-          <p>When: {{when}}</p>
-          <span class="unbold">Status: {{job.jobStatus}}</span>
+        <div class=" row text-secondary bg-white py-3 shadow-lg mx-1" v-if="job.creator">
+          <div class="col-6 d-flex justify-content-center">
+            <img class="rounded-circle" :src="job.creator.picture" style="height:7em;width:7em" />
+          </div>
+          <div class="col-6 d-flex flex-column justify-content-center">
+            <h2>&nbsp;{{job.creator.name}}</h2>
+            <h3>&nbsp;{{requestorRating}}</h3>
+          </div>
         </div>
+        <div class="row py-3 mx-1">
+          <div class="col bg-white shadow-lg">
+        <h4>Description:</h4>
+        <h5 class="py-2">{{job.description}}</h5>
+        <div></div>
+        <div class="col">
+          <h5 class="unbold">General Location: {{job.generalLocation}}</h5>
+          <h5 class="unbold">Estimated Hours: {{job.estimatedHours}}</h5>
+          <h5 class="unbold">When: {{when}}</h5>
+          <h5 class="unbold">Status: {{job.jobStatus}}</h5>
+        </div></div>
       </div>
-
+</div>
       <!-- Edit Job -->
       <div class="col-12 col-md-6 justify-content-center align-self-center mt-3" v-else>
         <form class="form" @submit.prevent="editJob">
@@ -94,18 +105,18 @@
             <button
               v-if="!isSignedUp"
               @click="addToQueue"
-              class="btn btn-secondary btn-lg text-primary text-shadow"
-            >Apply to Help</button>
+              class="btn btn-primary btn-lg text-secondary shadow-lg"
+            ><h3>Apply to Help</h3></button>
           </div>
         </div>
       </div>
     </div>
 
     <div
-      class="row mb-3 d-flex justify-content-center bg-secondary text-primary text-shadow border-cstm p-3"
+      class="row d-flex justify-content-center bg-secondary text-primary text-shadow border-cstm p-3"
     >
       <div class="col-10 text-center">
-        <h3>Ask a Question or Leave a Comment:</h3>
+        <h2 class="text-white darkness">Ask a Question or Leave a Comment:</h2>
       </div>
       <!-- ADD COMMENT MODAL FORM -->
       <div class="col-12 d-flex justify-content-center">
@@ -113,10 +124,10 @@
         <button
           v-if="$auth.isAuthenticated"
           type="button"
-          class="btn btn-info btn-sm"
+          class="btn btn-primary"
           data-toggle="modal"
           data-target="#myModal"
-        >Add Comment</button>
+        ><h5 class="text-secondary">Add Comment</h5></button>
       </div>
       <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
@@ -132,7 +143,7 @@
                 <div class="row justify-content-center">
                   <div class="col text-center">
                     <!-- add v-model -->
-                    <h5>Ask a Question or Leave a Comment:</h5>
+                    <h5 class="shadow-none text-dark">Ask a Question or Leave a Comment:</h5>
                     <textarea
                       class="unbold"
                       placeholder="Comment..."
@@ -230,14 +241,54 @@
     <!-- END MODAL FORM -->
     <!-- END ADD COMMENT MODAL -->
 
-    <div class="row text-center border-cstm pb-3">
-      <div class="col-12">Sign Up List</div>
+    <div class="row text-center bg-primary border-cstm py-3">
+      <div class="col-12 text-secondary"><h1>Sign Up List</h1></div>
     </div>
-    <div class="row">
+    <div class="row bg-white">
       <div class="col-12">
         <Queue v-for="queue in queues" :key="queue.id" :queue="queue" />
       </div>
     </div>
+
+    <footer class="row sticky-bottom bg-primary d-flex justify-content-between">
+      <div class="col-4 text-center">Xander Rutledge<br/>
+           <a href="https://www.linkedin.com/in/alexander-rutledge/" target="_blank">
+          <i class="fa fa-linkedin-square text-dark p-1"></i>
+           <a href="https://github.com/XanderRutledge" target="_blank">
+          <i class="fa fa-github text-dark p-1"></i>
+        </a>
+        </a>
+      </div>
+      <div class="col-4 text-center">
+        Kevin Lane<br/>
+        <a href="https://www.linkedin.com/in/kevin-lane-2422b51b0/" target="_blank">
+          <i class="fa fa-linkedin-square text-dark p-1"></i>
+        </a>
+        <a href="https://github.com/Kevinclane" target="_blank">
+          <i class="fa fa-github text-dark p-1"></i>
+        </a>
+      </div>
+      <!-- Justin -->
+      <div class="col-4 text-center">
+        <div>
+          Justin Mattson
+          <br />
+          <a href="https://www.facebook.com/justin.mattson.9" target="_blank">
+            <i class="fa fa-facebook-official text-dark" aria-hidden="true"></i>
+          </a>&nbsp;
+          <a href="https://www.linkedin.com/in/justin-mattson" target="_blank">
+            <i class="fa fa-linkedin-square text-dark" aria-hidden="true"></i>
+          </a>&nbsp;
+          <a href="https://justinmattson.github.io/" target="_blank">
+            <i class="fa fa-github text-dark p-1" aria-hidden="true"></i>
+          </a>&nbsp;
+          <a href="mailto:justin.mattson@outlook.com" class="text-dark">
+            <i class="fa fa-envelope-o text-dark" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+      <!-- Justin -->
+    </footer>
   </div>
 </template>
 
@@ -388,5 +439,11 @@ img {
 .border-cstm {
   border-top: 1px solid black;
   border-bottom: 1px solid black;
+}
+.darkness {
+text-shadow: 4px 4px black !important;
+}
+.shadow-none{
+  text-shadow: none;
 }
 </style>
