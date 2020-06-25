@@ -1,25 +1,25 @@
 <template>
-  <div class="comment container">
+  <div class="comment container my-3">
     <!-- COMMENT TEMPLATE API -->
 
     <div class="row bg-light border border-secondary rounded-lg mb-1 shadow" v-if="cIndex == 0">
       <div class="d-flex col-12 m-0 px-3 justify-content-between" v-if="comment.creator">
-        <span>{{comment.creator.name}}</span>
+        <h3>{{comment.creator.name}}</h3>
         <small class="text-muted align-self-center">{{updated}}</small>
       </div>
       <!-- can use a different bg-color if the comment index % = 0? -->
       <!-- TODO need to add edit/delete functions to owned comments -->
-      <div class="col-2 text-left m-0 d-flex align-self-center" v-if="comment.creator">
+      <div class="col-4 col-md-2 text-left m-0 d-flex align-self-center" v-if="comment.creator">
         <img
           :src="comment.creator.picture"
-          class="card-img-top p-2"
-          alt="http://placehold.it/75x75"
-          style="width:75px;height:75px;"
+          class="card-img-top p-2 rounded-circle"
+          alt="http://placehold.it/100x100"
+          style="width:100px;height:100px;"
         />
       </div>
-      <div class="col-10 m-0 d-flex align-self-center">
+      <div class="col-8 col-md-10 m-0 d-flex align-self-center">
         <textarea
-          class="text-left text-primary unbold bg-light border-0 py-0 pl-2 ml-2"
+          class="text-left text-primary unbold font-md bg-light border-0 py-0 pl-2 ml-2"
           v-model="comment.body"
           style="height:88px;width:99%"
           placeholder="comment.body"
@@ -71,22 +71,22 @@
     <!-- Alternate BG color -->
     <div class="row border border-secondary rounded-lg mb-1 shadow" v-if="cIndex == 1">
       <div class="d-flex col-12 m-0 px-3 justify-content-between" v-if="comment.creator">
-        <span>{{comment.creator.name}}</span>
+        <h3>{{comment.creator.name}}</h3>
         <small class="text-muted align-self-center">{{updated}}&nbsp;</small>
       </div>
       <!-- can use a different bg-color if the comment index % = 0? -->
       <!-- TODO need to add edit/delete functions to owned comments -->
-      <div class="col-2 text-left m-0 d-flex align-self-center" v-if="comment.creator">
+      <div class="col-4 col-md-2 text-left m-0 d-flex align-self-center" v-if="comment.creator">
         <img
           :src="comment.creator.picture"
-          class="card-img-top p-2"
-          alt="http://placehold.it/75x75"
-          style="width:75px;height:75px;"
+          class="card-img-top p-2 rounded-circle"
+          alt="http://placehold.it/100x100"
+          style="width:100px;height:100px;"
         />
       </div>
-      <div class="col-10 m-0 d-flex align-self-center">
+      <div class="col-8 col-md-10 m-0 d-flex align-self-center">
         <textarea
-          class="text-left text-secondary unbold border-0 py-0 pl-2 ml-2"
+          class="text-left text-secondary unbold border-0 font-md py-0 pl-2 ml-2"
           v-model="comment.body"
           style="height:88px;width:99%;background-color:var(--elephant);"
           placeholder="comment.body"
@@ -239,5 +239,8 @@ export default {
 }
 img {
   border-radius: 13px;
+}
+.font-md{
+  font-size: 1.7em;
 }
 </style>

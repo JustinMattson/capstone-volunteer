@@ -32,18 +32,24 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item " :class="{ active: $route.name == 'Home' }">
-          <router-link :to="{ name: 'Home' }" class="nav-link"><h4 class="text-secondary">Home</h4></router-link>
+        <li class="nav-item" :class="{ active: $route.name == 'Home' }">
+          <router-link :to="{ name: 'Home' }" class="nav-link">
+            <h4 class="text-secondary">Home</h4>
+          </router-link>
         </li>
         <li class="nav-item" :class="{ active: $route.name == 'Jobs' }">
-          <router-link :to="{ name: 'Jobs' }" class="nav-link"><h4 class="text-secondary">Volunteer Oportunities</h4></router-link>
+          <router-link :to="{ name: 'Jobs' }" class="nav-link">
+            <h4 class="text-secondary">Volunteer Oportunities</h4>
+          </router-link>
         </li>
         <li
-          class="nav-item "
+          class="nav-item"
           v-if="$auth.isAuthenticated"
           :class="{ active: $route.name == 'Profile' }"
         >
-          <router-link class="nav-link" :to="{ name: 'Profile' }"><h4 class="text-secondary">Profile</h4></router-link>
+          <router-link class="nav-link" :to="{ name: 'Profile' }">
+            <h4 class="text-secondary">Profile</h4>
+          </router-link>
         </li>
       </ul>
       <span class="navbar-text">
@@ -63,8 +69,8 @@ export default {
     async login() {
       await this.$auth.loginWithPopup();
       this.$store.dispatch("setBearer", this.$auth.bearer);
-      console.log("this.$auth.user: ");
-      console.log(this.$auth.user);
+      // console.log("this.$auth.user: ");
+      // console.log(this.$auth.user);
       this.$store.dispatch("getProfile");
     },
     async logout() {
