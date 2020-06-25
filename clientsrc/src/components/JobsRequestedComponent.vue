@@ -87,12 +87,12 @@ export default {
   methods: {
     toggleRatings() {
       this.volunteerRatings = !this.volunteerRatings;
-    },
-    volunteers() {
-      let arr = this.$state.store.profile.find(
-        p => p.id == this.requestorJob.volunteerIds
-      );
     }
+    // volunteers() {
+    //   let arr = this.$state.store.profile.find(
+    //     p => p.id == this.requestorJob.volunteerIds
+    //   );
+    // }
   },
   components: {
     VolunteerId

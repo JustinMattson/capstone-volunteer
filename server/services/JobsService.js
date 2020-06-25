@@ -76,7 +76,7 @@ class JobsService {
     return data;
   }
   async updateJobVolunteers(obj) {
-    await dbContext.Jobs.findOneAndUpdate(
+    await dbContext.Jobs.findByIdAndUpdate(
       { _id: obj.jobId },
       { $addToSet: { volunteerIds: obj.volunteerId } }
     );
@@ -89,6 +89,12 @@ class JobsService {
     await dbContext.Jobs.findByIdAndUpdate(
       { _id: obj.jobId },
       { $addToSet: { completedReviews: obj.userId } }
+    )
+  }
+  async updateVolunteerRating(obj) {
+    await dbContext.Jobs.findOneAndUpdate(
+      { _id: obj.jobId },
+      { $push: { completedReviews: obj.recipientId } }
     )
   }
 }

@@ -5,7 +5,10 @@
         <img :src="volunteerId.picture" style="height:25px;width:25px;" />
         {{volunteerId.name}}
       </span>
-      <span class="form-inline d-flex align-self-center">
+      <span
+        v-if="reviewSubmitted == false && ratingToggle == false"
+        class="form-inline d-flex align-self-center"
+      >
         <span class="mx-2">Rating:</span>
         <form @submit.prevent="submitRating" id="vRatingForm">
           <select v-model="obj.rating">
@@ -37,13 +40,24 @@ export default {
         recipientId: this.volunteerId.id, //volunteer being rated
         userId: this.$store.state.profile.id, //person who posted job
         jobId: this.requesterJob.id
-      }
+      },
+      ratingToggle: false
     };
   },
-  computed: {},
+  computed: {
+    reviewSubmitted() {
+      let id = this.volunteerId.id;
+      let data = this.requesterJob.completedReviews.find(v => v == id);
+      if (data) {
+        return true;
+      } else return false;
+    }
+  },
   methods: {
     submitRating() {
       this.$store.dispatch("jobVolunteerRating", this.obj);
+      // debugger;
+      this.requesterJob.completedReviews.push(this.volunteerId.id);
     }
   },
   components: {}
