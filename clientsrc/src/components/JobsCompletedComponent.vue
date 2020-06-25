@@ -11,7 +11,7 @@
     </div>
     <div class="col-md-2 d-flex justify-content-center align-items-center">
       <form
-        v-if="this.reviewCompleted == false"
+        v-if="this.reviewSubmitted == false"
         @submit.prevent="submitRating"
         :id="volunteerJob.id"
       >
@@ -26,12 +26,12 @@
     </div>
     <div class="col-md-2 mt-md-0 mt-3">
       <button
-        v-if="this.reviewCompleted == false"
+        v-if="this.reviewSubmitted == false"
         type="submit"
         :form="volunteerJob.id"
         class="btn btn-secondary text-primary btn-lg"
       >Submit</button>
-      <div v-if="this.reviewCompleted == true">Thanks for the feedback!</div>
+      <div v-if="this.reviewSubmitted == true">Thanks for the feedback!</div>
     </div>
   </div>
 </template>
@@ -53,7 +53,6 @@ export default {
     reviewSubmitted() {
       let id = this.$store.state.profile.id;
       let data = this.volunteerJob.completedReviews.find(v => v == id);
-      debugger;
       if (data) {
         return true;
       } else return false;
@@ -62,6 +61,7 @@ export default {
   methods: {
     submitRating() {
       this.$store.dispatch("jobPosterRating", this.obj);
+      this.volunteerJob.completedReviews.push(this.$store.state.profile.id);
     }
   }
 };

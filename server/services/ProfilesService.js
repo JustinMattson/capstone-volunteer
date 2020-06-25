@@ -104,7 +104,7 @@ class ProfileService {
   async updateUserJR(obj) {
     await dbContext.Profile.findOneAndUpdate(
       { _id: obj.recipientId },
-      { $addToSet: { requesterRating: obj.rating } }
+      { $push: { requesterRating: obj.rating } }
     );
   }
 }
