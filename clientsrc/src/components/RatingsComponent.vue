@@ -10,7 +10,7 @@
         class="form-inline d-flex align-self-center"
       >
         <span class="mx-2">Rating:</span>
-        <form @submit.prevent="submitRating" id="vRatingForm">
+        <form @submit.prevent="submitRating" :id="volunteerId.id + requesterJob.id">
           <select v-model="obj.rating">
             <option value="1">1</option>
             <option value="2">2</option>
@@ -22,7 +22,7 @@
         <button
           type="submit"
           class="btn btn-secondary text-primary btn-sm ml-1"
-          form="vRatingForm"
+          :form="volunteerId.id + requesterJob.id"
         >Submit</button>
       </span>
     </div>
