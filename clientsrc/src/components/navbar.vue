@@ -39,7 +39,7 @@
         </li>
         <li class="nav-item" :class="{ active: $route.name == 'Jobs' }">
           <router-link :to="{ name: 'Jobs' }" class="nav-link">
-            <h4 class="text-secondary">Volunteer Oportunities</h4>
+            <h4 class="text-secondary">Volunteer</h4>
           </router-link>
         </li>
         <li
@@ -52,6 +52,11 @@
           </router-link>
         </li>
       </ul>
+      <span v-show="$auth.isAuthenticated" class="mx-4">
+        <router-link class="nav-link" :to="{ name: 'Profile' }">
+        <h2 class="text-secondary">{{profile.name}} <img class="rounded-circle" :src="profile.picture" style="height:75px;width:75px" /></h2>
+        </router-link>   
+      </span>
       <span class="navbar-text">
         <button class="btn btn-success" @click="login" v-if="!$auth.isAuthenticated">Login</button>
         <button class="btn btn-danger" @click="logout" v-else>logout</button>
@@ -77,6 +82,11 @@ export default {
       this.$store.dispatch("resetBearer");
       await this.$auth.logout({ returnTo: window.location.origin });
     }
+  },
+  computed:{
+        profile() {
+      return this.$store.state.profile;
+    },
   }
 };
 </script>

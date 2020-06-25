@@ -14,18 +14,18 @@
 <h3> We are a service commited to help those who love volunteering. Here you can find opportunities to help others with. Also, you can create opportunities for others to help you with.</h3>
       </div>
     </div>
-    <div class="row d-flex bg-light justify-content-around py-5 ">
+    <div class="row d-flex bg-light justify-content-around py-3 ">
       <router-link
         :to="{name: 'Jobs'}"
         class="col-12 col-md-5 bg-primary shadow-lg border-3 box-height no-line d-flex align-items-center justify-content-center rounded my-1"
       >
-        <h1 class="text-secondary text-shadow">Get help with something</h1>
+        <h1 class="text-secondary text-shadow">Get Help</h1>
       </router-link>
       <router-link
         :to="{name: 'Jobs'}"
         class="col-12 col-md-5 bg-secondary shadow-lg border-4 box-height no-line d-flex align-items-center justify-content-center rounded my-1"
       >
-        <h1 class="text-primary text-shadow">Find something to help with</h1>
+        <h1 class="text-primary text-shadow">Volunteer</h1>
       </router-link>
     </div>
     <div class="row d-flex justify-content-around bg-secondary py-5">
@@ -142,7 +142,7 @@ export default {
   height: 3rem;
 }
 .box-height {
-  height: 25vh;
+  height: 18vh;
 }
 .big-img {
   max-width: 90vw;
