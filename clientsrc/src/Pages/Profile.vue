@@ -1,21 +1,26 @@
 <template>
-  <div class="profile text-center container">
-    <!-- <h1>Welcome {{ profile.name }}</h1>
-    <img class="rounded" :src="profile.picture" alt />
-    <p>{{ profile.email }}</p>-->
-    <h1>
+  <div class="profile text-center container-fluid">
+    <div class="row bg-white text-center">
+  <div class="col-md-4 bg-secondary text-primary">
+        <div class="pt-md-5 mt-md-5 py-2">  <h3>Your Volunteer Rating:</h3>
+         <h1>{{volunteerAverage}} / 5</h1></div>
+        </div>
+      <div class="col-md-4">
+ <h1>
       Welcome
-      <span :style="{color:color}">{{ profile.name }}</span>
+      <span class="text-primary">{{ profile.name }}</span>
     </h1>
-    <img class="rounded-circle shadow-lg" :src="profile.picture" @click="toggleEdit" />
+    <img class="rounded-circle shadow-lg border border-dark" :src="profile.picture" @click="toggleEdit" />
     <div class="font-lg unbold">
       {{ profile.email }}
-      <div class="text-muted unbold" style="font-size:12px">{{profile.id}}</div>
-      <!-- Last Updated: {{prettyDate}}
-      <br />-->
-      <!-- <span class="text-danger" :style="{fontSize:fontSize}">{{profile.id}}</span> -->
     </div>
-    <p class="text-muted unbold">Click on profile image to edit user profile.</p>
+    <p class="text-muted unbold">Click on your profile image to edit user profile.</p> </div>
+         <div class="col-md-4 bg-secondary text-center text-primary">
+          <div class="pt-md-5 mt-md-5 py-2"><h3>Job Poster Rating:</h3>
+          <h1>{{requesterAverage}}</h1></div>
+        </div>
+    </div>
+ 
 
     <form class="form text-left" v-if="edit" style="width:100%;" @submit.prevent="updateProfile">
       <div class="form-group">
@@ -46,14 +51,8 @@
 
     <div class="container-fluid shadow-lg">
       <div class="row justify-content-center">
-        <div class="col-6 py-5 bg-primary text-secondary">
-          <h3>Volunteer Rating:</h3>
-          <h1>{{volunteerAverage}}</h1>
-        </div>
-        <div class="col-6 py-5 bg-secondary text-primary">
-          <h3>Job Poster Rating:</h3>
-          <h1>{{requesterAverage}}</h1>
-        </div>
+       
+       
       </div>
       <div class="row py-3 rounded-lg">
         <div class="col">
