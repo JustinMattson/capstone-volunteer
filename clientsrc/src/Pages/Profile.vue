@@ -113,7 +113,7 @@ export default {
     };
   },
   async mounted() {
-    await this.$store.dispatch("getProfile");
+    await this.$store.dispatch("getProfilePageData");
   },
   computed: {
     profile() {
