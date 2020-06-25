@@ -17,7 +17,7 @@
             <img class="rounded-circle" :src="job.creator.picture" style="height:75px;width:75px" />
           </span>
           <span>
-          <h4 class="d-flex align-self-center pl-2">{{job.creator.name}} </h4>
+          <h4 style= "font-size:2vh" class="d-flex align-self-center pl-2">{{job.creator.name}} </h4>
           <h4 class="ml-1"> {{requestorRating}}</h4></span>
         </div>
         <h5 class="card-text text-left py-2">{{ job.description }}</h5>
