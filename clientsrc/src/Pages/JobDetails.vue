@@ -324,7 +324,7 @@ export default {
       let obj = {
         volunteerName: this.profile.name,
         volunteerPic: this.profile.picture,
-        jobId: this.$route.params.jobId,
+        jobId: this.job.id,
         jobCreatorEmail: this.job.creatorEmail,
         volunteerId: this.profile.id
       };

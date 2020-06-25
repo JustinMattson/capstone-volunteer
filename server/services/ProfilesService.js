@@ -107,5 +107,11 @@ class ProfileService {
       { $push: { requesterRating: obj.rating } }
     );
   }
+  async updateUserVR(obj) {
+    await dbContext.Profile.findOneAndUpdate(
+      { _id: obj.recipientId },
+      { $push: { volunteerRating: obj.rating } }
+    )
+  }
 }
 export const profilesService = new ProfileService();

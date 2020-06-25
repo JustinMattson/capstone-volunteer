@@ -21,6 +21,11 @@ export class RatingsController extends BaseController {
     }
   }
   async volunteerRating(req, res, next) {
-
+    try {
+      await profilesService.updateUserVR(req.body)
+      res.send("Successfully updated")
+    } catch (error) {
+      next(error)
+    }
   }
 }
