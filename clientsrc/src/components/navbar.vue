@@ -54,7 +54,7 @@
       </ul>
       <span v-show="$auth.isAuthenticated" class="mx-4">
         <router-link class="nav-link" :to="{ name: 'Profile' }">
-        <h2 class="text-secondary">{{profile.name}} <img class="rounded-circle" :src="profile.picture" style="height:75px;width:75px" /></h2>
+        <h2 class="text-secondary">{{profile.name}} <img class="rounded-circle" :src="profile.picture" style="height:65px;width:65px" /></h2>
         </router-link>   
       </span>
       <span class="navbar-text">

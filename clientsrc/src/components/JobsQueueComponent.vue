@@ -1,16 +1,17 @@
 <template>
-  <div class="jobQueue container">
+  <div class="jobQueue row justify-content-center">
+    <div class="col-md-8">
     <!-- Color 1 -->
-    <div class="row bg-light border border-secondary rounded-lg mb-1 shadow" v-if="qIndex == 0">
+    <div class="row bg-light border border-secondary rounded-lg mb-1 shadow text-secondary py-1" v-if="qIndex == 0">
       <div class="col-12 col-md-6 d-flex justify-content-between">
-        <router-link
+        <router-link class="text-secondary"
           :to="{ name: 'job', params: { jobId: jobQueue.jobId.id } }"
-        >{{jobQueue.jobId.title}}</router-link>
-        <span class="unbold">{{when}}</span>
+        ><h4>{{jobQueue.jobId.title}}</h4></router-link>
+        <span class="unbold"><h5>{{when}}</h5></span>
       </div>
       <div class="col-12 col-md-6 d-flex justify-content-between">
-        <span class="unbold">Status: {{jobQueue.jobApproval}}</span>
-        <span title="Remove from Queue">
+        <h5 class="unbold">Status: {{jobQueue.jobApproval}}</h5>
+        <h5 title="Remove from Queue">
           <i
             class="far fa-trash-alt text-danger action"
             v-if="jobQueue.jobApproval == 'rejected'"
@@ -18,18 +19,18 @@
             @click="cancelQueue"
           ></i>
           <i class="fas fa-ban text-danger action" v-else alt="Cancel" @click="cancelQueue"></i>
-        </span>
+        </h5>
       </div>
     </div>
     <!-- Alt Color -->
-    <div class="row border border-secondary rounded-lg mb-1 shadow" v-if="qIndex == 1">
-      <div class="col-12 col-md-6 d-flex justify-content-between">
-        <router-link :to="{ name: 'job', params: { jobId: jobQueue.id } }">{{jobQueue.jobId.title}}</router-link>
-        <span class="unbold">{{when}}</span>
+    <div class="row border border-secondary rounded-lg mb-1 shadow bg-primary text-secondary py-1" v-if="qIndex == 1">
+      <div class="col-12 col-md-6 d-flex justify-content-between ">
+        <router-link class="text-secondary" :to="{ name: 'job', params: { jobId: jobQueue.id } }"><h4>{{jobQueue.jobId.title}}</h4></router-link>
+        <span class="unbold"><h5>{{when}}</h5></span>
       </div>
       <div class="col-12 col-md-6 d-flex justify-content-between">
-        <span class="unbold">Status: {{jobQueue.jobApproval}}</span>
-        <span title="Remove from Queue">
+        <h5 class="unbold">Status: {{jobQueue.jobApproval}}</h5>
+        <h5 title="Remove from Queue">
           <i
             class="far fa-trash-alt text-danger action"
             v-if="jobQueue.jobApproval == 'rejected'"
@@ -37,8 +38,9 @@
             @click="cancelQueue"
           ></i>
           <i class="fas fa-ban text-danger action" v-else alt="Cancel" @click="cancelQueue"></i>
-        </span>
+        </h5>
       </div>
+    </div>
     </div>
   </div>
 </template>

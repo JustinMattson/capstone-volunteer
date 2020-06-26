@@ -1,19 +1,20 @@
 <template>
-  <div class="requesterJobs container">
+  <div class="requesterJobs row justify-content-center">
+    <div class="col-md-8">
     <!-- Color 1 -->
     <div class="row bg-light border border-secondary rounded-lg mb-1 shadow" v-if="rIndex == 0">
       <div class="col-12 col-md-6 d-flex justify-content-between">
         <router-link
           :to="{ name: 'job', params: { jobId: requesterJob.id } }"
-        >{{requesterJob.title}}</router-link>
-        <span class="unbold">{{when}}</span>
+        ><h4>{{requesterJob.title}}</h4></router-link>
+        <span class="unbold"><h5>{{when}}</h5></span>
       </div>
       <div class="col-12 col-md-6 d-flex justify-content-between">
-        <span class="unbold">Job Status: {{requesterJob.jobStatus}}</span>
-        <span title="Rate Volunteer(s)">
+        <span class="unbold"><h5>Job Status: {{requesterJob.jobStatus}}</h5></span>
+        <h5 title="Rate Volunteer(s)" class="action"  @click="toggleRatings">
           <!-- TODO this star should only show once completed -->
-          <i class="fas fa-star-half-alt text-warning action" alt="Ratings" @click="toggleRatings"></i>
-        </span>
+          Rate <i class="fas fa-star-half-alt text-warning " alt="Ratings"></i>
+        </h5>
       </div>
       <!-- Ratings -->
       <div v-show="volunteerRatings" class="border border-top col-12">
@@ -26,19 +27,19 @@
       </div>
     </div>
     <!-- Alt Color -->
-    <div class="row border border-secondary rounded-lg mb-1 shadow" v-if="rIndex == 1">
+    <div class="row bg-primary rounded-lg mb-1 shadow text-white" v-if="rIndex == 1">
       <div class="col-12 col-md-6 d-flex justify-content-between">
-        <router-link
+        <router-link class="text-white"
           :to="{ name: 'job', params: { jobId: requesterJob.id } }"
-        >{{requesterJob.title}}</router-link>
-        <span class="unbold">{{when}}</span>
+        ><h4>{{requesterJob.title}}</h4></router-link>
+        <h5 class="unbold">{{when}}</h5>
       </div>
       <div class="col-12 col-md-6 d-flex justify-content-between">
-        <span class="unbold">Job Status: {{requesterJob.jobStatus}}</span>
-        <span title="Rate Volunteer(s)">
+        <h5 class="unbold">Job Status: {{requesterJob.jobStatus}}</h5>
+        <h5 title="Rate Volunteer(s)" class="action" @click="toggleRatings">
           <!-- TODO this star should only show once completed -->
-          <i class="fas fa-star-half-alt text-warning action" alt="Ratings" @click="toggleRatings"></i>
-        </span>
+          Rate <i class="fas fa-star-half-alt text-warning " alt="Ratings" ></i>
+        </h5>
       </div>
       <!-- Ratings -->
       <div v-show="volunteerRatings" class="border border-top col-12">
@@ -50,6 +51,7 @@
         />
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -112,4 +114,7 @@ export default {
 .font-lg {
   font-size: 20pt;
 }
+/* .bg-grey{
+  background: rgba(218, 218, 218, 0.712);
+} */
 </style>
