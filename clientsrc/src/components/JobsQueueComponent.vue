@@ -61,7 +61,7 @@ export default {
     // FIXME once completed, the index is not sequential, colors can be all white or gray.
     qIndex() {
       let num = this.$store.state.queues.findIndex(
-        q => q.id == this.jobQueue.id && q.jobId.jobStatus == "pending"
+        q => q.id == this.jobQueue.id && q.jobStatus == "pending"
       );
       return num % 2;
     },
