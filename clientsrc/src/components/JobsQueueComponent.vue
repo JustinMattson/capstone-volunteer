@@ -25,7 +25,7 @@
     <!-- Alt Color -->
     <div class="row border border-secondary rounded-lg mb-1 shadow bg-primary text-secondary py-1" v-if="qIndex == 1">
       <div class="col-12 col-md-6 d-flex justify-content-between ">
-        <router-link class="text-secondary" :to="{ name: 'job', params: { jobId: jobQueue.id } }"><h4>{{jobQueue.jobId.title}}</h4></router-link>
+        <router-link class="text-secondary" :to="{ name: 'job', params: { jobId: jobQueue.jobId.id } }"><h4>{{jobQueue.jobId.title}}</h4></router-link>
         <span class="unbold"><h5>{{when}}</h5></span>
       </div>
       <div class="col-12 col-md-6 d-flex justify-content-between">
