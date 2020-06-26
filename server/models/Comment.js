@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
-let ObjectId = Schema.Types.ObjectId
+let ObjectId = Schema.Types.ObjectId;
 
 const Comment = new Schema(
   {
     body: { type: String, required: true },
-    jobId: { type: ObjectId, ref: "Job", required: true },
+    jobId: { type: ObjectId, ref: "Jobs", required: true },
     creatorEmail: { type: String, required: true },
     profileId: { type: String, required: true },
   },

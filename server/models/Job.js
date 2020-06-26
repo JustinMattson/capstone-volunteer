@@ -13,8 +13,8 @@ const Job = new Schema(
     endDate: { type: Date, required: true },
     requesterId: { type: String, required: true },
     volunteerIds: [{ type: ObjectId, ref: "Profile" }],
-    jobCreatorRatings: [{ type: Object }], //job rating {volunteerId, Rating from Volunteer to job poster}
-    helperRatings: [{ type: Object }], //helper's rating {volunteerId, Rating from job poster to Volunteer}
+    jobCreatorRatings: [{ type: String }], //job rating {volunteerId, Rating from Volunteer to job poster}
+    helperRatings: [{ type: String }], //helper's rating {volunteerId, Rating from job poster to Volunteer}
     creatorEmail: { type: String, required: true },
     jobStatus: {
       type: String,
@@ -23,7 +23,7 @@ const Job = new Schema(
       default: "pending",
     },
     completedVolunteerReviews: [{ type: String }],
-    completedRequesterReviews: [{ type: String }]
+    completedRequesterReviews: [{ type: String }],
   },
   { timestamps: true, toJSON: { virtuals: true } }
 );
