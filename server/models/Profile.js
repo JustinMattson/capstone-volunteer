@@ -10,7 +10,7 @@ const Profile = new Schema(
     picture: { type: String },
     volunteerRating: [{ type: Number }],
     requesterRating: [{ type: Number }],
-    requestsSubmitted: [{ type: ObjectId }],
+    // requestsSubmitted: [{ type: ObjectId }],
     jobsAccepted: [{ type: ObjectId }],
     // NOTE If you wish to add additional public properties for profiles do so here
   },
