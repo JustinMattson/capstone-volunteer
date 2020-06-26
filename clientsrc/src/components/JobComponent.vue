@@ -23,7 +23,8 @@
         </div>
         <h5 class="card-text text-left py-2">{{ job.description }}</h5>
         <h4>General Location: {{ job.generalLocation }}</h4>
-        <h4>When: {{ when }} {{expireCheck}}</h4>
+        <h4>When: {{ when }}</h4>
+        <div class="hide">{{expireCheck}}</div>
 
         <router-link :to="{ name: 'job', params: { jobId: job.id } }">
           <button class="btn btn-secondary d-flex my-3 justify-content-center">
@@ -134,5 +135,8 @@ img {
 }
 .text-shadow {
   text-shadow: 2px 2px black;
+}
+.hide {
+  display: none;
 }
 </style>
