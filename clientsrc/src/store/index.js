@@ -91,7 +91,7 @@ export default new Vuex.Store({
     //#endregion
   },
   actions: {
-    setBearer({ }, bearer) {
+    setBearer({}, bearer) {
       api.defaults.headers.authorization = bearer;
     },
     resetBearer() {
@@ -144,9 +144,9 @@ export default new Vuex.Store({
     },
     async removeOldJob({ commit }, id) {
       try {
-        commit("removeJob", id)
+        commit("removeJob", id);
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
     },
     //#endregion
@@ -180,11 +180,11 @@ export default new Vuex.Store({
       try {
         let res = await api.get("profile");
         commit("setProfile", res.data);
-        dispatch("getQueuesByProfileId", res.data.id)
-        dispatch("getJobsByVolunteerId", res.data.id)
-        dispatch("getJobsByRequesterId", res.data.id)
+        dispatch("getQueuesByProfileId", res.data.id);
+        dispatch("getJobsByVolunteerId", res.data.id);
+        dispatch("getJobsByRequesterId", res.data.id);
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
     },
     async getAllProfiles({ commit }) {
@@ -267,12 +267,13 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
-    async approveDeny({ commit }, obj) {
+    async approveDeny({ commit, dispatch }, obj) {
       let res = await api.put("queue/" + obj.id, obj);
       commit("updateQueueStatus", res.data);
       if (obj.jobApproval == "accepted") {
         await api.put("queue/" + obj.id + "/jobs", obj);
       }
+      dispatch("getJobById", obj.jobId);
     },
     async cancelQueue({ commit }, id) {
       let res = await api.delete("queue/" + id, id);
@@ -286,19 +287,19 @@ export default new Vuex.Store({
     //volunteer to host
     async jobPosterRating({ commit }, obj) {
       try {
-        await api.put("rating/jobRating", obj)
+        await api.put("rating/jobRating", obj);
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
     },
     //host to volunteer
     async jobVolunteerRating({ commit }, obj) {
       try {
-        await api.put("rating/volunteerRating", obj)
+        await api.put("rating/volunteerRating", obj);
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
-    }
+    },
     //#endregion
   },
 });
