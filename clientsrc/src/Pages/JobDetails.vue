@@ -28,7 +28,7 @@
             <img class="rounded-circle" :src="job.creator.picture" style="height:7em;width:7em" />
           </div>
           <div class="col-6 d-flex flex-column justify-content-center">
-            <h2>&nbsp;{{job.creator.name}}</h2>
+            <h2 style="font-size:2.5vw">&nbsp;{{job.creator.name}}</h2>
             <h3>&nbsp;{{requestorRating}}</h3>
           </div>
         </div>
