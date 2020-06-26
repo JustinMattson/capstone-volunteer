@@ -56,7 +56,7 @@
             v-for="jobQueue in jobQueues"
             :key="jobQueue.id"
             :jobQueue="jobQueue"
-            v-show="jobQueue.jobStatus == 'pending'"
+            v-show="jobQueue.jobId.jobStatus == 'pending'"
           />
         </div>
       </div>
