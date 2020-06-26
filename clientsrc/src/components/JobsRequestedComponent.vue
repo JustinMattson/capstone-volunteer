@@ -1,57 +1,73 @@
 <template>
   <div class="requesterJobs row justify-content-center">
     <div class="col-md-8">
-    <!-- Color 1 -->
-    <div class="row bg-light border border-secondary rounded-lg mb-1 shadow" v-if="rIndex == 0">
-      <div class="col-12 col-md-6 d-flex justify-content-between">
-        <router-link
-          :to="{ name: 'job', params: { jobId: requesterJob.id } }"
-        ><h4>{{requesterJob.title}}</h4></router-link>
-        <span class="unbold"><h5>{{when}}</h5></span>
+      <!-- Color 1 -->
+      <div class="row bg-light border border-secondary rounded-lg mb-1 shadow" v-if="rIndex == 0">
+        <div class="col-12 col-md-6 d-flex justify-content-between">
+          <router-link :to="{ name: 'job', params: { jobId: requesterJob.id } }">
+            <h4>{{requesterJob.title}}</h4>
+          </router-link>
+          <span class="unbold">
+            <h5>{{when}}</h5>
+          </span>
+        </div>
+        <div class="col-12 col-md-6 d-flex justify-content-between">
+          <span class="unbold">
+            <h5>Job Status: {{requesterJob.jobStatus}}</h5>
+          </span>
+          <h5
+            v-if="requesterJob.jobStatus == 'completed'"
+            title="Rate Volunteer(s)"
+            class="action"
+            @click="toggleRatings"
+          >
+            <!-- TODO this star should only show once completed -->
+            Rate
+            <i class="fas fa-star-half-alt text-warning" alt="Ratings"></i>
+          </h5>
+        </div>
+        <!-- Ratings -->
+        <div v-show="volunteerRatings" class="border border-top col-12">
+          <VolunteerId
+            v-for="volunteerId in requesterJob.volunteerIds"
+            :key="volunteerId.id"
+            :volunteerId="volunteerId"
+            :requesterJob="requesterJob"
+          />
+        </div>
       </div>
-      <div class="col-12 col-md-6 d-flex justify-content-between">
-        <span class="unbold"><h5>Job Status: {{requesterJob.jobStatus}}</h5></span>
-        <h5 title="Rate Volunteer(s)" class="action"  @click="toggleRatings">
-          <!-- TODO this star should only show once completed -->
-          Rate <i class="fas fa-star-half-alt text-warning " alt="Ratings"></i>
-        </h5>
-      </div>
-      <!-- Ratings -->
-      <div v-show="volunteerRatings" class="border border-top col-12">
-        <VolunteerId
-          v-for="volunteerId in requesterJob.volunteerIds"
-          :key="volunteerId.id"
-          :volunteerId="volunteerId"
-          :requesterJob="requesterJob"
-        />
+      <!-- Alt Color -->
+      <div class="row bg-primary rounded-lg mb-1 shadow text-white" v-if="rIndex == 1">
+        <div class="col-12 col-md-6 d-flex justify-content-between">
+          <router-link class="text-white" :to="{ name: 'job', params: { jobId: requesterJob.id } }">
+            <h4>{{requesterJob.title}}</h4>
+          </router-link>
+          <h5 class="unbold">{{when}}</h5>
+        </div>
+        <div class="col-12 col-md-6 d-flex justify-content-between">
+          <h5 class="unbold">Job Status: {{requesterJob.jobStatus}}</h5>
+          <h5
+            v-if="requesterJob.jobStatus == 'completed'"
+            title="Rate Volunteer(s)"
+            class="action"
+            @click="toggleRatings"
+          >
+            <!-- TODO this star should only show once completed -->
+            Rate
+            <i class="fas fa-star-half-alt text-warning" alt="Ratings"></i>
+          </h5>
+        </div>
+        <!-- Ratings -->
+        <div v-show="volunteerRatings" class="border border-top col-12">
+          <VolunteerId
+            v-for="volunteerId in requesterJob.volunteerIds"
+            :key="volunteerId.id"
+            :volunteerId="volunteerId"
+            :requesterJob="requesterJob"
+          />
+        </div>
       </div>
     </div>
-    <!-- Alt Color -->
-    <div class="row bg-primary rounded-lg mb-1 shadow text-white" v-if="rIndex == 1">
-      <div class="col-12 col-md-6 d-flex justify-content-between">
-        <router-link class="text-white"
-          :to="{ name: 'job', params: { jobId: requesterJob.id } }"
-        ><h4>{{requesterJob.title}}</h4></router-link>
-        <h5 class="unbold">{{when}}</h5>
-      </div>
-      <div class="col-12 col-md-6 d-flex justify-content-between">
-        <h5 class="unbold">Job Status: {{requesterJob.jobStatus}}</h5>
-        <h5 title="Rate Volunteer(s)" class="action" @click="toggleRatings">
-          <!-- TODO this star should only show once completed -->
-          Rate <i class="fas fa-star-half-alt text-warning " alt="Ratings" ></i>
-        </h5>
-      </div>
-      <!-- Ratings -->
-      <div v-show="volunteerRatings" class="border border-top col-12">
-        <VolunteerId
-          v-for="volunteerId in requesterJob.volunteerIds"
-          :key="volunteerId.id"
-          :volunteerId="volunteerId"
-          :requesterJob="requesterJob"
-        />
-      </div>
-    </div>
-  </div>
   </div>
 </template>
 
