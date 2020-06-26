@@ -16,8 +16,8 @@
     </div>
     <p class="text-muted unbold">Click on your profile image to edit user profile.</p> </div>
          <div class="col-md-4 bg-secondary text-center text-primary">
-          <div class="pt-md-5 mt-md-5 py-2"><h3>Job Poster Rating:</h3>
-          <h1>{{requesterAverage}}</h1></div>
+          <div class="pt-md-5 mt-md-5 py-2"><h3>Your Poster Rating:</h3>
+          <h1>{{requesterAverage}} / 5</h1></div>
         </div>
     </div>
  
@@ -49,14 +49,9 @@
       </div>
     </form>
 
-    <div class="container-fluid shadow-lg">
-      <div class="row justify-content-center">
-       
-       
-      </div>
-      <div class="row py-3 rounded-lg">
+      <div class="row py-3 rounded-lg justify-content-center">
         <div class="col">
-          <h3>Future Opportunites:</h3>
+          <h2 class="text-secondary">Future Opportunites:</h2>
           <jobQueue
             v-for="jobQueue in jobQueues"
             :key="jobQueue.id"
@@ -67,7 +62,7 @@
       </div>
       <div class="row py-3 bg-white rounded-lg">
         <div class="col">
-          <h3>Opportunities Completed:</h3>
+          <h2>Opportunities Completed:</h2>
           <volunteerJob
             v-for="volunteerJob in volunteerJobs"
             :key="volunteerJob.id"
@@ -76,9 +71,9 @@
           />
         </div>
       </div>
-      <div class="row py-3 rounded-lg">
+      <div class="row py-3 rounded-lg bg-secondary">
         <div class="col">
-          <h3>Requests You've Posted:</h3>
+          <h2 class="text-white">Requests You've Posted:</h2>
           <requesterJob
             v-for="requesterJob in requesterJobs"
             :key="requesterJob.id"
@@ -87,7 +82,7 @@
         </div>
       </div>
     </div>
-  </div>
+ 
 </template>
 
 <script>
