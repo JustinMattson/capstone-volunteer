@@ -17,15 +17,16 @@
             <img class="rounded-circle" :src="job.creator.picture" style="height:75px;width:75px" />
           </span>
           <span>
-          <h4 style= "font-size:2vh" class="d-flex align-self-center pl-2">{{job.creator.name}} </h4>
-          <h4 class="ml-1"> {{requestorRating}}</h4></span>
+            <h4 style="font-size:2vh" class="d-flex align-self-center pl-2">{{job.creator.name}}</h4>
+            <h4 class="ml-1"></h4>
+          </span>
         </div>
         <h5 class="card-text text-left py-2">{{ job.description }}</h5>
         <h4>General Location: {{ job.generalLocation }}</h4>
-        <h4>When: {{ when }}</h4>
+        <h4>When: {{ when }} {{expireCheck}}</h4>
 
-        <router-link  :to="{ name: 'job', params: { jobId: job.id } }">
-          <button class=" btn btn-secondary d-flex my-3 justify-content-center">
+        <router-link :to="{ name: 'job', params: { jobId: job.id } }">
+          <button class="btn btn-secondary d-flex my-3 justify-content-center">
             <i class="fas fa-hands-helping action text-white text-shadow font-lg">&nbsp;More Info</i>
           </button>
         </router-link>
@@ -48,9 +49,7 @@ export default {
       end: moment(String(this.job.startDate)).format("MM/DD/YYYY")
     };
   },
-  mounted() {
-    this.expireCheck;
-  },
+  mounted() {},
   computed: {
     profile() {
       return this.$store.state.profile;
@@ -66,20 +65,30 @@ export default {
         );
       }
     },
-    requestorRating() {
-      if (this.job) {
-        let rateArr = this.job.jobCreatorRatings;
-        let length = rateArr.length;
-        let x = 0;
-        let i = 0;
-        while (i < length) {
-          x += rateArr[i];
-          i++;
-        }
-        if (length == 0) {
-          return "No Ratings";
-        } else return x.toFixed(1);
-      }
+    // requestorRating() {
+    //   if (this.job) {
+    //     let rateArr = this.job.jobCreatorRatings;
+    //     let length = rateArr.length;
+    //     let x = 0;
+    //     let i = 0;
+    //     while (i < length) {
+    //       x += rateArr[i];
+    //       i++;
+    //     }
+    //     if (length == 0) {
+    //       return "No Ratings";
+    //     } else return x.toFixed(1);
+    //   }
+    // },
+    expireCheck() {
+      let jobDate = moment(String(this.job.endDate)).format("MM/DD/YYYY");
+      let currentDate = moment(String(new Date())).format("MM/DD/YYYY");
+      if (jobDate < currentDate) {
+        this.job.jobStatus = "completed";
+        this.$store.dispatch("changeJobStatus", this.job);
+        this.$store.dispatch("removeOldJob", this.job.id);
+        return "completed";
+      } else return "upcoming";
     }
   },
   methods: {
@@ -103,16 +112,6 @@ export default {
           swal("Close cancelled");
         }
       });
-    },
-    expireCheck() {
-      debugger;
-      let jobDate = moment(String(this.job.endDate)).format("MM/DD/YYYY");
-      let currentDate = moment(String(new Date())).format("MM/DD/YYYY");
-      if (jobDate < currentDate) {
-        this.job.jobStatus = "completed";
-        this.$store.dispatch("editJob", this.job);
-        this.$store.dispatch("removeOldJob", this.job.id);
-      } else return "upcoming";
     }
   },
   components: {}
@@ -134,6 +133,6 @@ img {
   border-radius: 13px;
 }
 .text-shadow {
-text-shadow: 2px 2px black;
+  text-shadow: 2px 2px black;
 }
 </style>

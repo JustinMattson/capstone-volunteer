@@ -65,6 +65,13 @@ class JobsService {
     }
     return data;
   }
+  async changeJobStatus(update) {
+    let data = await dbContext.Jobs.findByIdAndUpdate(update.id, update)
+    if (!data) {
+      throw new BadRequest("Invalid ID");
+    }
+    return data;
+  }
   async delete(id, userEmail) {
     let data = await dbContext.Jobs.findOneAndDelete({
       _id: id,

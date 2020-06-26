@@ -15,6 +15,7 @@ export class JobsController extends BaseController {
       // NOTE: Beyond this point all routes require Authorization tokens (the user must be logged in)
       .get("/:id/comments", this.getCommentsByJobId)
       .get("/:id/queue", this.getQueuesByJobId)
+      .put("/:id/expire", this.changeJobStatus)
       .use(auth0Provider.getAuthorizedUserInfo)
       .put("/:id", this.edit)
       .post("", this.create)
@@ -84,6 +85,15 @@ export class JobsController extends BaseController {
       return res.send(data);
     } catch (error) {
       next(error);
+    }
+  }
+
+  async changeJobStatus(req, res, next) {
+    try {
+      let data = await jobsService.changeJobStatus(req.body)
+      res.send(data)
+    } catch (error) {
+      next(error)
     }
   }
   async delete(req, res, next) {
