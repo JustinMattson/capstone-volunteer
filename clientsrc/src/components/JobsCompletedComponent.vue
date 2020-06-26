@@ -23,7 +23,7 @@
             @submit.prevent="submitRating"
             :id="volunteerJob.id"
           >
-            <select v-model="obj.rating">
+            <select v-model="obj.rating" required>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -60,7 +60,7 @@
             @submit.prevent="submitRating"
             :id="volunteerJob.id"
           >
-            <select v-model="obj.rating">
+            <select v-model="obj.rating" required>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -115,7 +115,7 @@ export default {
     },
     reviewSubmitted() {
       let id = this.$store.state.profile.id;
-      let data = this.volunteerJob.completedReviews.find(v => v == id);
+      let data = this.volunteerJob.completedRequesterReviews.find(v => v == id);
       if (data) {
         return true;
       } else return false;
@@ -124,7 +124,9 @@ export default {
   methods: {
     submitRating() {
       this.$store.dispatch("jobPosterRating", this.obj);
-      this.volunteerJob.completedReviews.push(this.$store.state.profile.id);
+      this.volunteerJob.completedRequesterReviews.push(
+        this.$store.state.profile.id
+      );
     }
   }
 };
