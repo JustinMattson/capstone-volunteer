@@ -1,5 +1,5 @@
 <template>
-  <div class="row my-2">
+  <div class="row my-2" :class="qIndex">
     <div class="col-3">
       <img :src="queue.volunteerPic" class="profile-pic" />
     </div>
@@ -29,9 +29,11 @@
 <script>
 export default {
   name: "Queue",
-  props: ["queue"],
+  props: ["queue", "queues"],
   data() {
-    return {};
+    return {
+      altColor: ""
+    };
   },
   mounted() {},
   computed: {
@@ -46,6 +48,14 @@ export default {
         this.queue.jobApproval == "accepted" ||
         this.queue.jobApproval == "rejected"
       );
+    },
+    qIndex() {
+      let num = this.queues.findIndex(q => q.id == this.queue.id);
+      if (num % 2 == 0) {
+        return "even";
+      } else {
+        return "odd";
+      }
     }
   },
   methods: {
@@ -73,5 +83,8 @@ export default {
 }
 .smol-button {
   height: 60%;
+}
+.odd {
+  background-color: #dadada;
 }
 </style>

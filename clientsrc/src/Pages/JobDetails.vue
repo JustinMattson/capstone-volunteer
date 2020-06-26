@@ -2,7 +2,9 @@
   <div class="jobDetails container-fluid">
     <!-- TOP ROW -->
     <div class="row py-2 bg-secondary text-white text-center darkness shadow-lg">
-      <div class="col"><h1>{{job.title}}</h1></div>
+      <div class="col">
+        <h1>{{job.title}}</h1>
+      </div>
     </div>
     <div class="row d-flex justify-content-center bg-light border-cstm">
       <div class="col-12 col-md-6 d-flex justify-content-center align-self-center">
@@ -20,10 +22,10 @@
         </div>
         <div class="row text-center pb-3">
           <div class="col">
-            <h1> Posted By:</h1>
+            <h1>Posted By:</h1>
           </div>
         </div>
-        <div class=" row text-secondary bg-white py-3 shadow-lg mx-1" v-if="job.creator">
+        <div class="row text-secondary bg-white py-3 shadow-lg mx-1" v-if="job.creator">
           <div class="col-6 d-flex justify-content-center">
             <img class="rounded-circle" :src="job.creator.picture" style="height:7em;width:7em" />
           </div>
@@ -34,17 +36,18 @@
         </div>
         <div class="row py-3 mx-1">
           <div class="col bg-white shadow-lg">
-        <h4>Description:</h4>
-        <h5 class="py-2">{{job.description}}</h5>
-        <div></div>
-        <div class="col">
-          <h5 class="unbold">General Location: {{job.generalLocation}}</h5>
-          <h5 class="unbold">Estimated Hours: {{job.estimatedHours}}</h5>
-          <h5 class="unbold">When: {{when}}</h5>
-          <h5 class="unbold">Status: {{job.jobStatus}}</h5>
-        </div></div>
+            <h4>Description:</h4>
+            <h5 class="py-2">{{job.description}}</h5>
+            <div></div>
+            <div class="col">
+              <h5 class="unbold">General Location: {{job.generalLocation}}</h5>
+              <h5 class="unbold">Estimated Hours: {{job.estimatedHours}}</h5>
+              <h5 class="unbold">When: {{when}}</h5>
+              <h5 class="unbold">Status: {{job.jobStatus}}</h5>
+            </div>
+          </div>
+        </div>
       </div>
-</div>
       <!-- Edit Job -->
       <div class="col-12 col-md-6 justify-content-center align-self-center mt-3" v-else>
         <form class="form" @submit.prevent="editJob">
@@ -106,7 +109,9 @@
               v-if="!isSignedUp"
               @click="addToQueue"
               class="btn btn-primary btn-lg text-secondary shadow-lg"
-            ><h3>Apply to Help</h3></button>
+            >
+              <h3>Apply to Help</h3>
+            </button>
           </div>
         </div>
       </div>
@@ -127,7 +132,9 @@
           class="btn btn-primary"
           data-toggle="modal"
           data-target="#myModal"
-        ><h5 class="text-secondary">Add Comment</h5></button>
+        >
+          <h5 class="text-secondary">Add Comment</h5>
+        </button>
       </div>
       <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
@@ -242,25 +249,30 @@
     <!-- END ADD COMMENT MODAL -->
 
     <div class="row text-center bg-primary border-cstm py-3">
-      <div class="col-12 text-secondary"><h1>Sign Up List</h1></div>
+      <div class="col-12 text-secondary">
+        <h1>Sign Up List</h1>
+      </div>
     </div>
     <div class="row bg-white">
       <div class="col-12">
-        <Queue v-for="queue in queues" :key="queue.id" :queue="queue" />
+        <Queue v-for="queue in queues" :key="queue.id" :queue="queue" :queues="queues" />
       </div>
     </div>
 
     <footer class="row sticky-bottom bg-primary d-flex justify-content-between mt-5">
-      <div class="col-4 text-center">Xander Rutledge<br/>
-           <a href="https://www.linkedin.com/in/alexander-rutledge/" target="_blank">
+      <div class="col-4 text-center">
+        Xander Rutledge
+        <br />
+        <a href="https://www.linkedin.com/in/alexander-rutledge/" target="_blank">
           <i class="fa fa-linkedin-square text-dark p-1"></i>
-           <a href="https://github.com/XanderRutledge" target="_blank">
-          <i class="fa fa-github text-dark p-1"></i>
-        </a>
+          <a href="https://github.com/XanderRutledge" target="_blank">
+            <i class="fa fa-github text-dark p-1"></i>
+          </a>
         </a>
       </div>
       <div class="col-4 text-center">
-        Kevin Lane<br/>
+        Kevin Lane
+        <br />
         <a href="https://www.linkedin.com/in/kevin-lane-2422b51b0/" target="_blank">
           <i class="fa fa-linkedin-square text-dark p-1"></i>
         </a>
@@ -441,9 +453,9 @@ img {
   border-bottom: 1px solid black;
 }
 .darkness {
-text-shadow: 4px 4px black !important;
+  text-shadow: 4px 4px black !important;
 }
-.shadow-none{
+.shadow-none {
   text-shadow: none;
 }
 </style>
