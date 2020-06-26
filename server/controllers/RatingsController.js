@@ -11,6 +11,7 @@ export class RatingsController extends BaseController {
       .put("/jobRating", this.jobRating)
       .put("/volunteerRating", this.volunteerRating)
   }
+  //volunteer to host
   async jobRating(req, res, next) {
     try {
       await profilesService.updateUserJR(req.body)
@@ -20,6 +21,7 @@ export class RatingsController extends BaseController {
       next(error)
     }
   }
+  //host to volunteer
   async volunteerRating(req, res, next) {
     try {
       await profilesService.updateUserVR(req.body)

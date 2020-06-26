@@ -283,6 +283,7 @@ export default new Vuex.Store({
     //#endregion
 
     //#region 
+    //volunteer to host
     async jobPosterRating({ commit }, obj) {
       try {
         await api.put("rating/jobRating", obj)
@@ -290,6 +291,7 @@ export default new Vuex.Store({
         console.error(error)
       }
     },
+    //host to volunteer
     async jobVolunteerRating({ commit }, obj) {
       try {
         await api.put("rating/volunteerRating", obj)
