@@ -98,7 +98,7 @@ class JobsService {
     )
     await dbContext.Jobs.findByIdAndUpdate(
       { _id: obj.jobId },
-      { $addToSet: { completedVolunteerReviews: obj.recipient } }
+      { $addToSet: { completedVolunteerReviews: obj.recipientId } }
     )
   }
 }
