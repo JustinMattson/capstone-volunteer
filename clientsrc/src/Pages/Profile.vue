@@ -137,7 +137,7 @@ export default {
       let avg = total / vr.length;
       if (vr.length == 0) {
         return "No Rating";
-      } else return avg;
+      } else return avg.toFixed(1);
     },
     requesterAverage() {
       let total = 0;
@@ -148,7 +148,7 @@ export default {
       let avg = total / vr.length;
       if (vr.length == 0) {
         return "No Rating";
-      } else return avg;
+      } else return avg.toFixed(1);
     }
   },
   methods: {

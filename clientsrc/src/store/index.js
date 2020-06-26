@@ -282,7 +282,7 @@ export default new Vuex.Store({
     },
     //#endregion
 
-    //#region 
+    //#region RATINGS
     //volunteer to host
     async jobPosterRating({ commit }, obj) {
       try {

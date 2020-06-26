@@ -47,7 +47,7 @@ export default {
   computed: {
     reviewSubmitted() {
       let id = this.volunteerId.id;
-      let data = this.requesterJob.completedReviews.find(v => v == id);
+      let data = this.requesterJob.completedVolunteerReviews.find(v => v == id);
       if (data) {
         return true;
       } else return false;
@@ -57,7 +57,7 @@ export default {
     submitRating() {
       this.$store.dispatch("jobVolunteerRating", this.obj);
       // debugger;
-      this.requesterJob.completedReviews.push(this.volunteerId.id);
+      this.requesterJob.completedVolunteerReviews.push(this.volunteerId.id);
     }
   },
   components: {}
