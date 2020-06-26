@@ -7,9 +7,7 @@
       style="background-color:#dadada;"
     >
       <div class="col-12 col-md-6 d-flex justify-content-between">
-        <router-link
-          :to="{ name: 'job', params: { jobId: volunteerJob.id } }"
-        >{{volunteerJob.title}}</router-link>
+        <h3>{{volunteerJob.title}}</h3>
         <span class="unbold">{{when}}</span>
       </div>
       <div class="col-12 col-md-6 d-flex justify-content-between align-items-center">
@@ -44,9 +42,7 @@
     <!-- Alt Color -->
     <div class="row border border-secondary rounded-lg mb-1 shadow" v-if="vIndex == 1">
       <div class="col-12 col-md-6 d-flex justify-content-between">
-        <router-link
-          :to="{ name: 'job', params: { jobId: volunteerJob.id } }"
-        >{{volunteerJob.title}}</router-link>
+        <h3>{{volunteerJob.title}}</h3>
         <span class="unbold">{{when}}</span>
       </div>
       <div class="col-12 col-md-6 d-flex justify-content-between align-items-center">
