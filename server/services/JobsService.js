@@ -99,7 +99,8 @@ class JobsService {
     await dbContext.Jobs.findByIdAndUpdate(
       { _id: obj.jobId },
       { $addToSet: { completedVolunteerReviews: obj.recipient } }
+    )
   }
 }
 
-export const jobsService = new JobsService();
+export const jobsService = new JobsService()
