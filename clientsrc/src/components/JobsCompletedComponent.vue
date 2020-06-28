@@ -1,46 +1,10 @@
 <template>
   <div class="volunteerJob container">
-    <!-- Color 1 -->
     <div
       class="row border border-secondary rounded-lg mb-1 shadow"
-      v-if="vIndex == 0"
+      :class="vIndex"
       style="background-color:#dadada;"
     >
-      <div class="col-12 col-md-6 d-flex justify-content-between">
-        <h3>{{volunteerJob.title}}</h3>
-        <span class="unbold">{{when}}</span>
-      </div>
-      <div class="col-12 col-md-6 d-flex justify-content-between align-items-center">
-        <span
-          class="unbold text-left"
-          style="max-width:65%;"
-        >Rate {{volunteerJob.creator.name}}'s Help Request</span>
-        <span class="form-inline d-flex align-self-center">
-          <form
-            v-if="this.reviewSubmitted == false"
-            @submit.prevent="submitRating"
-            :id="volunteerJob.id"
-          >
-            <select v-model="obj.rating" required>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </form>
-          <button
-            v-if="this.reviewSubmitted == false"
-            type="submit"
-            :form="volunteerJob.id"
-            class="btn btn-secondary text-primary btn-sm mb-2 ml-1"
-          >Submit</button>
-          <div class="text-right" v-if="this.reviewSubmitted == true">Thanks for the feedback!</div>
-        </span>
-      </div>
-    </div>
-    <!-- Alt Color -->
-    <div class="row border border-secondary rounded-lg mb-1 shadow" v-if="vIndex == 1">
       <div class="col-12 col-md-6 d-flex justify-content-between">
         <h3>{{volunteerJob.title}}</h3>
         <span class="unbold">{{when}}</span>
@@ -80,7 +44,7 @@
 import moment from "moment";
 export default {
   name: "volunteerJob",
-  props: ["volunteerJob"],
+  props: ["volunteerJob", "volunteerJobs"],
   data() {
     return {
       obj: {
@@ -93,11 +57,15 @@ export default {
   },
   computed: {
     vIndex() {
-      let num = this.$store.state.volunteerJobs.findIndex(
-        v => v.id == this.volunteerJob.id
-      );
-      return num % 2;
+      let num = this.volunteerJobs.findIndex(v => v.id == this.volunteerJob.id);
+      return num % 2 == 0 ? "bg-light" : "altColor";
     },
+    // vIndex() {
+    //   let num = this.$store.state.volunteerJobs.findIndex(
+    //     v => v.id == this.volunteerJob.id
+    //   );
+    //   return num % 2;
+    // },
     when() {
       if (this.volunteerJob.startDate == this.volunteerJob.endDate) {
         return moment(String(this.volunteerJob.startDate)).format("MM/DD/YYYY");
@@ -137,5 +105,8 @@ export default {
 }
 .font-lg {
   font-size: 20pt;
+}
+.altColor {
+  background-color: #dadada;
 }
 </style>
