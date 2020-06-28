@@ -1,26 +1,32 @@
 <template>
   <div class="profile text-center container-fluid">
     <div class="row bg-white text-center">
-  <div class="col-md-4 bg-secondary text-primary">
-        <div class="pt-md-5 mt-md-5 py-2">  <h3>Your Volunteer Rating:</h3>
-         <h1>{{volunteerAverage}} / 5</h1></div>
+      <div class="col-md-3 bg-secondary text-primary">
+        <div class="pt-md-5 mt-md-5 py-2">
+          <h3>Your Volunteer Rating:</h3>
+          <h1>{{volunteerAverage}} / 5</h1>
         </div>
-      <div class="col-md-4">
- <h1>
-      Welcome
-      <span class="text-primary">{{ profile.name }}</span>
-    </h1>
-    <img class="rounded-circle shadow-lg border border-dark" :src="profile.picture" @click="toggleEdit" />
-    <div class="font-lg unbold">
-      {{ profile.email }}
-    </div>
-    <p class="text-muted unbold">Click on your profile image to edit user profile.</p> </div>
-         <div class="col-md-4 bg-secondary text-center text-primary">
-          <div class="pt-md-5 mt-md-5 py-2"><h3>Your Poster Rating:</h3>
-          <h1>{{requesterAverage}} / 5</h1></div>
+      </div>
+      <div class="col-md-6">
+        <h1>
+          Welcome
+          <span class="text-primary">{{ profile.name }}</span>
+        </h1>
+        <img
+          class="rounded-circle shadow-lg border border-dark"
+          :src="profile.picture"
+          @click="toggleEdit"
+        />
+        <div class="font-lg unbold">{{ profile.email }}</div>
+        <p class="text-muted unbold">Click on your profile image to edit user profile.</p>
+      </div>
+      <div class="col-md-3 bg-secondary text-center text-primary">
+        <div class="pt-md-5 mt-md-5 py-2">
+          <h3>Your Poster Rating:</h3>
+          <h1>{{requesterAverage}} / 5</h1>
         </div>
+      </div>
     </div>
- 
 
     <form class="form text-left" v-if="edit" style="width:100%;" @submit.prevent="updateProfile">
       <div class="form-group">
@@ -49,40 +55,42 @@
       </div>
     </form>
 
-      <div class="row py-3 rounded-lg justify-content-center">
-        <div class="col">
-          <h2 class="text-secondary">Future Opportunites:</h2>
-          <jobQueue
-            v-for="jobQueue in jobQueues"
-            :key="jobQueue.id"
-            :jobQueue="jobQueue"
-            v-show="jobQueue.jobId.jobStatus == 'pending'"
-          />
-        </div>
-      </div>
-      <div class="row py-3 bg-white rounded-lg">
-        <div class="col">
-          <h2>Opportunities Completed:</h2>
-          <volunteerJob
-            v-for="volunteerJob in volunteerJobs"
-            :key="volunteerJob.id"
-            :volunteerJob="volunteerJob"
-            v-show="volunteerJob.jobStatus == 'completed'"
-          />
-        </div>
-      </div>
-      <div class="row py-3 rounded-lg bg-secondary">
-        <div class="col">
-          <h2 class="text-white">Requests You've Posted:</h2>
-          <requesterJob
-            v-for="requesterJob in requesterJobs"
-            :key="requesterJob.id"
-            :requesterJob="requesterJob"
-          />
-        </div>
+    <div class="row py-3 bg-white rounded-lg">
+      <div class="col">
+        <h2 class="text-secondary">Future Opportunites:</h2>
+        <jobQueue
+          v-for="jobQueue in jobQueues"
+          :key="jobQueue.id"
+          :jobQueue="jobQueue"
+          :jobQueues="jobQueues"
+          v-show="jobQueue.jobId.jobStatus == 'pending' && jobQueue.volunteerId == profile.id"
+        />
       </div>
     </div>
- 
+    <div class="row py-3 rounded-lg">
+      <div class="col">
+        <h2>Opportunities Completed:</h2>
+        <volunteerJob
+          v-for="volunteerJob in volunteerJobs"
+          :key="volunteerJob.id"
+          :volunteerJob="volunteerJob"
+          :volunteerJobs="volunteerJobs"
+          v-show="volunteerJob.jobStatus == 'completed' "
+        />
+      </div>
+    </div>
+    <div class="row py-3 rounded-lg bg-secondary">
+      <div class="col">
+        <h2 class="text-white">Requests You've Posted:</h2>
+        <requesterJob
+          v-for="requesterJob in requesterJobs"
+          :key="requesterJob.id"
+          :requesterJob="requesterJob"
+          :requesterJobs="requesterJobs"
+        />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>

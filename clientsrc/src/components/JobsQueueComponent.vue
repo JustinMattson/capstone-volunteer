@@ -1,13 +1,20 @@
 <template>
-  <div class="jobQueue row justify-content-center">
-    <div class="col-md-8">
-    <!-- Color 1 -->
-    <div class="row bg-light border border-secondary rounded-lg mb-1 shadow text-secondary py-1" v-if="qIndex == 0">
+  <!-- Future Opportunities -->
+  <div class="jobQueue container">
+    <div
+      class="row border border-secondary rounded-lg mb-1 shadow text-secondary py-1"
+      :class="qIndex"
+    >
       <div class="col-12 col-md-6 d-flex justify-content-between">
-        <router-link class="text-secondary"
+        <router-link
+          class="text-secondary"
           :to="{ name: 'job', params: { jobId: jobQueue.jobId.id } }"
-        ><h4>{{jobQueue.jobId.title}}</h4></router-link>
-        <span class="unbold"><h5>{{when}}</h5></span>
+        >
+          <h4>{{jobQueue.jobId.title}}</h4>
+        </router-link>
+        <span class="unbold">
+          <h5>{{when}}</h5>
+        </span>
       </div>
       <div class="col-12 col-md-6 d-flex justify-content-between">
         <h5 class="unbold">Status: {{jobQueue.jobApproval}}</h5>
@@ -21,26 +28,6 @@
           <i class="fas fa-ban text-danger action" v-else alt="Cancel" @click="cancelQueue"></i>
         </h5>
       </div>
-    </div>
-    <!-- Alt Color -->
-    <div class="row border border-secondary rounded-lg mb-1 shadow bg-primary text-secondary py-1" v-if="qIndex == 1">
-      <div class="col-12 col-md-6 d-flex justify-content-between ">
-        <router-link class="text-secondary" :to="{ name: 'job', params: { jobId: jobQueue.jobId.id } }"><h4>{{jobQueue.jobId.title}}</h4></router-link>
-        <span class="unbold"><h5>{{when}}</h5></span>
-      </div>
-      <div class="col-12 col-md-6 d-flex justify-content-between">
-        <h5 class="unbold">Status: {{jobQueue.jobApproval}}</h5>
-        <h5 title="Remove from Queue">
-          <i
-            class="far fa-trash-alt text-danger action"
-            v-if="jobQueue.jobApproval == 'rejected'"
-            alt="Delete"
-            @click="cancelQueue"
-          ></i>
-          <i class="fas fa-ban text-danger action" v-else alt="Cancel" @click="cancelQueue"></i>
-        </h5>
-      </div>
-    </div>
     </div>
   </div>
 </template>
@@ -50,7 +37,7 @@
 import moment from "moment";
 export default {
   name: "jobQueue",
-  props: ["jobQueue"],
+  props: ["jobQueue", "jobQueues"],
   data() {
     return {};
   },
@@ -60,11 +47,19 @@ export default {
     },
     // FIXME once completed, the index is not sequential, colors can be all white or gray.
     qIndex() {
-      let num = this.$store.state.queues.findIndex(
-        q => q.id == this.jobQueue.id && q.jobId.jobStatus == "pending"
+      let num = this.jobQueues.findIndex(
+        q => q.id == this.jobQueue.id
+        // &&
+        // q.jobId.jobStatus == "pending"
+        // &&
+        // q.jobQueue.volunteerId == profile.id
       );
-      return num % 2;
+      return num % 2 == 0 ? "bg-light" : "altColor";
     },
+    // qnum() {
+    //   let num = this.jobQueues.findIndex(q => q.id == this.jobQueue.id);
+    //   return num;
+    // },
     when() {
       if (this.jobQueue.jobId.startDate == this.jobQueue.jobId.endDate) {
         return moment(String(this.jobQueue.jobId.startDate)).format(
@@ -99,5 +94,8 @@ export default {
 }
 .font-lg {
   font-size: 20pt;
+}
+.altColor {
+  background-color: #dadada;
 }
 </style>

@@ -1,27 +1,29 @@
 <template>
-  <div class="row my-2" :class="qIndex">
-    <div class="col-3">
-      <img :src="queue.volunteerPic" class="profile-pic" />
-    </div>
-    <div class="col-md-2 col-6">
-      {{queue.volunteerName}}
-      {{queue.volunteerRating}}
-    </div>
-    <div class="col-3 d-flex justify-content-end">{{queue.jobApproval}}</div>
-    <div v-if="isCreator" class="col-12 col-md-3 d-flex justify-content-end">
-      <button @click="cancelQueue" class="btn btn-danger">Cancel</button>
-    </div>
-    <div v-else class="col-md-3 col-12 d-flex justify-content-end">
-      <button
-        v-if="isJobCreator && !acceptanceToggle"
-        @click="approve"
-        class="btn btn-success mx-1"
-      >Approve</button>
-      <button
-        v-if="isJobCreator && !acceptanceToggle"
-        @click="deny"
-        class="btn btn-danger mx-1"
-      >Deny</button>
+  <div name="Queue container">
+    <div class="row border border-secondary rounded-lg mb-1 mx-1 shadow" :class="qIndex">
+      <div class="col-3">
+        <img :src="queue.volunteerPic" class="profile-pic" />
+      </div>
+      <div class="col-md-2 col-6">
+        {{queue.volunteerName}}
+        {{queue.volunteerRating}}
+      </div>
+      <div class="col-3 d-flex justify-content-end">{{queue.jobApproval}}</div>
+      <div v-if="isCreator" class="col-12 col-md-3 d-flex justify-content-end">
+        <button @click="cancelQueue" class="btn btn-danger">Cancel</button>
+      </div>
+      <div v-else class="col-md-3 col-12 d-flex justify-content-end">
+        <button
+          v-if="isJobCreator && !acceptanceToggle"
+          @click="approve"
+          class="btn btn-success m-1"
+        >Approve</button>
+        <button
+          v-if="isJobCreator && !acceptanceToggle"
+          @click="deny"
+          class="btn btn-danger m-1"
+        >Deny</button>
+      </div>
     </div>
   </div>
 </template>
@@ -78,6 +80,8 @@ export default {
 .profile-pic {
   height: 75px;
   width: 75px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   border-radius: 15px;
   box-shadow: 4px 4px 5px black;
 }

@@ -68,7 +68,7 @@
           <div class="text-secondary d-flex justify-content-between mt-2" v-if="job.creator">
             <span class="unbold">
               <img class="rounded-lg" :src="job.creator.picture" style="height:25px;width:25px" />
-              {{job.creator.name}} {{profile.requesterRating}} 5 FIX THIS BEFORE DEPLOY
+              {{job.creator.name}} {{requestorRating}}
             </span>
           </div>
           <h5 class="mt-3">
@@ -186,7 +186,12 @@
     <div class="row">
       <div class="col-12">
         <!-- CARD TEMPLATE COMMENTS -->
-        <comment v-for="comment in comments" :key="comment.id" :comment="comment" />
+        <comment
+          v-for="comment in comments"
+          :key="comment.id"
+          :comment="comment"
+          :comments="comments"
+        />
         <!-- END CARD TEMPLATE COMMENTS -->
       </div>
     </div>
@@ -253,7 +258,7 @@
         <h1>Sign Up List</h1>
       </div>
     </div>
-    <div class="row bg-white">
+    <div class="row bg-light py-3 rounded-lg">
       <div class="col-12">
         <Queue v-for="queue in queues" :key="queue.id" :queue="queue" :queues="queues" />
       </div>
