@@ -11,27 +11,28 @@
         <img :src="job.imgUrl" class="mx-img border border-secondary m-3" />
       </div>
       <div class="col-12 col-md-6 justify-content-center align-self-center mt-3" v-if="!editForm">
-        <div class="text-center">
-          <h1>
-            <i
-              class="far fa-edit text-secondary action"
-              v-show="job.creatorEmail == profile.email"
-              @click="toggleEditForm"
-            ></i>
-          </h1>
-        </div>
-        <div class="row text-center pb-3">
+        <span class="text-center"></span>
+        <span class="row text-center pb-3">
           <div class="col">
-            <h1>Posted By:</h1>
+            <h1 class="d-flex justify-content-between">
+              <span>Posted By:</span>
+              <span>
+                <i
+                  class="far fa-edit text-secondary action"
+                  v-show="job.creatorEmail == profile.email"
+                  @click="toggleEditForm"
+                ></i>
+              </span>
+            </h1>
           </div>
-        </div>
+        </span>
         <div class="row text-secondary bg-white py-3 shadow-lg mx-1" v-if="job.creator">
           <div class="col-6 d-flex justify-content-center">
             <img class="rounded-circle" :src="job.creator.picture" style="height:7em;width:7em" />
           </div>
           <div class="col-6 d-flex flex-column justify-content-center">
             <h2 style="font-size:2.5vw">&nbsp;{{job.creator.name}}</h2>
-            <h3>&nbsp;{{requestorRating}}</h3>
+            <h3 v-show="requestorRating != 'No Ratings'">&nbsp;{{requestorRating}}</h3>
           </div>
         </div>
         <div class="row py-3 mx-1">
@@ -68,30 +69,46 @@
           <div class="text-secondary d-flex justify-content-between mt-2" v-if="job.creator">
             <span class="unbold">
               <img class="rounded-lg" :src="job.creator.picture" style="height:25px;width:25px" />
-              {{job.creator.name}} {{requestorRating}}
+              {{job.creator.name}}
+              <span
+                v-show="requestorRating != 'No Ratings'"
+              >{{requestorRating}}</span>
             </span>
           </div>
           <h5 class="mt-3">
             <textarea v-model="job.description" style="width:100%;height:100px;" />
           </h5>
-          <div class="unbold">
-            <input type="text" v-model="job.generalLocation" style="width:100%;" />
-            <input class="unbold" v-model="job.estimatedHours" style="width:100%;" />
+          <div class>
+            Image Url:
+            <input type="text" v-model="job.imgUrl" style="width:100%;" />
+            Location:
+            <input
+              type="text"
+              v-model="job.generalLocation"
+              style="width:100%;"
+            />
+            Hours:
+            <input
+              class="unbold"
+              v-model="job.estimatedHours"
+              style="width:100%;"
+            />
+            <p />
             <div class="unbold">
               <input type="date" v-model="job.startDate" /> Start Date
             </div>
             <div class="unbold">
-              <input type="date" v-model="job.endDate" />End Date
+              <input type="date" v-model="job.endDate" /> End Date
             </div>
             <br />
             <!-- dropdown -->
-            <span class="unbold">Job Status:</span>
             <select v-model="job.jobStatus">
               <!-- <option disabled value="Job Status">Job Status:</option> -->
               <option value="pending">Pending</option>
               <option value="completed">Completed</option>
               <option value="cancelled">Cancelled</option>
             </select>
+            <span class>&nbsp;Job Status</span>
 
             <!-- End Dropdown -->
           </div>

@@ -1,8 +1,8 @@
 <template>
   <div class="profile text-center container-fluid">
     <div class="row bg-white text-center">
-      <div class="col-md-3 bg-secondary text-primary">
-        <div class="pt-md-5 mt-md-5 py-2">
+      <div class="col-md-3 bg-secondary text-primary border border-dark rounded-right shadow">
+        <div class="pt-md-4 mt-md-5 py-2">
           <h3>Your Volunteer Rating:</h3>
           <h1>{{volunteerAverage}} / 5</h1>
         </div>
@@ -20,8 +20,10 @@
         <div class="font-lg unbold">{{ profile.email }}</div>
         <p class="text-muted unbold">Click on your profile image to edit user profile.</p>
       </div>
-      <div class="col-md-3 bg-secondary text-center text-primary">
-        <div class="pt-md-5 mt-md-5 py-2">
+      <div
+        class="col-md-3 bg-secondary text-center text-primary border border-dark rounded-left shadow"
+      >
+        <div class="pt-md-4 mt-md-5 py-2">
           <h3>Your Poster Rating:</h3>
           <h1>{{requesterAverage}} / 5</h1>
         </div>
