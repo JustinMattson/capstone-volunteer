@@ -10,7 +10,7 @@
       </div>
       <div class="col-3 d-flex justify-content-end">{{queue.jobApproval}}</div>
       <div v-if="isCreator" class="col-12 col-md-3 d-flex justify-content-end">
-        <button @click="cancelQueue" class="btn btn-danger">Cancel</button>
+        <button @click="cancelQueue" class="btn btn-danger m-1">Cancel</button>
       </div>
       <div v-else class="col-md-3 col-12 d-flex justify-content-end">
         <button
