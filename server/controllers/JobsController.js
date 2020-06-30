@@ -18,16 +18,16 @@ export class JobsController extends BaseController {
       .put("/:id/expire", this.changeJobStatus)
       .use(auth0Provider.getAuthorizedUserInfo)
       .put("/:id", this.edit)
-      .post("", this.create)
-      .delete("/:id", this.delete);
+      .post("", this.create);
+    // .delete("/:id", this.delete);
   }
 
   async getActive(req, res, next) {
     try {
       let data = await jobsService.getActive(req.query);
-      res.send(data)
+      res.send(data);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
   async getAll(req, res, next) {
@@ -90,20 +90,20 @@ export class JobsController extends BaseController {
 
   async changeJobStatus(req, res, next) {
     try {
-      let data = await jobsService.changeJobStatus(req.body)
-      res.send(data)
-    } catch (error) {
-      next(error)
-    }
-  }
-  async delete(req, res, next) {
-    try {
-      let data = await jobsService.delete(req.params.id, req.userInfo.email);
-      if (data) {
-        res.send("Successfully deleted");
-      }
+      let data = await jobsService.changeJobStatus(req.body);
+      res.send(data);
     } catch (error) {
       next(error);
     }
   }
+  // async delete(req, res, next) {
+  //   try {
+  //     let data = await jobsService.delete(req.params.id, req.userInfo.email);
+  //     if (data) {
+  //       res.send("Successfully deleted");
+  //     }
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  // }
 }

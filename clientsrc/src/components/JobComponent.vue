@@ -24,6 +24,7 @@
         <h5 class="card-text text-left py-2">{{ job.description }}</h5>
         <h4>General Location: {{ job.generalLocation }}</h4>
         <h4>When: {{ when }}</h4>
+        <!-- <div>{{job.jobStatus}}</div> -->
         <div class="hide">{{expireCheck}}</div>
 
         <router-link :to="{ name: 'job', params: { jobId: job.id } }">
@@ -97,15 +98,15 @@ export default {
       swal({
         title: "Are you sure?",
         text:
-          "Click 'Ok' to confirm you wish to delete this request.  This action cannot be undone.",
+          "Click 'Ok' to confirm you wish to cancel this request.  This action cannot be undone.",
         icon: "warning",
         buttons: true,
         dangerMode: true
       }).then(willDelete => {
         if (willDelete) {
-          let data = this.$store.dispatch("deleteJob", this.job.id);
-
-          swal("Poof! Your help request has been deleted!", {
+          this.job.jobStatus = "cancelled";
+          let data = this.$store.dispatch("editJob", this.job);
+          swal("Poof! Your help request has been cancelled!", {
             icon: "success"
           });
           this.editJob = false;
