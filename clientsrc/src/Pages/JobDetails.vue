@@ -27,12 +27,14 @@
           </div>
         </span>
         <div class="row text-secondary bg-white py-3 shadow-lg mx-1" v-if="job.creator">
-          <div class="col-6 d-flex justify-content-center">
+          <div class="col-4 text-center">
             <img class="rounded-circle" :src="job.creator.picture" style="height:7em;width:7em" />
           </div>
-          <div class="col-6 d-flex flex-column justify-content-center">
+          <div class="col-8 d-flex flex-column justify-content-center">
             <h2 style="font-size:2.5vw">&nbsp;{{job.creator.name}}</h2>
-            <h3 v-show="requestorRating != 'No Ratings'">&nbsp;{{requestorRating}}</h3>
+            <h3
+              v-show="requestorRating != 'No Ratings'"
+            >Requestor Rating: &nbsp;{{requestorRating}}/5</h3>
           </div>
         </div>
         <div class="row py-3 mx-1">
@@ -395,12 +397,12 @@ export default {
         let x = 0;
         let i = 0;
         while (i < length) {
-          x += rateArr[i];
+          x += +rateArr[i];
           i++;
         }
         if (length == 0) {
           return "No Ratings";
-        } else return x.toFixed(1);
+        } else return x.toFixed(1) / length;
       }
     }
   },

@@ -10,7 +10,7 @@
           class="text-secondary"
           :to="{ name: 'job', params: { jobId: jobQueue.jobId.id } }"
         >
-          <h4>{{jobQueue.jobId.title}}</h4>
+          <h4 class="text-left">{{jobQueue.jobId.title}}</h4>
         </router-link>
         <span class="unbold">
           <h5>{{when}}</h5>

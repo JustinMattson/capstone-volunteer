@@ -3,7 +3,7 @@
     <div class="row border border-secondary rounded-lg mb-1 shadow" :class="rIndex">
       <div class="col-12 col-md-6 d-flex justify-content-between">
         <router-link :to="{ name: 'job', params: { jobId: requesterJob.id } }">
-          <h4>{{requesterJob.title}}</h4>
+          <h4 class="text-left">{{requesterJob.title}}</h4>
         </router-link>
         <span class="unbold">
           <h5>{{when}}</h5>
