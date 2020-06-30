@@ -89,6 +89,7 @@
           :key="requesterJob.id"
           :requesterJob="requesterJob"
           :requesterJobs="requesterJobs"
+          v-show="requesterJob.jobStatus != 'cancelled'"
         />
       </div>
     </div>

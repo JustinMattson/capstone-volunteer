@@ -423,6 +423,28 @@ export default {
     editJob() {
       this.job.startDate = moment(this.job.startDate).format("MM-DD-YYYY");
       this.job.endDate = moment(this.job.endDate).format("MM-DD-YYYY");
+      if (this.job.jobStatus == "cancelled") {
+        swal({
+          title: "Are you sure?",
+          text:
+            "Click 'Ok' to confirm you wish to cancel this request.  This action cannot be undone.",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true
+        }).then(willDelete => {
+          if (willDelete) {
+            this.job.jobStatus = "cancelled";
+            let data = this.$store.dispatch("editJob", this.job);
+            swal("Poof! Your help request has been cancelled!", {
+              icon: "success"
+            });
+            this.editForm = false;
+          } else {
+            swal("Close cancelled");
+          }
+          return;
+        });
+      }
       this.$store.dispatch("editJob", this.job);
       this.editForm = false;
     },
