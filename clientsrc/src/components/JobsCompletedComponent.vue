@@ -6,7 +6,9 @@
       style="background-color:#dadada;"
     >
       <div class="col-12 col-md-6 d-flex justify-content-between">
-        <h3>{{volunteerJob.title}}</h3>
+        <router-link :to="{ name: 'job', params: { jobId: volunteerJob.id } }">
+          <h3>{{volunteerJob.title}}</h3>
+        </router-link>
         <span class="unbold">{{when}}</span>
       </div>
       <div class="col-12 col-md-6 d-flex justify-content-between align-items-center">
