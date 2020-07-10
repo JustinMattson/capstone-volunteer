@@ -63,7 +63,7 @@ export class CommentsController extends BaseController {
   async delete(req, res, next) {
     try {
       let data = await commentsService.delete(req.params.id);
-      socketService.messageRoom(req.body.jobId, "deleteComment", data);
+      socketService.messageRoom(data.jobId, "deleteComment", data);
       if (data) {
         res.send("Successfully deleted");
       }
