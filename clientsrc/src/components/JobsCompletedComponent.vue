@@ -9,7 +9,7 @@
         <router-link :to="{ name: 'job', params: { jobId: volunteerJob.id } }">
           <h3>{{volunteerJob.title}}</h3>
         </router-link>
-        <span class="unbold">{{when}}</span>
+        <span class="unbold d-flex align-items-center">{{when}}</span>
       </div>
       <div class="col-12 col-md-6 d-flex justify-content-between align-items-center">
         <span
