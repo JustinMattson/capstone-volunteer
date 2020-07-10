@@ -2,8 +2,11 @@ import Vue from "vue";
 import Vuex from "vuex";
 import Axios from "axios";
 import router from "../router";
+import io from "socket.io-client";
 
 Vue.use(Vuex);
+
+let socket = {};
 
 let baseUrl = location.host.includes("localhost")
   ? "http://localhost:3000/"
@@ -308,6 +311,41 @@ export default new Vuex.Store({
       } catch (error) {
         console.error(error);
       }
+    },
+    //#endregion
+
+    //#region Sockets
+    initializeSocket({ commit, dispatch }) {
+      //establish connection with socket
+      socket = io("//localhost:3000");
+      //Handle any on connection events
+      socket.on("CONNECTED", (data) => {
+        console.log("please work");
+      });
+
+      socket.on("newComment", (comment) => {
+        commit("setNewComment", comment);
+        this.dispatch("getComments", comment.jobId);
+      });
+
+      socket.on("newEdit", (update) => {
+        debugger;
+        commit("changeComment", update);
+        this.dispatch("getComments", update.jobId);
+      });
+
+      socket.on("deleteComment", (data) => {
+        debugger;
+        commit("removeComment", data);
+        this.dispatch("getComments", data.jobId);
+      });
+    },
+
+    joinRoom({ commit, dispatch }, roomName) {
+      socket.emit("dispatch", { action: "JoinRoom", data: roomName });
+    },
+    leaveRoom({ commit, dispatch }, roomName) {
+      socket.emit("dispatch", { action: "LeaveRoom", data: roomName });
     },
     //#endregion
   },
