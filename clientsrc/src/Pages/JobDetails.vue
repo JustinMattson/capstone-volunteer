@@ -349,6 +349,7 @@ export default {
     await this.$store.dispatch("getJobById", this.$route.params.jobId);
     this.$store.dispatch("getComments", this.$route.params.jobId);
     this.$store.dispatch("getQueuesByJobId", this.$route.params.jobId);
+    this.$store.dispatch("joinRoom","comments");
   },
   computed: {
     job() {
