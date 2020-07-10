@@ -317,7 +317,7 @@ export default new Vuex.Store({
     //#region Sockets
     initializeSocket({ commit, dispatch }) {
       //establish connection with socket
-      socket = io("//localhost:3000");
+      socket = io(baseUrl);
       //Handle any on connection events
       socket.on("CONNECTED", (data) => {
         console.log("please work");
