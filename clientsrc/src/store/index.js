@@ -313,32 +313,40 @@ export default new Vuex.Store({
       }
     },
     //#endregion
+
     //#region Sockets
-    initalizeSocket({ commit, dispatch }) {
+    initializeSocket({ commit, dispatch }) {
       //establish connection with socket
       socket = io("//localhost:3000");
       //Handle any on connection events
-      socket.on("CONNECTED", data => {
+      socket.on("CONNECTED", (data) => {
         console.log("please work");
       });
 
-      socket.on("newComment", comment => {
-        commit("addComment", comment);
+      socket.on("newComment", (comment) => {
+        commit("setNewComment", comment);
+        this.dispatch("getComments", comment.jobId);
       });
 
-      socket.on("newEdit", update => {
-        commit("editComment", update);
+      socket.on("newEdit", (update) => {
+        debugger;
+        commit("changeComment", update);
+        this.dispatch("getComments", update.jobId);
       });
 
-      socket.on("deleteComment", data => {
-        commit("deleteComment", data);
+      socket.on("deleteComment", (data) => {
+        debugger;
+        commit("removeComment", data);
+        this.dispatch("getComments", data.jobId);
       });
     },
 
-      joinRoom({ commit, dispatch }, roomName) {
-        socket.emit("dispatch", { action: "JoinRoom", data: roomName });
-      }
-    ////#endregion
-
+    joinRoom({ commit, dispatch }, roomName) {
+      socket.emit("dispatch", { action: "JoinRoom", data: roomName });
+    },
+    leaveRoom({ commit, dispatch }, roomName) {
+      socket.emit("dispatch", { action: "LeaveRoom", data: roomName });
+    },
+    //#endregion
   },
 });
