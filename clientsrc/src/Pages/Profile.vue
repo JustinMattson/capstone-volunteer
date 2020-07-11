@@ -2,9 +2,11 @@
   <div class="profile text-center container-fluid">
     <div class="row bg-white text-center">
       <div class="col-md-3 bg-secondary text-primary border border-dark rounded-right shadow">
-        <div class="pt-md-4 mt-md-5 py-2">
+        <div class="pt-md-4 mt-md-4 py-2">
           <h3>Your Volunteer Rating:</h3>
           <h1>{{volunteerAverage}} / 5</h1>
+          <small v-if="numVolRatings > 1">({{numVolRatings}} ratings)</small>
+          <small v-else>({{numVolRatings}} rating)</small>
         </div>
       </div>
       <div class="col-md-6">
@@ -23,9 +25,11 @@
       <div
         class="col-md-3 bg-secondary text-center text-primary border border-dark rounded-left shadow"
       >
-        <div class="pt-md-4 mt-md-5 py-2">
+        <div class="pt-md-4 mt-md-4 py-2">
           <h3>Your Poster Rating:</h3>
           <h1>{{requesterAverage}} / 5</h1>
+          <small v-if="numReqRatings > 1">({{numReqRatings}} ratings)</small>
+          <small v-else>({{numReqRatings}} rating)</small>
         </div>
       </div>
     </div>
@@ -144,6 +148,9 @@ export default {
         return "No Rating";
       } else return avg.toFixed(1);
     },
+    numVolRatings() {
+      return this.profile.volunteerRating.length;
+    },
     requesterAverage() {
       let total = 0;
       let vr = this.$store.state.profile.requesterRating || [];
@@ -154,6 +161,9 @@ export default {
       if (vr.length == 0) {
         return "No Rating";
       } else return avg.toFixed(1);
+    },
+    numReqRatings() {
+      return this.profile.requesterRating.length;
     }
   },
   methods: {

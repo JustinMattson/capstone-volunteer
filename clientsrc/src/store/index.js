@@ -329,13 +329,11 @@ export default new Vuex.Store({
       });
 
       socket.on("newEdit", (update) => {
-        debugger;
         commit("changeComment", update);
         this.dispatch("getComments", update.jobId);
       });
 
       socket.on("deleteComment", (data) => {
-        debugger;
         commit("removeComment", data);
         this.dispatch("getComments", data.jobId);
       });
