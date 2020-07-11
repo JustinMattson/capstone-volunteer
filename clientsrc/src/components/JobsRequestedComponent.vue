@@ -1,29 +1,25 @@
 <template>
   <div class="requesterJobs container justify-content-center">
-    <div class="row border border-secondary rounded-lg mb-1 shadow" :class="rIndex">
+    <div class="row border border-secondary rounded-lg mb-1 text-secondary shadow" :class="rIndex">
       <div class="col-12 col-md-6 d-flex justify-content-between">
         <router-link :to="{ name: 'job', params: { jobId: requesterJob.id } }">
-          <h4 class="text-left">{{requesterJob.title}}</h4>
+          <span class="d-flex align-items-center text-left">{{requesterJob.title}}</span>
         </router-link>
-        <span class="unbold">
-          <h5>{{when}}</h5>
-        </span>
+        <span class="d-flex align-items-center unbold">{{when}}</span>
       </div>
       <div class="col-12 col-md-6 d-flex justify-content-between">
-        <span class="unbold">
-          <h5>Job Status: {{requesterJob.jobStatus}}</h5>
-        </span>
-        <h5
+        <span class="d-flex align-items-center">Job Status: {{requesterJob.jobStatus}}</span>
+        <span
           v-if="requesterJob.jobStatus == 'completed' && requesterJob.volunteerIds.length > 0"
           title="Rate Volunteer(s)"
-          class="action"
+          class="d-flex align-items-center action"
           @click="toggleRatings"
         >
           <!-- FIXED this star should only show once completed
           and only if there are volunteers to rate-->
           Rate
           <i class="fas fa-star-half-alt text-warning" alt="Ratings"></i>
-        </h5>
+        </span>
       </div>
       <!-- Ratings -->
       <div v-show="volunteerRatings" class="border border-top col-12">

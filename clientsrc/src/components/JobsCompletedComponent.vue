@@ -1,19 +1,19 @@
 <template>
   <div class="volunteerJob container">
     <div
-      class="row border border-secondary rounded-lg mb-1 shadow"
+      class="row border border-secondary rounded-lg text-secondary mb-1 shadow"
       :class="vIndex"
       style="background-color:#dadada;"
     >
       <div class="col-12 col-md-6 d-flex justify-content-between">
         <router-link :to="{ name: 'job', params: { jobId: volunteerJob.id } }">
-          <h3>{{volunteerJob.title}}</h3>
+          <span class="d-flex align-items-center">{{volunteerJob.title}}</span>
         </router-link>
-        <span class="unbold">{{when}}</span>
+        <span class="d-flex align-items-center unbold">{{when}}</span>
       </div>
       <div class="col-12 col-md-6 d-flex justify-content-between align-items-center">
         <span
-          class="unbold text-left"
+          class="d-flex align-items-center text-left"
           style="max-width:65%;"
         >Rate {{volunteerJob.creator.name}}'s Help Request</span>
         <span class="form-inline d-flex align-self-center">

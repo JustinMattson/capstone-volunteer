@@ -6,19 +6,14 @@
       :class="qIndex"
     >
       <div class="col-12 col-md-6 d-flex justify-content-between">
-        <router-link
-          class="text-secondary"
-          :to="{ name: 'job', params: { jobId: jobQueue.jobId.id } }"
-        >
-          <h4 class="text-left">{{jobQueue.jobId.title}}</h4>
+        <router-link :to="{ name: 'job', params: { jobId: jobQueue.jobId.id } }">
+          <span class="d-flex align-items-center text-left">{{jobQueue.jobId.title}}</span>
         </router-link>
-        <span class="unbold">
-          <h5>{{when}}</h5>
-        </span>
+        <span class="d-flex align-items-center unbold">{{when}}</span>
       </div>
       <div class="col-12 col-md-6 d-flex justify-content-between">
-        <h5 class="unbold">Status: {{jobQueue.jobApproval}}</h5>
-        <h5 title="Remove from Queue">
+        <span class="d-flex align-items-center">Status: {{jobQueue.jobApproval}}</span>
+        <span title="Remove from Queue">
           <i
             class="far fa-trash-alt text-danger action"
             v-if="jobQueue.jobApproval == 'rejected'"
@@ -26,7 +21,7 @@
             @click="cancelQueue"
           ></i>
           <i class="fas fa-ban text-danger action" v-else alt="Cancel" @click="cancelQueue"></i>
-        </h5>
+        </span>
       </div>
     </div>
   </div>

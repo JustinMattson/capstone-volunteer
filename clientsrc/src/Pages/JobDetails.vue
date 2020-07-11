@@ -1,23 +1,16 @@
 <template>
   <div class="jobDetails container-fluid">
     <!-- TOP ROW -->
-    <div
-      class="row py-2 bg-secondary text-white text-center darkness shadow-lg"
-    >
+    <div class="row py-2 bg-secondary text-white text-center darkness shadow-lg">
       <div class="col">
         <h1>{{ job.title }}</h1>
       </div>
     </div>
     <div class="row d-flex justify-content-center bg-light border-cstm">
-      <div
-        class="col-12 col-md-6 d-flex justify-content-center align-self-center"
-      >
+      <div class="col-12 col-md-6 d-flex justify-content-center align-self-center">
         <img :src="job.imgUrl" class="mx-img border border-secondary m-3" />
       </div>
-      <div
-        class="col-12 col-md-6 justify-content-center align-self-center mt-3"
-        v-if="!editForm"
-      >
+      <div class="col-12 col-md-6 justify-content-center align-self-center mt-3" v-if="!editForm">
         <span class="text-center"></span>
         <span class="row text-center pb-3">
           <div class="col">
@@ -33,21 +26,16 @@
             </h1>
           </div>
         </span>
-        <div
-          class="row text-secondary bg-white py-3 shadow-lg mx-1"
-          v-if="job.creator"
-        >
+        <div class="row text-secondary bg-white py-3 shadow-lg mx-1" v-if="job.creator">
           <div class="col-4 text-center">
-            <img
-              class="rounded-circle"
-              :src="job.creator.picture"
-              style="height:7em;width:7em"
-            />
+            <img class="rounded-circle" :src="job.creator.picture" style="height:7em;width:7em" />
           </div>
           <div class="col-8 d-flex flex-column justify-content-center">
             <h2 style="font-size:2.5vw">&nbsp;{{ job.creator.name }}</h2>
             <h3 v-show="requestorRating != 'No Ratings'">
               Requestor Rating: &nbsp;{{ requestorRating }}/5
+              <br />
+              <small>({{numRatings}} ratings)</small>
             </h3>
           </div>
         </div>
@@ -57,9 +45,7 @@
             <h5 class="py-2">{{ job.description }}</h5>
             <div></div>
             <div class="col">
-              <h5 class="unbold">
-                General Location: {{ job.generalLocation }}
-              </h5>
+              <h5 class="unbold">General Location: {{ job.generalLocation }}</h5>
               <h5 class="unbold">Estimated Hours: {{ job.estimatedHours }}</h5>
               <h5 class="unbold">When: {{ when }}</h5>
               <h5 class="unbold">Status: {{ job.jobStatus }}</h5>
@@ -68,10 +54,7 @@
         </div>
       </div>
       <!-- Edit Job -->
-      <div
-        class="col-12 col-md-6 justify-content-center align-self-center mt-3"
-        v-else
-      >
+      <div class="col-12 col-md-6 justify-content-center align-self-center mt-3" v-else>
         <form class="form" @submit.prevent="editJob">
           <div class="d-flex justify-content-between">
             <span class="font-lg">
@@ -87,27 +70,18 @@
               </button>
             </span>
           </div>
-          <div
-            class="text-secondary d-flex justify-content-between mt-2"
-            v-if="job.creator"
-          >
+          <div class="text-secondary d-flex justify-content-between mt-2" v-if="job.creator">
             <span class="unbold">
-              <img
-                class="rounded-lg"
-                :src="job.creator.picture"
-                style="height:25px;width:25px"
-              />
+              <img class="rounded-lg" :src="job.creator.picture" style="height:125px;width:25px" />
               {{ job.creator.name }}
-              <span v-show="requestorRating != 'No Ratings'">{{
-                requestorRating
-              }}</span>
+              <span v-show="requestorRating != 'No Ratings'">
+                {{requestorRating}}
+                <small>({{numRatings}} ratings)</small>
+              </span>
             </span>
           </div>
           <h5 class="mt-3">
-            <textarea
-              v-model="job.description"
-              style="width:100%;height:100px;"
-            />
+            <textarea v-model="job.description" style="width:100%;height:100px;" />
           </h5>
           <div class>
             Image Url:
@@ -192,9 +166,7 @@
           <div class="modal-content">
             <div class="modal-header bg-primary shadow-sm">
               <h4 class="modal-title text-white">New Comment</h4>
-              <button type="button" class="close" data-dismiss="modal">
-                &times;
-              </button>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body shadow-sm container text-primary">
               <!-- add submit method here -->
@@ -202,9 +174,7 @@
                 <div class="row justify-content-center">
                   <div class="col text-center">
                     <!-- add v-model -->
-                    <h5 class="shadow-none text-dark">
-                      Ask a Question or Leave a Comment:
-                    </h5>
+                    <h5 class="shadow-none text-dark">Ask a Question or Leave a Comment:</h5>
                     <textarea
                       class="unbold"
                       placeholder="Comment..."
@@ -222,17 +192,13 @@
 
                 <div class="row mt-3 align-items-end">
                   <div class="col text-center">
-                    <button type="submit" class="btn btn-secondary btn-lg">
-                      Add Comment
-                    </button>
+                    <button type="submit" class="btn btn-secondary btn-lg">Add Comment</button>
                   </div>
                 </div>
               </form>
             </div>
             <div class="modal-footer bg-primary shadow-sm">
-              <button type="button" class="btn btn-light" data-dismiss="modal">
-                Cancel
-              </button>
+              <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
             </div>
           </div>
         </div>
@@ -263,9 +229,7 @@
         class="btn btn-info btn-sm mb-3"
         data-toggle="modal"
         data-target="#myModal"
-      >
-        Add Comment
-      </button>
+      >Add Comment</button>
     </div>
     <div class="modal fade" id="myModal" role="dialog">
       <div class="modal-dialog">
@@ -273,9 +237,7 @@
         <div class="modal-content">
           <div class="modal-header bg-primary shadow-sm">
             <h4 class="modal-title text-white">New Comment</h4>
-            <button type="button" class="close" data-dismiss="modal">
-              &times;
-            </button>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body shadow-sm container text-primary">
             <!-- add submit method here -->
@@ -301,17 +263,13 @@
 
               <div class="row mt-3 align-items-end">
                 <div class="col text-center">
-                  <button type="submit" class="btn btn-secondary btn-lg">
-                    Add Comment
-                  </button>
+                  <button type="submit" class="btn btn-secondary btn-lg">Add Comment</button>
                 </div>
               </div>
             </form>
           </div>
           <div class="modal-footer bg-primary shadow-sm">
-            <button type="button" class="btn btn-light" data-dismiss="modal">
-              Cancel
-            </button>
+            <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
           </div>
         </div>
       </div>
@@ -326,25 +284,15 @@
     </div>
     <div class="row bg-light py-3 rounded-lg">
       <div class="col-12">
-        <Queue
-          v-for="queue in queues"
-          :key="queue.id"
-          :queue="queue"
-          :queues="queues"
-        />
+        <Queue v-for="queue in queues" :key="queue.id" :queue="queue" :queues="queues" />
       </div>
     </div>
 
-    <footer
-      class="row sticky-bottom bg-primary d-flex justify-content-between mt-5"
-    >
+    <footer class="row sticky-bottom bg-primary d-flex justify-content-between mt-5">
       <div class="col-4 text-center">
         Xander Rutledge
         <br />
-        <a
-          href="https://www.linkedin.com/in/alexander-rutledge/"
-          target="_blank"
-        >
+        <a href="https://www.linkedin.com/in/alexander-rutledge/" target="_blank">
           <i class="fa fa-linkedin-square text-dark p-1"></i>
           <a href="https://github.com/XanderRutledge" target="_blank">
             <i class="fa fa-github text-dark p-1"></i>
@@ -354,10 +302,7 @@
       <div class="col-4 text-center">
         Kevin Lane
         <br />
-        <a
-          href="https://www.linkedin.com/in/kevin-lane-2422b51b0/"
-          target="_blank"
-        >
+        <a href="https://www.linkedin.com/in/kevin-lane-2422b51b0/" target="_blank">
           <i class="fa fa-linkedin-square text-dark p-1"></i>
         </a>
         <a href="https://github.com/Kevinclane" target="_blank">
@@ -370,20 +315,14 @@
           Justin Mattson
           <br />
           <a href="https://www.facebook.com/justin.mattson.9" target="_blank">
-            <i
-              class="fa fa-facebook-official text-dark"
-              aria-hidden="true"
-            ></i> </a
-          >&nbsp;
+            <i class="fa fa-facebook-official text-dark" aria-hidden="true"></i>
+          </a>&nbsp;
           <a href="https://www.linkedin.com/in/justin-mattson" target="_blank">
-            <i
-              class="fa fa-linkedin-square text-dark"
-              aria-hidden="true"
-            ></i> </a
-          >&nbsp;
+            <i class="fa fa-linkedin-square text-dark" aria-hidden="true"></i>
+          </a>&nbsp;
           <a href="https://justinmattson.github.io/" target="_blank">
-            <i class="fa fa-github text-dark p-1" aria-hidden="true"></i> </a
-          >&nbsp;
+            <i class="fa fa-github text-dark p-1" aria-hidden="true"></i>
+          </a>&nbsp;
           <a href="mailto:justin.mattson@outlook.com" class="text-dark">
             <i class="fa fa-envelope-o text-dark" aria-hidden="true"></i>
           </a>
@@ -404,7 +343,7 @@ export default {
     return {
       newComment: {},
       editForm: false,
-      jobStatuses: ["pending", "completed", "cancelled"],
+      jobStatuses: ["pending", "completed", "cancelled"]
     };
   },
   onRouterLeave(to, from, next) {
@@ -442,7 +381,7 @@ export default {
     },
     isSignedUp() {
       let data = this.$store.state.queues.find(
-        (q) => q.creatorEmail == this.$store.state.profile.email
+        q => q.creatorEmail == this.$store.state.profile.email
       );
       if (data) {
         return true;
@@ -463,6 +402,7 @@ export default {
     },
     requestorRating() {
       if (this.job) {
+        //this.job.jobCreatorRating = specific to this job
         let rateArr = this.job.jobCreatorRatings;
         let length = rateArr.length;
         let x = 0;
@@ -476,6 +416,10 @@ export default {
         } else return x.toFixed(1) / length;
       }
     },
+    numRatings() {
+      // Total ratings of requestor for this job
+      return this.job.jobCreatorRatings.length;
+    }
   },
   methods: {
     addToQueue() {
@@ -484,7 +428,7 @@ export default {
         volunteerPic: this.profile.picture,
         jobId: this.job.id,
         jobCreatorEmail: this.job.creatorEmail,
-        volunteerId: this.profile.id,
+        volunteerId: this.profile.id
       };
       this.$store.dispatch("createQueue", obj);
     },
@@ -501,13 +445,13 @@ export default {
             "Click 'Ok' to confirm you wish to cancel this request.  This action cannot be undone.",
           icon: "warning",
           buttons: true,
-          dangerMode: true,
-        }).then((willDelete) => {
+          dangerMode: true
+        }).then(willDelete => {
           if (willDelete) {
             this.job.jobStatus = "cancelled";
             let data = this.$store.dispatch("editJob", this.job);
             swal("Poof! Your help request has been cancelled!", {
-              icon: "success",
+              icon: "success"
             });
             this.editForm = false;
           } else {
@@ -524,12 +468,12 @@ export default {
       this.$store.dispatch("addComment", { ...this.newComment });
       this.newComment = {};
       $("#myModal").modal("hide");
-    },
+    }
   },
   components: {
     Comment,
-    Queue,
-  },
+    Queue
+  }
 };
 </script>
 
