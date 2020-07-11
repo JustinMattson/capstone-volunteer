@@ -32,11 +32,16 @@
           </div>
           <div class="col-8 d-flex flex-column justify-content-center">
             <h2 style="font-size:2.5vw">&nbsp;{{ job.creator.name }}</h2>
-            <h3 v-show="requestorRating != 'No Ratings'">
+            <span v-show="requestorRating != 'No Ratings'">
+              {{requestorRating}}/5
+              <small v-if="numRatings > 1">({{numRatings}} ratings)</small>
+              <small v-else>({{numRatings}} rating)</small>
+            </span>
+            <!-- <h3 v-show="requestorRating != 'No Ratings'">
               Requestor Rating: &nbsp;{{ requestorRating }}/5
               <br />
               <small>({{numRatings}} ratings)</small>
-            </h3>
+            </h3>-->
           </div>
         </div>
         <div class="row py-3 mx-1">
@@ -71,12 +76,13 @@
             </span>
           </div>
           <div class="text-secondary d-flex justify-content-between mt-2" v-if="job.creator">
-            <span class="unbold">
-              <img class="rounded-lg" :src="job.creator.picture" style="height:125px;width:25px" />
+            <span class>
+              <img class="rounded-lg" :src="job.creator.picture" style="height:35px;width:35px" />
               {{ job.creator.name }}
               <span v-show="requestorRating != 'No Ratings'">
-                {{requestorRating}}
-                <small>({{numRatings}} ratings)</small>
+                {{requestorRating}}/5
+                <small v-if="numRatings > 1">({{numRatings}} ratings)</small>
+                <small v-else>({{numRatings}} rating)</small>
               </span>
             </span>
           </div>
