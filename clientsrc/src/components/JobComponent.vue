@@ -112,6 +112,7 @@ export default {
     }
   },
   methods: {
+    // deleting is bad because it orphans contacts. Just update to cancelled.
     deleteJob() {
       swal({
         title: "Are you sure?",

@@ -165,15 +165,15 @@ export default {
     },
     toggleEdit() {
       this.edit = !this.edit;
-    },
-    toggleMyBlogs() {
-      this.myBlogs = !this.myBlogs;
-    },
-    toggleMyComments() {
-      // NOTE may need to enable debugger here to get the button to function again.
-      // debugger
-      this.myComments = !this.myComments;
     }
+    // toggleMyBlogs() {
+    //   this.myBlogs = !this.myBlogs;
+    // },
+    // toggleMyComments() {
+    //   // NOTE may need to enable debugger here to get the button to function again.
+    //   // debugger
+    //   this.myComments = !this.myComments;
+    // }
   },
   components: {
     JobQueue,
