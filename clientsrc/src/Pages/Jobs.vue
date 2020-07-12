@@ -156,6 +156,9 @@ export default {
     await this.$store.dispatch("initializeSocket");
     this.$store.dispatch("joinRoom", "requests");
   },
+  beforedestry() {
+    this.$store.dispatch("leaveRoom", "requests");
+  },
   methods: {
     toggleSort() {
       if (this.sort == "desc") {

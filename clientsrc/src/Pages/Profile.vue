@@ -111,14 +111,6 @@ export default {
       edit: false,
       fontSize: "10px",
       color: "#808"
-
-      // prettyDate: new Date(this.profile.createdAt).toLocaleDateString("eu-US", {
-      //   year: "numeric",
-      //   month: "short",
-      //   day: "numeric",
-      //   hour: "2-digit",
-      //   minute: "2-digit"
-      // })
     };
   },
   async mounted() {
