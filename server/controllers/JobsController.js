@@ -4,6 +4,7 @@ import { jobsService } from "../services/JobsService";
 import auth0Provider from "@bcwdev/auth0provider";
 import { commentsService } from "../services/CommentsService";
 import { queueService } from "../services/QueueService";
+import socketService from "../services/SocketService";
 
 export class JobsController extends BaseController {
   constructor() {
@@ -69,6 +70,7 @@ export class JobsController extends BaseController {
       // req.body.requesterId = req.userInfo.id;
       // REVIEW the line above was assigning some different auth0 id making it not possible to link the requesterId to the creator.id.
       let data = await jobsService.create(req.body);
+      socketService.messageRoom("requests", "newJob", data);
       res.status(201).send(data);
     } catch (error) {
       next(error);
@@ -82,6 +84,7 @@ export class JobsController extends BaseController {
         req.userInfo.email,
         req.body
       );
+      socketService.messageRoom("requests", "editJob", data);
       return res.send(data);
     } catch (error) {
       next(error);
@@ -91,6 +94,7 @@ export class JobsController extends BaseController {
   async changeJobStatus(req, res, next) {
     try {
       let data = await jobsService.changeJobStatus(req.body);
+      socketService.messageRoom("requests", "updateJobStatus", data);
       res.send(data);
     } catch (error) {
       next(error);

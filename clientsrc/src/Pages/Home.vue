@@ -8,13 +8,18 @@
         />
       </div>
     </div>
-    <div class="row text-center text-secondary py-md-5 py-1 bg-primary shadow-lg justify-content-center">
+    <div
+      class="row text-center text-secondary py-md-5 py-1 bg-primary shadow-lg justify-content-center"
+    >
       <div class="col-md-7">
-<h1>What is <i class="text-dark">Please Help Me!</i> ?</h1>
-<h3> We are a service commited to help those who love volunteering. Here you can find opportunities to help others with. Also, you can create opportunities for others to help you with.</h3>
+        <h1>
+          What is
+          <i class="text-dark">Please Help Me!</i> ?
+        </h1>
+        <h3>We are a service commited to help those who love volunteering. Here you can find opportunities to help others with. Also, you can create opportunities for others to help you with.</h3>
       </div>
     </div>
-    <div class="row d-flex bg-light justify-content-around py-3 ">
+    <div class="row d-flex bg-light justify-content-around py-3">
       <router-link
         :to="{name: 'Jobs'}"
         class="col-12 col-md-5 bg-primary shadow-lg border-3 box-height no-line d-flex align-items-center justify-content-center rounded my-1"
@@ -46,13 +51,13 @@
           </p>
           <h5
             class="card-text"
-          >"I love this website! I run an after-school program to help keep kids busy and off the streets. We use this site almost exclusively to find projects to help out with. I reccomend this to everyone I know!"</h5>
+          >"I love this website! I run an after-school program to help keep kids busy and off the streets. We use this site almost exclusively to find projects to help out with. I recommend this to everyone I know!"</h5>
         </div>
       </div>
       <div class="card col-12 col-md-3 height-fix my-1 bg-primary text-secondary shadow">
         <img
           src="https://headshotphotographerasheville.com/wp-content/uploads/headshots-in-asheville-3.jpg"
-          class="card-img-top mt-3 "
+          class="card-img-top mt-3"
           alt="error loading image"
         />
         <div class="card-body">
@@ -91,16 +96,19 @@
       </div>
     </div>
     <footer class="row sticky-bottom bg-primary d-flex justify-content-between">
-      <div class="col-4">Xander Rutledge<br/>
-           <a href="https://www.linkedin.com/in/alexander-rutledge/" target="_blank">
+      <div class="col-4">
+        Xander Rutledge
+        <br />
+        <a href="https://www.linkedin.com/in/alexander-rutledge/" target="_blank">
           <i class="fa fa-linkedin-square text-dark p-1"></i>
-           <a href="https://github.com/XanderRutledge" target="_blank">
-          <i class="fa fa-github text-dark p-1"></i>
-        </a>
+          <a href="https://github.com/XanderRutledge" target="_blank">
+            <i class="fa fa-github text-dark p-1"></i>
+          </a>
         </a>
       </div>
       <div class="col-4">
-        Kevin Lane<br/>
+        Kevin Lane
+        <br />
         <a href="https://www.linkedin.com/in/kevin-lane-2422b51b0/" target="_blank">
           <i class="fa fa-linkedin-square text-dark p-1"></i>
         </a>
@@ -172,6 +180,6 @@ export default {
   border: 12px solid #41b883 !important;
 }
 .text-shadow {
-text-shadow: 1px 1px black !important;
+  text-shadow: 1px 1px black !important;
 }
 </style>

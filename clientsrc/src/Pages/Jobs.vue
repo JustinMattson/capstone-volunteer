@@ -153,6 +153,8 @@ export default {
   },
   async mounted() {
     await this.$store.dispatch("getAllJobs");
+    await this.$store.dispatch("initializeSocket");
+    this.$store.dispatch("joinRoom", "requests");
   },
   methods: {
     toggleSort() {

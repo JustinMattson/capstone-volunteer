@@ -53,6 +53,7 @@ export default new Vuex.Store({
       let foundJob = state.jobs.find((j) => j.id == update.id);
       foundJob = update;
     },
+    // REVIEW 7/11 Expired jobs should be set to cancelled, not completed.
     removeJob(state, id) {
       let index = state.jobs.findIndex((j) => j.id == id);
       state.jobs.splice(index, 1);
@@ -154,6 +155,7 @@ export default new Vuex.Store({
     //     console.error(error);
     //   }
     // },
+    // REVIEW 7/11 Expired jobs should be set to cancelled, not completed.
     async removeOldJob({ commit }, id) {
       try {
         commit("removeJob", id);
@@ -336,6 +338,18 @@ export default new Vuex.Store({
       socket.on("deleteComment", (data) => {
         commit("removeComment", data);
         this.dispatch("getComments", data.jobId);
+      });
+      socket.on("newJob", (job) => {
+        commit("setActiveJob", job);
+        this.dispatch("getAllJobs", job.jobId);
+      });
+      socket.on("editJob", (update) => {
+        commit("updateJob", update);
+        this.dispatch("getAllJobs", update.jobId);
+      });
+      socket.on("updateJobStatus", (update) => {
+        commit("updateJob", update);
+        this.dispatch("updateJob", update.JobId);
       });
     },
 
