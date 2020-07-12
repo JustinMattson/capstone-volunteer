@@ -18,8 +18,21 @@
           </span>
           <span>
             <h4 style="font-size:2vh" class="d-flex align-self-center pl-2">{{job.creator.name}}</h4>
+            <span class="pl-2" v-show="requestorRating != 'No Ratings'">
+              {{requestorRating}}/5
+              <small v-if="numRatings > 1">({{numRatings}} ratings)</small>
+              <small v-else>({{numRatings}} rating)</small>
+            </span>
             <h4 class="ml-1"></h4>
           </span>
+          <!-- <span class>
+              <img class="rounded-lg" :src="job.creator.picture" style="height:35px;width:35px" />
+              {{ job.creator.name }}
+              <span v-show="requestorRating != 'No Ratings'">
+                {{requestorRating}}/5
+                <small v-if="numRatings > 1">({{numRatings}} ratings)</small>
+                <small v-else>({{numRatings}} rating)</small>
+          </span>-->
         </div>
         <h5 class="card-text text-left py-2">{{ job.description }}</h5>
         <h4>General Location: {{ job.generalLocation }}</h4>
@@ -67,21 +80,26 @@ export default {
         );
       }
     },
-    // requestorRating() {
-    //   if (this.job) {
-    //     let rateArr = this.job.jobCreatorRatings;
-    //     let length = rateArr.length;
-    //     let x = 0;
-    //     let i = 0;
-    //     while (i < length) {
-    //       x += rateArr[i];
-    //       i++;
-    //     }
-    //     if (length == 0) {
-    //       return "No Ratings";
-    //     } else return x.toFixed(1);
-    //   }
-    // },
+    requestorRating() {
+      if (this.job) {
+        //this.job.jobCreatorRating = specific to this job
+        let rateArr = this.job.jobCreatorRatings;
+        let length = rateArr.length;
+        let x = 0;
+        let i = 0;
+        while (i < length) {
+          x += +rateArr[i];
+          i++;
+        }
+        if (length == 0) {
+          return "No Ratings";
+        } else return x.toFixed(1) / length;
+      }
+    },
+    numRatings() {
+      // Total ratings of requestor for this job
+      return this.job.jobCreatorRatings.length;
+    },
     expireCheck() {
       let jobDate = moment(String(this.job.endDate)).format("MM/DD/YYYY");
       let currentDate = moment(String(new Date())).format("MM/DD/YYYY");
