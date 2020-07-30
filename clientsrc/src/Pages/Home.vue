@@ -74,7 +74,7 @@
           >"I really enjoy this site! I've had tons of projects I've needed help with and have found plenty of people to help me out. I've also been able to return the favor by helping others with their projects as well. This has been very useful!"</h5>
         </div>
       </div>
-      <div class="card col-12 col-md-3 height-fix my-1 bg-primary text-seondary shadow">
+      <div class="card col-12 col-md-3 height-fix my-1 bg-primary text-secondary shadow">
         <img
           src="https://i1.wp.com/kinserstudios.com/wp-content/uploads/2019/06/man.png?fit=384%2C295&ssl=1"
           class="card-img-top mt-3"
