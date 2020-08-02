@@ -3,7 +3,6 @@ import BaseController from "../utils/BaseController";
 import { jobsService } from "../services/JobsService";
 import auth0Provider from "@bcwdev/auth0provider";
 import { commentsService } from "../services/CommentsService";
-import socketService from "../services/SocketService";
 
 export class CommentsController extends BaseController {
   constructor() {
@@ -40,7 +39,6 @@ export class CommentsController extends BaseController {
       req.body.creatorEmail = req.userInfo.email;
       req.body.profileId = req.userInfo.id;
       let data = await commentsService.create(req.body);
-      socketService.messageRoom(req.body.jobId, "newComment", data);
       res.status(201).send(data);
     } catch (error) {
       next(error);
@@ -54,7 +52,6 @@ export class CommentsController extends BaseController {
         req.userInfo.email,
         req.body
       );
-      socketService.messageRoom(req.body.jobId, "newEdit", data);
       res.send(data);
     } catch (error) {
       next(error);
@@ -63,8 +60,6 @@ export class CommentsController extends BaseController {
   async delete(req, res, next) {
     try {
       let data = await commentsService.delete(req.params.id);
-      // @ts-ignore
-      socketService.messageRoom(data.jobId, "deleteComment", data);
       if (data) {
         res.send("Successfully deleted");
       }
