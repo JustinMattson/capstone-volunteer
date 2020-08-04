@@ -349,7 +349,7 @@ export default {
     return {
       newComment: {},
       editForm: false,
-      jobStatuses: ["pending", "completed", "cancelled"]
+      jobStatuses: ["pending", "completed", "cancelled"],
     };
   },
   onRouterLeave(to, from, next) {
@@ -374,10 +374,14 @@ export default {
       return this.$store.state.profile;
     },
     comments() {
-      return this.$store.state.comments;
+      if ($auth.isAuthenticated) {
+        return this.$store.state.comments;
+      }
     },
     queues() {
-      return this.$store.state.queues;
+      if ($auth.isAuthenticated) {
+        return this.$store.state.queues;
+      }
     },
     isJobCreator() {
       if (this.job.creator) {
@@ -387,7 +391,7 @@ export default {
     },
     isSignedUp() {
       let data = this.$store.state.queues.find(
-        q => q.creatorEmail == this.$store.state.profile.email
+        (q) => q.creatorEmail == this.$store.state.profile.email
       );
       if (data) {
         return true;
@@ -425,7 +429,7 @@ export default {
     numRatings() {
       // Total ratings of requestor for this job
       return this.job.jobCreatorRatings.length;
-    }
+    },
   },
   methods: {
     addToQueue() {
@@ -434,7 +438,7 @@ export default {
         volunteerPic: this.profile.picture,
         jobId: this.job.id,
         jobCreatorEmail: this.job.creatorEmail,
-        volunteerId: this.profile.id
+        volunteerId: this.profile.id,
       };
       this.$store.dispatch("createQueue", obj);
     },
@@ -451,13 +455,13 @@ export default {
             "Click 'Ok' to confirm you wish to cancel this request.  This action cannot be undone.",
           icon: "warning",
           buttons: true,
-          dangerMode: true
-        }).then(willDelete => {
+          dangerMode: true,
+        }).then((willDelete) => {
           if (willDelete) {
             this.job.jobStatus = "cancelled";
             let data = this.$store.dispatch("editJob", this.job);
             swal("Poof! Your help request has been cancelled!", {
-              icon: "success"
+              icon: "success",
             });
             this.editForm = false;
           } else {
@@ -474,12 +478,12 @@ export default {
       this.$store.dispatch("addComment", { ...this.newComment });
       this.newComment = {};
       $("#myModal").modal("hide");
-    }
+    },
   },
   components: {
     Comment,
-    Queue
-  }
+    Queue,
+  },
 };
 </script>
 
