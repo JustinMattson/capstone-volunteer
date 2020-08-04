@@ -150,7 +150,7 @@
     <div
       class="row d-flex justify-content-center bg-secondary text-primary text-shadow border-cstm p-3"
     >
-      <div class="col-10 text-center">
+      <div class="col-10 text-center" v-if="$auth.isAuthenticated">
         <h2 class="text-white darkness">Ask a Question or Leave a Comment:</h2>
       </div>
       <!-- ADD COMMENT MODAL FORM -->
@@ -284,7 +284,7 @@
     <!-- END ADD COMMENT MODAL -->
 
     <div class="row text-center bg-primary border-cstm py-3">
-      <div class="col-12 text-secondary">
+      <div class="col-12 text-secondary" v-if="$auth.isAuthenticated">
         <h1>Sign Up List</h1>
       </div>
     </div>
