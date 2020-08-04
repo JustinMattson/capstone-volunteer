@@ -374,14 +374,10 @@ export default {
       return this.$store.state.profile;
     },
     comments() {
-      if ($auth.isAuthenticated) {
-        return this.$store.state.comments;
-      }
+      return this.$store.state.comments;
     },
     queues() {
-      if ($auth.isAuthenticated) {
-        return this.$store.state.queues;
-      }
+      return this.$store.state.queues;
     },
     isJobCreator() {
       if (this.job.creator) {

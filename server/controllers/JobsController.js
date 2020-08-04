@@ -13,11 +13,11 @@ export class JobsController extends BaseController {
       .get("", this.getActive)
       .get("/all", this.getAll)
       .get("/:id", this.getJobById)
-      .get("/:id/queue", this.getQueuesByJobId)
       .put("/:id/expire", this.changeJobStatus)
       .use(auth0Provider.getAuthorizedUserInfo)
       // NOTE: Beyond this point all routes require Authorization tokens (the user must be logged in)
       .get("/:id/comments", this.getCommentsByJobId)
+      .get("/:id/queue", this.getQueuesByJobId)
       .put("/:id", this.edit)
       .post("", this.create);
     // .delete("/:id", this.delete);
