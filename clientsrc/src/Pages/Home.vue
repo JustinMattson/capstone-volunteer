@@ -16,7 +16,7 @@
           What is
           <i class="text-dark">Please Help Me!</i> ?
         </h1>
-        <h3>We are a service commited to help those who love volunteering. Here you can find opportunities to help others with. Also, you can create opportunities for others to help you with.</h3>
+        <h3>We are here to connect those that need help with those who love volunteering. If you would like to volunteer or ask for help, please create a login. Best of all, it is 100% free!</h3>
       </div>
     </div>
     <div class="row d-flex bg-light justify-content-around py-3">
@@ -142,7 +142,7 @@
 
 <script>
 export default {
-  name: "home"
+  name: "home",
 };
 </script>
 <style scoped>
