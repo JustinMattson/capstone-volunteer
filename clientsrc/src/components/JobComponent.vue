@@ -40,11 +40,16 @@
         <!-- <div>{{job.jobStatus}}</div> -->
         <div class="hide">{{expireCheck}}</div>
 
-        <router-link :to="{ name: 'job', params: { jobId: job.id } }">
-          <button class="btn btn-secondary d-flex my-3 justify-content-center">
-            <i class="fas fa-hands-helping action text-white text-shadow font-lg">&nbsp;More Info</i>
-          </button>
-        </router-link>
+        <span class="d-flex justify-content-between" style="align-items:flex-end;">
+          <router-link :to="{ name: 'job', params: { jobId: job.id } }">
+            <button class="btn btn-secondary d-flex my-3 justify-content-center">
+              <i class="fas fa-hands-helping action text-white text-shadow font-lg">&nbsp;More Info</i>
+            </button>
+          </router-link>
+          <a href="#top">
+            <i class="fas fa-angle-double-up text-warning" title="Return to top of page."></i>
+          </a>
+        </span>
         <!-- <p class="small text-muted mb-0 text-center unbold">#{{ job.id }}</p> -->
       </div>
     </div>
@@ -61,7 +66,7 @@ export default {
   data() {
     return {
       start: moment(String(this.job.startDate)).format("MM/DD/YYYY"),
-      end: moment(String(this.job.startDate)).format("MM/DD/YYYY")
+      end: moment(String(this.job.startDate)).format("MM/DD/YYYY"),
     };
   },
   mounted() {},
@@ -109,7 +114,7 @@ export default {
         this.$store.dispatch("removeOldJob", this.job.id);
         return "completed";
       } else return "upcoming";
-    }
+    },
   },
   methods: {
     // deleting is bad because it orphans contacts. Just update to cancelled.
@@ -120,22 +125,22 @@ export default {
           "Click 'Ok' to confirm you wish to cancel this request.  This action cannot be undone.",
         icon: "warning",
         buttons: true,
-        dangerMode: true
-      }).then(willDelete => {
+        dangerMode: true,
+      }).then((willDelete) => {
         if (willDelete) {
           this.job.jobStatus = "cancelled";
           let data = this.$store.dispatch("editJob", this.job);
           swal("Poof! Your help request has been cancelled!", {
-            icon: "success"
+            icon: "success",
           });
           this.editJob = false;
         } else {
           swal("Close cancelled");
         }
       });
-    }
+    },
   },
-  components: {}
+  components: {},
 };
 </script>
 

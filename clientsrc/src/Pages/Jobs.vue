@@ -148,7 +148,7 @@ export default {
   name: "jobs",
   data() {
     return {
-      newJob: {}
+      newJob: {},
     };
   },
   async mounted() {
@@ -193,7 +193,7 @@ export default {
         return 0;
       }
       return this.jobs.sort(compare);
-    }
+    },
   },
   computed: {
     jobs() {
@@ -201,11 +201,11 @@ export default {
     },
     profile() {
       return this.$store.state.profile;
-    }
+    },
   },
   components: {
-    Job
-  }
+    Job,
+  },
 };
 </script>
 <style scoped>
