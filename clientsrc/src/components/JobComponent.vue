@@ -106,8 +106,9 @@ export default {
       return this.job.jobCreatorRatings.length;
     },
     expireCheck() {
-      let jobDate = moment(String(this.job.endDate)).format("MM/DD/YYYY");
-      let currentDate = moment(String(new Date())).format("MM/DD/YYYY");
+      // NOTE found the dates were not comparing properly unless it was decending, Year, Month, Day
+      let jobDate = moment(String(this.job.endDate)).format("YYYY/MM/DD");
+      let currentDate = moment(String(new Date())).format("YYYY/MM/DD");
       if (jobDate < currentDate) {
         this.job.jobStatus = "completed";
         this.$store.dispatch("changeJobStatus", this.job);
