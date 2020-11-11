@@ -43,10 +43,10 @@
         />
         <div class="card-body">
           <h4 class="card-title">Sydney</h4>
-          <p class="card-text" role=img>
+          <p class="card-text" role=img alt="5-star rating">
             <i class="fas fa-star" aria-label="font-awesome star"></i>
             <i class="fas fa-star" role=img aria-placeholder="font-awesome star"></i>
-            <i class="fas fa-star" aria-relevant="font-awesome star"></i>
+            <i class="fas fa-star" alt="star" aria-relevant="font-awesome star"></i>
             <i class="fas fa-star" aria-selected="font-awesome star"></i>
             <i class="fas fa-star" aria-sort="font-awesome star"></i>
           </p>
