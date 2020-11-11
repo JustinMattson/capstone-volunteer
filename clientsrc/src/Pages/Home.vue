@@ -43,9 +43,9 @@
         />
         <div class="card-body">
           <h4 class="card-title">Sydney</h4>
-          <p class="card-text" aria-roledescription="5-star review">
+          <p class="card-text" role=img>
             <i class="fas fa-star" aria-label="font-awesome star"></i>
-            <i class="fas fa-star" aria-placeholder="font-awesome star"></i>
+            <i class="fas fa-star" role=img aria-placeholder="font-awesome star"></i>
             <i class="fas fa-star" aria-relevant="font-awesome star"></i>
             <i class="fas fa-star" aria-selected="font-awesome star"></i>
             <i class="fas fa-star" aria-sort="font-awesome star"></i>
