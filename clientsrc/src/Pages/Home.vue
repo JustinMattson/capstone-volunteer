@@ -43,7 +43,7 @@
         />
         <div class="card-body">
           <h4 class="card-title">Sydney</h4>
-          <p class="card-text" alt="5-star rating">
+          <p class="card-text" alt="5-star rating" aria-hidden="false">
             <i class="fas fa-star" alt="font-awesome star"></i>
             <i class="fas fa-star" alt="font-awesome star"></i>
             <i class="fas fa-star" alt="font-awesome star"></i>
