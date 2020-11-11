@@ -5,6 +5,7 @@
         <img
           src="https://www.ci.medford.or.us/SIB/images/Many-Hands-Holding-the-red-Letters-Volunteer-Isolated-1024x300.jpg"
           class="cstm-size"
+          alt="Image of raised hands holding letters spelling out volunteer."
         />
       </div>
     </div>
@@ -38,7 +39,7 @@
         <img
           src="https://i.pinimg.com/originals/0d/c5/7b/0dc57b8d66c12736c666f157a3afa3ff.jpg"
           class="card-img-top mt-3"
-          alt="error loading image"
+          alt="Image of Sydney with blurred background"
         />
         <div class="card-body">
           <h4 class="card-title">Sydney</h4>
@@ -56,9 +57,9 @@
       </div>
       <div class="card col-12 col-md-3 height-fix my-1 bg-primary text-secondary shadow">
         <img
-          src="https://headshotphotographerasheville.com/wp-content/uploads/headshots-in-asheville-3.jpg"
+          src="https://knockheadshots.com/wp-content/uploads/2018/05/lotsi-man-headshot-headshots-photographer-knock-studios-los-angeles-la-610x448.jpg"
           class="card-img-top mt-3"
-          alt="error loading image"
+          alt="Image of Albert staring directly into the camera"
         />
         <div class="card-body">
           <h4 class="card-title">Albert</h4>
@@ -78,7 +79,7 @@
         <img
           src="https://i1.wp.com/kinserstudios.com/wp-content/uploads/2019/06/man.png?fit=384%2C295&ssl=1"
           class="card-img-top mt-3"
-          alt="error loading image"
+          alt="Image of Scott with a big happy grin."
         />
         <div class="card-body">
           <h4 class="card-title">Scott</h4>
