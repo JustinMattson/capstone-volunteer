@@ -43,12 +43,12 @@
         />
         <div class="card-body">
           <h4 class="card-title">Sydney</h4>
-          <p class="card-text" role=img alt="5-star rating">
-            <i class="fas fa-star" aria-label="font-awesome star"></i>
-            <i class="fas fa-star" role=img aria-placeholder="font-awesome star"></i>
-            <i class="fas fa-star" alt="star" aria-relevant="font-awesome star"></i>
-            <i class="fas fa-star" aria-selected="font-awesome star"></i>
-            <i class="fas fa-star" aria-sort="font-awesome star"></i>
+          <p class="card-text">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
           </p>
           <h5
             class="card-text"
@@ -102,9 +102,9 @@
         <br />
         <a href="https://www.linkedin.com/in/alexander-rutledge/" target="_blank">
           <i class="fa fa-linkedin-square text-dark p-1"></i>
-          <a href="https://github.com/XanderRutledge" target="_blank">
+        </a>
+        <a href="https://github.com/XanderRutledge" target="_blank">
             <i class="fa fa-github text-dark p-1"></i>
-          </a>
         </a>
       </div>
       <div class="col-4">
