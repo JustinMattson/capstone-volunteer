@@ -1,5 +1,5 @@
 import SocketIO from "socket.io";
-import auth0Provider from "@bcwdev/auth0provider";
+import { Auth0Provider } from "@bcwdev/auth0provider";
 class SocketService {
   io = SocketIO();
   /**
@@ -62,7 +62,7 @@ class SocketService {
   }
 
   _onConnect() {
-    return socket => {
+    return (socket) => {
       this._newConnection(socket);
 
       //STUB Register listeners
@@ -99,7 +99,7 @@ class SocketService {
     //Handshake / Confirmation of Connection
     socket.emit("CONNECTED", {
       socket: socket.id,
-      message: "Successfully Connected"
+      message: "Successfully Connected",
     });
   }
 }
