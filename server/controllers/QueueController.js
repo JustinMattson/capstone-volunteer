@@ -9,7 +9,7 @@ export class QueueController extends BaseController {
     super("api/queue");
     this.router
       // NOTE: Beyond this point all routes require Authorization tokens (the user must be logged in)
-      .use(auth0Provider.getAuthorizedUserInfo)
+      .use(Auth0Provider.getAuthorizedUserInfo)
       .put("/:id/jobs", this.addVolunteerIdToJobQueue)
       .put("/:id", this.edit)
       .post("", this.create)

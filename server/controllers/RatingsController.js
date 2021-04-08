@@ -8,7 +8,7 @@ export class RatingsController extends BaseController {
   constructor() {
     super("api/rating");
     this.router
-      .use(auth0Provider.getAuthorizedUserInfo)
+      .use(Auth0Provider.getAuthorizedUserInfo)
       // NOTE: Beyond this point all routes require Authorization tokens (the user must be logged in)
       .put("/jobRating", this.jobRating)
       .put("/volunteerRating", this.volunteerRating);

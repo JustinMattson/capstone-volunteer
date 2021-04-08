@@ -12,7 +12,7 @@ export class ProfilesController extends BaseController {
       .get("/:id/jobs", this.getJobsByVolunteerId)
       .get("/:id/myJobs", this.getJobsByRequesterId)
       .get("/:id/queue", this.getQueuesByVolunteerId)
-      .use(auth0Provider.getAuthorizedUserInfo)
+      .use(Auth0Provider.getAuthorizedUserInfo)
       // NOTE: Beyond this point all routes require Authorization tokens (the user must be logged in)
       .get("/:id", this.getProfileById)
       .get("", this.getUserProfile)
