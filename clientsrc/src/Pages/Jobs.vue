@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row bg-secondary text-center py-5">
       <div class="col-12">
-        <h1 class="text-white darkness">Request Some Help</h1>
+        <h1 class="text-white darkness">Request Help Now!</h1>
         <!-- MODAL FORM -->
         <button
           type="button"
