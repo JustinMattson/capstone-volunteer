@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-12 p-0">
         <img
-          src="https://www.ci.medford.or.us/SIB/images/Many-Hands-Holding-the-red-Letters-Volunteer-Isolated-1024x300.jpg"
+          src="http://www.yefindia.org/back/wp-content/uploads/2019/01/Many-Hands-Holding-the-red-Letters-Volunteer-Isolated-1024x300.jpg"
           class="cstm-size"
           alt="Image of raised hands holding letters spelling out volunteer."
         />
